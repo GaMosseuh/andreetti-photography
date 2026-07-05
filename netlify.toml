@@ -1,2 +1,8 @@
 [functions]
   directory = "netlify/functions"
+
+# Les images ne changent jamais sans changer de nom : cache navigateur d'un an
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
