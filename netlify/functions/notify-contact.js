@@ -52,7 +52,7 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         from: 'ANDREETTI Photography <onboarding@resend.dev>',
-        to: ['alexandre.andreetti@gmail.com'],
+        to: ['contact.andreettiphotography@gmail.com'],
         reply_to: email,
         subject: `📸 Nouveau message via andreetti.photography — ${nom}`,
         html,
