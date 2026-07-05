@@ -86,6 +86,24 @@
 }
 </script>
 
+<!-- Données structurées : FAQ (garder synchronisé avec la section FAQ visible) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Comment se déroule une séance photo ?", "acceptedAnswer": { "@type": "Answer", "text": "On commence par échanger sur votre projet : ambiance, lieu, envies. Le jour J, je vous guide tout du long — pas besoin d'expérience devant l'objectif. Une séance portrait dure environ une heure, dans un lieu choisi ensemble." } },
+    { "@type": "Question", "name": "Combien coûte une prestation ?", "acceptedAnswer": { "@type": "Answer", "text": "Chaque projet est différent : je fonctionne sur devis personnalisé, gratuit et sans engagement, avec une réponse sous 48 h. Le déplacement dans l'Yonne, à Dijon et dans les environs est inclus." } },
+    { "@type": "Question", "name": "Comment et quand vais-je recevoir mes photos ?", "acceptedAnswer": { "@type": "Answer", "text": "Vos photos triées et retouchées sont livrées sous 14 jours dans une galerie privée en ligne, téléchargeables en haute définition." } },
+    { "@type": "Question", "name": "Qui a les droits sur les photos ?", "acceptedAnswer": { "@type": "Answer", "text": "Vous recevez un droit d'usage personnel complet : impression, partage, réseaux sociaux. Toute publication de ma part dans mon portfolio se fait uniquement avec votre accord explicite." } },
+    { "@type": "Question", "name": "Que se passe-t-il en cas de mauvais temps ?", "acceptedAnswer": { "@type": "Answer", "text": "Pour une séance en extérieur, si la météo ne s'y prête pas, on reporte à une date qui vous convient, sans frais." } },
+    { "@type": "Question", "name": "Comment réserver une date ?", "acceptedAnswer": { "@type": "Answer", "text": "Envoyez un message via le formulaire de contact avec la date souhaitée. Après validation du devis, la date est bloquée pour vous. Pour les événements importants, réservez plusieurs semaines à l'avance." } },
+    { "@type": "Question", "name": "Je ne suis pas à l'aise devant un objectif, c'est grave ?", "acceptedAnswer": { "@type": "Answer", "text": "Pas du tout, c'est le cas de la plupart des gens. Mon travail est de vous mettre à l'aise : on discute, on bouge, on essaie — le naturel est le cœur de mon approche." } },
+    { "@type": "Question", "name": "Jusqu'où vous déplacez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "Basé dans l'Yonne (89) et à Dijon, je me déplace dans toute la Bourgogne : Auxerre, Sens, Joigny, Avallon, agglomération dijonnaise et au-delà. Déplacement inclus dans le devis pour l'Yonne, Dijon et environs." } }
+  ]
+}
+</script>
+
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -233,10 +251,23 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 /* TESTIMONIALS */
 .testi-wrap{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 40px}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
-.testi{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:26px}
+.testi{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);padding:26px}
 .testi p{font-family:var(--font-title);font-size:19px;font-style:italic;color:var(--text2);line-height:1.5;margin-bottom:16px}
 .testi .who{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.testi .stars{color:#E8A93C;font-size:14px;letter-spacing:2px;margin-bottom:12px}
+.testi .gsrc{display:inline-block;margin-left:8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal);border-radius:3px;padding:2px 7px;vertical-align:middle}
 .testi-empty{grid-column:1/-1;text-align:center;font-family:var(--font-title);font-style:italic;font-size:20px;color:var(--text3);padding:24px 10px}
+.review-cta{display:none;text-align:center;max-width:1100px;margin:26px auto 0}
+.review-cta p{font-size:13px;color:var(--text3);margin-bottom:14px}
+.review-cta.visible{display:block}
+.faq{max-width:760px;margin:0 auto;padding:0 20px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;list-style:none;padding:18px 4px;font-size:14px;font-weight:400;letter-spacing:.02em;color:var(--text);transition:color .2s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-family:var(--font-title);font-size:22px;color:var(--teal);flex-shrink:0;transition:transform .25s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item summary:hover{color:var(--teal)}
+.faq-item .faq-a{padding:0 4px 20px;font-size:14px;line-height:1.75;color:var(--text2)}
 
 /* INSTAGRAM BAND */
 .ig-band{max-width:1100px;margin:48px auto 0;padding:0 40px}
@@ -574,8 +605,12 @@ html{scroll-behavior:auto}
 
 <div class="testi-wrap">
 <div class="sec-head" style="padding-top:0"><span class="eyebrow" data-i18n="testiEyebrow">Témoignages</span><h2 data-i18n="testiTitle">Ils m'ont fait confiance</h2><div class="sec-rule"></div></div>
-<div class="testi-grid">
+<div class="testi-grid" id="testiGrid">
 <p class="testi-empty fade-in" data-i18n="testiEmpty">Les premiers témoignages clients seront publiés ici prochainement.</p>
+</div>
+<div class="review-cta" id="reviewCta">
+<p>Vous avez travaillé avec moi ? Votre avis compte énormément.</p>
+<a class="btn-ghost-teal" id="reviewLink" href="#" target="_blank" rel="noopener noreferrer">Donner mon avis sur Google</a>
 </div>
 </div>
 
@@ -649,6 +684,42 @@ html{scroll-behavior:auto}
 <div class="step fade-in"><div class="num">02</div><h4 data-i18n="step2T">Devis</h4><p data-i18n="step2D">Je vous propose une formule claire et adaptée.</p></div>
 <div class="step fade-in"><div class="num">03</div><h4 data-i18n="step3T">Séance</h4><p data-i18n="step3D">Le jour J, on capture les vrais moments.</p></div>
 <div class="step fade-in"><div class="num">04</div><h4 data-i18n="step4T">Livraison</h4><p data-i18n="step4D">Galerie privée et photos retouchées sous 14 jours.</p></div>
+</div>
+
+<div class="sec-head"><span class="eyebrow">FAQ</span><h2>Questions fréquentes</h2><div class="sec-rule"></div></div>
+<div class="faq fade-in">
+<details class="faq-item">
+<summary>Comment se déroule une séance photo ?</summary>
+<div class="faq-a">On commence toujours par échanger sur votre projet : l'ambiance recherchée, le lieu, vos envies. Le jour J, je vous guide tout du long — pas besoin d'expérience devant l'objectif. Une séance portrait dure environ une heure, dans un lieu qu'on choisit ensemble. L'objectif : que vous oubliiez l'appareil photo et que les images restent naturelles.</div>
+</details>
+<details class="faq-item">
+<summary>Combien coûte une prestation ?</summary>
+<div class="faq-a">Chaque projet est différent, c'est pourquoi je fonctionne sur devis personnalisé — et le devis est gratuit, sans engagement. Décrivez-moi votre besoin via le formulaire de contact et je vous réponds sous 48&nbsp;h avec une formule claire et adaptée. Le déplacement dans l'Yonne, à Dijon et dans les environs est inclus.</div>
+</details>
+<details class="faq-item">
+<summary>Comment et quand vais-je recevoir mes photos ?</summary>
+<div class="faq-a">Vos photos triées et retouchées sont livrées sous 14 jours dans une galerie privée en ligne, accessible uniquement avec votre lien. Vous pouvez les visionner, les télécharger en haute définition et les partager avec vos proches.</div>
+</details>
+<details class="faq-item">
+<summary>Qui a les droits sur les photos ?</summary>
+<div class="faq-a">Vous recevez vos photos avec un droit d'usage personnel complet : impression, partage, réseaux sociaux. De mon côté, je peux publier certaines images dans mon portfolio ou sur mes réseaux — mais uniquement avec votre accord, demandé explicitement. Si vous préférez que vos photos restent totalement privées, c'est votre droit et je le respecte sans condition.</div>
+</details>
+<details class="faq-item">
+<summary>Que se passe-t-il en cas de mauvais temps ?</summary>
+<div class="faq-a">Pour une séance en extérieur, si la météo ne s'y prête vraiment pas, on reporte simplement à une date qui vous convient, sans aucun frais. Un ciel voilé donne d'ailleurs souvent une belle lumière douce — on en discute ensemble la veille.</div>
+</details>
+<details class="faq-item">
+<summary>Comment réserver une date ?</summary>
+<div class="faq-a">Envoyez-moi un message via le formulaire de contact avec la date souhaitée. Après validation du devis, la date est bloquée pour vous. Pour les événements importants (couverture complète, association, club), pensez à réserver plusieurs semaines à l'avance.</div>
+</details>
+<details class="faq-item">
+<summary>Je ne suis pas à l'aise devant un objectif, c'est grave ?</summary>
+<div class="faq-a">Pas du tout — c'est même le cas de la majorité des gens que je photographie ! Mon travail consiste justement à vous mettre à l'aise : on discute, on bouge, on essaie, et les meilleures photos arrivent souvent quand on ne s'y attend pas. Le naturel, c'est le cœur de mon approche.</div>
+</details>
+<details class="faq-item">
+<summary>Tu te déplaces jusqu'où ?</summary>
+<div class="faq-a">Je suis basé dans l'Yonne (89) et à Dijon, et je me déplace dans toute la Bourgogne : Auxerre, Sens, Joigny, Avallon, l'agglomération dijonnaise et au-delà. Le déplacement est inclus dans le devis pour l'Yonne, Dijon et les environs. Pour un projet plus lointain, parlons-en — tout est envisageable.</div>
+</details>
 </div>
 </section>
 
@@ -780,6 +851,30 @@ html{scroll-behavior:auto}
 
 <script>
 "use strict";
+
+/* ---------- AVIS CLIENTS ----------
+   GOOGLE_REVIEW_URL : coller ici le lien "Demander des avis" de la fiche Google Business
+   (dès qu'il est renseigné, le bouton "Donner mon avis sur Google" apparaît automatiquement).
+   TESTIMONIALS : copier ici les meilleurs avis reçus. source:'google' affiche l'étiquette "Avis Google".
+   Exemple : {text:"Photos magnifiques, très pro !", who:"Marie L.", stars:5, source:'google'} */
+var GOOGLE_REVIEW_URL = "";
+var TESTIMONIALS = [];
+
+(function renderTestimonials(){
+  var grid = document.getElementById('testiGrid');
+  if(grid && TESTIMONIALS.length){
+    grid.innerHTML = TESTIMONIALS.map(function(t){
+      var stars = t.stars ? '<div class="stars" aria-label="'+t.stars+' étoiles sur 5">'+'★'.repeat(t.stars)+'☆'.repeat(5-t.stars)+'</div>' : '';
+      var src = t.source==='google' ? '<span class="gsrc">Avis Google</span>' : '';
+      return '<div class="testi fade-in">'+stars+'<p>«&nbsp;'+t.text+'&nbsp;»</p><div class="who">'+t.who+src+'</div></div>';
+    }).join('');
+  }
+  var cta = document.getElementById('reviewCta');
+  if(cta && GOOGLE_REVIEW_URL){
+    document.getElementById('reviewLink').href = GOOGLE_REVIEW_URL;
+    cta.classList.add('visible');
+  }
+})();
 
 /* ---------- DONNÉES PORTFOLIO (les vrais fichiers se déposent dans images/portfolio/) ---------- */
 var PHOTOS = [
