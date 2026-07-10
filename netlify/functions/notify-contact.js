@@ -25,6 +25,33 @@ exports.handler = async (event) => {
   const prestation = data.prestation || 'Non renseigné';
   const message = data.message || '';
 
+  // Prénom = premier mot du nom (pour personnaliser le brouillon)
+  const prenom = String(nom).trim().split(/\s+/)[0] || '';
+
+  // Intro du brouillon selon le type de prestation
+  const introParType = {
+    'Portrait': "J'ai bien noté votre envie d'une séance portrait.",
+    'Sport': "J'ai bien noté votre demande pour une couverture sport.",
+    'Événementiel': "J'ai bien noté votre projet d'événement à photographier.",
+  };
+  const intro = introParType[prestation] || "J'ai bien noté votre demande.";
+
+  // Brouillon de réponse prêt à copier
+  const brouillon =
+`Bonjour ${prenom},
+
+Merci beaucoup pour votre message, ça me fait plaisir ! ${intro}
+
+Pour vous préparer une proposition adaptée, il me manque juste quelques précisions :
+- la date ou la période que vous envisagez ;
+- le lieu approximatif ;
+- et si vous avez des envies particulières (ambiance, tenues, personnes présentes...).
+
+Je reviens vers vous très vite. Le devis est gratuit et sans engagement.
+
+À très bientôt,
+Alexandre — ANDREETTI Photography`;
+
   const html = `
 <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;background:#F5FAFB;padding:32px 24px;">
   <div style="text-align:center;margin-bottom:24px;">
@@ -40,7 +67,13 @@ exports.handler = async (event) => {
       <p style="font-size:14px;color:#111827;margin:0;white-space:pre-wrap;line-height:1.6;">${escapeHtml(message)}</p>
     </div>
   </div>
-  <p style="text-align:center;font-size:11px;color:#6B7280;margin-top:20px;">Répondre sous 48h · andreetti.photography</p>
+
+  <div style="background:#ffffff;border:1px dashed #1A7A8A;border-radius:14px;padding:22px 26px;margin-top:18px;">
+    <p style="font-size:13px;color:#0F5A68;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em;"><strong>✍️ Brouillon de réponse (à copier-coller et ajuster)</strong></p>
+    <p style="font-size:14px;color:#111827;margin:0;white-space:pre-wrap;line-height:1.65;font-family:Arial,sans-serif;">${escapeHtml(brouillon)}</p>
+  </div>
+
+  <p style="text-align:center;font-size:11px;color:#6B7280;margin-top:20px;">Réponds directement à cet email (il part vers le client) ou copie le brouillon ci-dessus · andreetti.photography</p>
 </div>`.trim();
 
   try {
