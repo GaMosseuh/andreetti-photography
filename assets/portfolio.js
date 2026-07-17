@@ -18,7 +18,7 @@ var PF_STEP = 9, pfFilter = 'all', pfShown = PF_STEP;
     btn.innerHTML =
       '<div class="media" style="height:'+p.h+'px">'+
         '<div class="ph '+PH_CLASS[p.cat]+'"><span class="lbl">'+CAT_LABEL[p.cat]+'</span></div>'+
-        '<img src="'+base+'.webp" data-fallback="'+base+'.jpg" alt="Photographie '+CAT_LABEL[p.cat]+'" loading="lazy" decoding="async" data-img>'+
+        '<img src="'+base+'.webp" data-fallback="'+base+'.jpg" alt="'+(CAT_ALT[p.cat]||CAT_LABEL[p.cat])+'" loading="lazy" decoding="async" data-img>'+
         '<span class="wmark">© ANDREETTI</span>'+
         '<span class="zoom-ic" aria-hidden="true">⤢</span>'+
       '</div>';
@@ -72,13 +72,23 @@ function openLightbox(el){
   lastFocus = document.activeElement;
   updateLightbox();
   lightbox.classList.add('open');
-  document.getElementById('app').setAttribute('aria-hidden','true');
+  masquerFond(true);
   document.body.style.overflow='hidden';
   document.querySelector('.lightbox-close').focus();
 }
+/* Masque le reste de la page aux lecteurs d'écran pendant que la photo est
+   ouverte (sinon ils continuent de lire le contenu situé derrière).
+   Avant la refonte, le site entier était dans un <div id="app"> qui n'existe
+   plus : on cible désormais <main>, la nav et le pied de page. */
+function masquerFond(masquer){
+  document.querySelectorAll('main, .nav, .footer, .mobile-menu').forEach(function(el){
+    if(masquer) el.setAttribute('aria-hidden','true');
+    else el.removeAttribute('aria-hidden');
+  });
+}
 function closeLightbox(){
   lightbox.classList.remove('open');
-  document.getElementById('app').removeAttribute('aria-hidden');
+  masquerFond(false);
   document.body.style.overflow='';
   resetZoom();
   lbImg.removeAttribute('src');
@@ -101,7 +111,7 @@ function updateLightbox(){
   var wmark = document.getElementById('lbWmark');
   if(hasReal){
     lbImg.style.display='block'; lbFallback.style.display='none';
-    lbImg.src = img.currentSrc || img.src; lbImg.alt = capTxt;
+    lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || capTxt; // reprend le texte alternatif de la vignette
     if(wmark) wmark.style.display='block'; // filigrane sur les vraies photos
   } else {
     if(wmark) wmark.style.display='none';

@@ -42,8 +42,11 @@ var dotsC = document.getElementById('carouselDots');
     slide.innerHTML =
       '<div class="media" style="position:absolute;inset:0">'+
         '<div class="ph '+PH_CLASS[c.cat]+'"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div>'+
+        /* .cblur = copie floutée de la photo, posée en fond pour combler le cadre.
+           Purement décorative : alt vide + aria-hidden, sinon les lecteurs d'écran
+           annonceraient DEUX FOIS la même photo. Ne pas lui mettre de texte. */
         '<img class="cblur" src="'+cbase+'.webp" data-fallback="'+cbase+'.jpg" alt="" aria-hidden="true" loading="'+eager+'" decoding="async" data-img>'+
-        '<img class="cmain" src="'+cbase+'.webp" data-fallback="'+cbase+'.jpg" alt="'+c.cap+'" loading="'+eager+'" decoding="async" data-img>'+
+        '<img class="cmain" src="'+cbase+'.webp" data-fallback="'+cbase+'.jpg" alt="'+(CAT_ALT[c.cat]||c.cap)+'" loading="'+eager+'" decoding="async" data-img>'+
       '</div>'+
       '<div class="carousel-caption">'+c.cap+'</div>';
     track.appendChild(slide);

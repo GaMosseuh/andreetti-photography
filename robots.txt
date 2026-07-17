@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://andreetti.photography/sitemap.xml
+Sitemap: https://andreetti-photography.netlify.app/sitemap.xml

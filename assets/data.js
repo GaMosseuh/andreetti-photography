@@ -33,3 +33,10 @@ var CAR = [
 ];
 var PH_CLASS = {portrait:'ph-portrait', sport:'ph-sport', evenement:'ph-event'};
 var CAT_LABEL = {portrait:'Portrait', sport:'Sport', evenement:'Événementiel'};
+/* Texte alternatif des photos (lu par les lecteurs d'écran et par Google Images).
+   Séparé de CAT_LABEL : « Photographie Événementiel » était incorrect. */
+var CAT_ALT = {
+  portrait:  "Photographie de portrait par Alexandre Andreetti",
+  sport:     "Photographie de sport par Alexandre Andreetti",
+  evenement: "Photographie d'événement par Alexandre Andreetti"
+};
