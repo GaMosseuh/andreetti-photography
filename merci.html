@@ -20,7 +20,14 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:34px
 p{color:#374151;line-height:1.7;margin-bottom:28px}
 a.btn{display:inline-block;background:#0F5A68;color:#fff;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border-radius:4px;transition:background .2s}
 a.btn:hover{background:#0a4651}
+.alt{display:inline-block;margin-top:18px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#1A7A8A;text-decoration:none}
+.alt:hover{color:#0F5A68}
 .check{font-size:40px;color:#1A7A8A;margin-bottom:12px}
+/* transition de page (cohérent avec le site) */
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+body{animation:pageIn .42s cubic-bezier(.4,0,.2,1) both}
+body.leaving{animation:none;opacity:0;transform:translateY(-6px);transition:opacity .22s ease,transform .22s ease}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}body{animation:none}}
 </style>
 </head>
 <body>
@@ -30,6 +37,16 @@ a.btn:hover{background:#0a4651}
 <h1>Message envoyé&nbsp;!</h1>
 <p>Merci pour votre message. Je vous réponds sous 48&nbsp;h. À très vite&nbsp;!</p>
 <a class="btn" href="/">Retour à l'accueil</a>
+<a class="alt" href="links.html">Tous mes liens</a>
 </div>
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a'):null;if(!a)return;
+var h=a.getAttribute('href');if(!h)return;if(a.target==='_blank'||a.hasAttribute('download'))return;
+if(/^(mailto:|tel:|#)/i.test(h))return;if(/^https?:/i.test(h)&&a.hostname!==location.hostname)return;
+if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;e.preventDefault();
+if(r){location.href=h;return;}document.body.classList.add('leaving');setTimeout(function(){location.href=h;},200);});
+window.addEventListener('pageshow',function(){document.body.classList.remove('leaving');});})();
+</script>
 </body>
 </html>

@@ -6,3 +6,19 @@
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# La page d'accueil s'appelle accueil.html (nommage cohérent avec portfolio.html,
+# contact.html, etc.). Le web exige qu'une page réponde à la racine "/" :
+# cette règle sert accueil.html quand on ouvre andreetti.photography.
+# status = 200 => réécriture, l'adresse affichée reste "/" (pas de redirection,
+# pas de contenu dupliqué : accueil.html a un canonical qui pointe sur "/").
+[[redirects]]
+  from = "/"
+  to = "/accueil.html"
+  status = 200
+
+# Sécurité : /index.html n'existe plus, on renvoie proprement vers l'accueil.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301

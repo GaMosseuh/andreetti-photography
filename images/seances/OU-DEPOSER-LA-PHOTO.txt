@@ -1,0 +1,24 @@
+DERNIÈRES SÉANCES — où déposer la photo
+=======================================
+
+C'est ici que va la photo de la section « Dernières séances » de l'accueil.
+
+À FAIRE :
+  Dépose ta photo dans CE dossier, nommée exactement :
+
+      seance-1.webp      (carte "Tir à l'arc en extérieur")
+
+  Format conseillé : .webp, environ 1200 px de large, paysage.
+  (Un .jpg fonctionne aussi : dans ce cas dis-le-moi, j'adapte une ligne.)
+
+C'est tout. La photo apparaît automatiquement, aucun code à toucher.
+Tant qu'elle n'est pas là, un fond coloré s'affiche à la place : rien ne casse.
+
+PLUS TARD :
+  Quand tu auras de nouvelles séances à montrer, les cartes 2 et 3 sont
+  actuellement en « Arrive prochainement ». Demande-moi de les activer :
+  il faudra alors seance-2.webp et seance-3.webp ici, plus le titre,
+  la date et la description de chaque séance.
+
+Le mode d'emploi complet est écrit en commentaire dans accueil.html,
+juste au-dessus de la section (cherche "DERNIÈRES SÉANCES").
