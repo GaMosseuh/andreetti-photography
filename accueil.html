@@ -173,15 +173,15 @@
 
 <div class="categories">
 <a class="cat-card fade-in" aria-label="Voir les portraits" href="portfolio.html?cat=portrait">
-<div class="media"><div class="ph ph-portrait"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-portrait.webp" alt="Portrait en extérieur de nuit : jeune homme en sweat à capuche, éclairé par des lampadaires orangés" data-img loading="lazy" decoding="async"></div>
+<div class="media"><div class="ph ph-portrait"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-portrait.webp" alt="Portrait en extérieur de nuit sous les lampadaires" data-img loading="lazy" decoding="async"></div>
 <div class="scrim"></div><span class="cat-label" data-i18n="catPortrait">Portrait</span>
 </a>
 <a class="cat-card fade-in" aria-label="Voir les photos de sport" href="portfolio.html?cat=sport">
-<div class="media"><div class="ph ph-sport"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-sport.webp" alt="Reportage sportif : match de football, un joueur en maillot vert déborde la défense adverse" data-img loading="lazy" decoding="async"></div>
+<div class="media"><div class="ph ph-sport"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-sport.webp" alt="Match de football, un joueur mène le ballon" data-img loading="lazy" decoding="async"></div>
 <div class="scrim"></div><span class="cat-label" data-i18n="catSport">Sport</span>
 </a>
 <a class="cat-card fade-in" aria-label="Voir l'événementiel" href="portfolio.html?cat=evenement">
-<div class="media"><div class="ph ph-event"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-event.webp" alt="Couverture d'événement : chanteur au micro sur scène, sous les lumières bleues et violettes" data-img loading="lazy" decoding="async"></div>
+<div class="media"><div class="ph ph-event"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-event.webp" alt="Chanteur au micro sur scène, lumières de concert" data-img loading="lazy" decoding="async"></div>
 <div class="scrim"></div><span class="cat-label" data-i18n="catEvent">Événementiel</span>
 </a>
 </div>
@@ -265,16 +265,24 @@
 
 <div class="testi-wrap">
 <div class="sec-head" style="padding-top:0"><span class="eyebrow" data-i18n="testiEyebrow">Témoignages</span><h2 data-i18n="testiTitle">Ils m'ont fait confiance</h2><div class="sec-rule"></div></div>
+<!-- Les vrais avis viennent se placer ici (remplis par TESTIMONIALS dans home.js).
+     Tant qu'il n'y en a pas, la carte "à venir" ci-dessous tient l'équilibre. -->
 <div class="testi-grid" id="testiGrid"></div>
-<div class="review-cta" id="reviewCta">
+<div class="testi-pair">
+<!-- Carte "à venir" : disparaît automatiquement dès qu'un vrai avis est ajouté -->
+<div class="testi-soon fade-in" id="testiSoon">
+<div class="testi-soon-stars" aria-hidden="true">★★★★★</div>
+<h3 data-i18n="soonTitle">Vos avis apparaîtront ici</h3>
+<p data-i18n="soonText">Les premiers arrivent, et d'autres suivront avec le temps. Chacun passe par Google : des retours 100&nbsp;% authentiques et vérifiables.</p>
+</div>
+<!-- Carte CTA : inviter à laisser un avis Google -->
 <div class="review-cta-card fade-in">
 <div class="review-stars" aria-hidden="true">★★★★★</div>
-<h3 data-i18n="reviewTitle">Vous avez travaillé avec moi ?</h3>
+<h3 data-i18n="reviewTitle">Vous avez travaillé avec moi&nbsp;?</h3>
 <p data-i18n="reviewText">Votre avis compte énormément. Il passe par Google, ce qui garantit qu'il est authentique et vérifiable : c'est la meilleure façon de m'aider à me faire connaître.</p>
 <a class="btn-teal" id="reviewLink" href="#" target="_blank" rel="noopener noreferrer" data-i18n="reviewBtn">Donner mon avis sur Google</a>
 </div>
 </div>
-<p class="review-note fade-in" id="testiNote" data-i18n="testiEmpty">Les premiers avis clients arrivent prochainement. Ils passeront par Google : des retours authentiques et vérifiables, impossibles à inventer.</p>
 </div>
 
 <section class="zones fade-in" aria-label="Zones d'intervention">

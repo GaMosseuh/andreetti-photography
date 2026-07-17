@@ -19,14 +19,12 @@ var TESTIMONIALS = [];
       return '<div class="testi fade-in">'+stars+'<p>«&nbsp;'+t.text+'&nbsp;»</p><div class="who">'+t.who+src+'</div></div>';
     }).join('');
   }
-  // la note « avis à venir » disparaît dès qu'il y a de vrais témoignages
-  var note = document.getElementById('testiNote');
-  if(note && TESTIMONIALS.length){ note.classList.add('hidden'); }
-  var cta = document.getElementById('reviewCta');
-  if(cta && GOOGLE_REVIEW_URL){
-    document.getElementById('reviewLink').href = GOOGLE_REVIEW_URL;
-    cta.classList.add('visible');
-  }
+  // la carte « à venir » disparaît dès qu'il y a de vrais témoignages
+  var soon = document.getElementById('testiSoon');
+  if(soon && TESTIMONIALS.length){ soon.classList.add('hidden'); }
+  // le bouton « Donner mon avis sur Google » pointe vers la fiche
+  var link = document.getElementById('reviewLink');
+  if(link && GOOGLE_REVIEW_URL){ link.href = GOOGLE_REVIEW_URL; }
 })();
 
 /* ---------- CONSTRUCTION CARROUSEL ---------- */
