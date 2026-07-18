@@ -9,7 +9,7 @@
    Exemple : {text:"Photos magnifiques, très pro !", who:"Marie L.", stars:5, source:'google'} */
 var GOOGLE_REVIEW_URL = "https://g.page/r/CUqtmkfR_G4MEBM/review";
 var TESTIMONIALS = [
-  { text:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", who:"Diane G. · Mariage", stars:5, source:'google' }
+  { text:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", who:"Diane G. · Mariage", date:"Juillet 2026", stars:5, source:'google' }
 ];
 
 (function renderTestimonials(){
@@ -22,7 +22,9 @@ var TESTIMONIALS = [
       var stars = t.stars ? '<div class="stars" aria-label="'+t.stars+' étoiles sur 5">'+'★'.repeat(t.stars)+'☆'.repeat(5-t.stars)+'</div>' : '';
       var src = t.source==='google' ? '<span class="gsrc">Avis Google</span>' : '';
       var texte = t.text.replace(/\n/g, '<br>'); // respecte les retours à la ligne de l'avis
-      return '<div class="testi fade-in visible">'+stars+'<p>«&nbsp;'+texte+'&nbsp;»</p><div class="who">'+t.who+src+'</div></div>';
+      // la DATE de l'avis est toujours affichée (obligatoire pour chaque témoignage)
+      var dateHtml = t.date ? '<div class="testi-date">'+t.date+'</div>' : '';
+      return '<div class="testi fade-in visible">'+stars+'<p>«&nbsp;'+texte+'&nbsp;»</p><div class="who">'+t.who+src+'</div>'+dateHtml+'</div>';
     }).join('');
     if(soon) soon.insertAdjacentHTML('beforebegin', html);
   }

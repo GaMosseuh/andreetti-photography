@@ -175,6 +175,7 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .testi p{font-family:var(--font-body);font-size:14px;font-weight:300;color:var(--text2);line-height:1.75;margin-bottom:18px}
 .testi .who{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
 .testi .gsrc{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal);border-radius:3px;padding:2px 7px}
+.testi .testi-date{margin-top:9px;font-size:11px;letter-spacing:.05em;color:var(--text3)}
 /* Paire de cartes carrées : "avis à venir" + CTA Google, équilibrées côte à côte.
    Quand un vrai avis existe, il s'affiche dans .testi-grid au-dessus et la carte
    "à venir" est masquée par le JS (voir home.js). */
