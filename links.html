@@ -106,7 +106,10 @@ html[data-theme="dark"] .lk-lang{color-scheme:dark}
 .lk-btn.is-soon .lk-ico{background:var(--bg2);color:var(--text3)}
 .lk-soon{flex:0 0 auto;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);border-radius:999px;padding:3px 9px}
 
-.lk-back{display:inline-block;margin-top:34px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);text-decoration:none}
+.lk-pages{margin-top:26px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.lk-pages a{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);text-decoration:none;border:1px solid var(--border);border-radius:999px;padding:7px 14px;transition:color .2s,border-color .2s,background .2s}
+.lk-pages a:hover{color:var(--teal);border-color:var(--teal);background:var(--teal-light)}
+.lk-back{display:inline-block;margin-top:20px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);text-decoration:none}
 .lk-back:hover{color:var(--teal-dark)}
 
 /* FOOTER */
@@ -195,6 +198,15 @@ html[data-theme="dark"] .lk-lang{color-scheme:dark}
 
 </nav>
 
+<!-- Accès direct aux pages du site (Accueil, Portfolio, etc.) -->
+<nav class="lk-pages" aria-label="Pages du site">
+<a href="/" data-i18n="pgHome">Accueil</a>
+<a href="portfolio.html" data-i18n="pgPortfolio">Portfolio</a>
+<a href="prestations.html" data-i18n="pgServices">Prestations</a>
+<a href="contact.html" data-i18n="pgContact">Contact</a>
+<a href="apropos.html" data-i18n="pgAbout">À propos</a>
+</nav>
+
 <a class="lk-back" href="/" data-i18n="back">← Retour au site</a>
 </main>
 
@@ -211,8 +223,8 @@ html[data-theme="dark"] .lk-lang{color-scheme:dark}
 <script>
 "use strict";
 var I18N = {
- fr:{title:"Liens — ANDREETTI Photography",desc:"Tous les liens d'Alexandre Andreetti, photographe portrait, sport et événementiel à Dijon et dans l'Yonne : site, Instagram, Facebook, avis Google et contact.",h1:"Tous mes liens",sub:"Photographe portrait · sport · événementiel — Dijon & Yonne",trust:"Réponse sous 48 h · Devis gratuit",siteMain:"Site officiel",siteSub:"Portfolio, prestations & contact",fbSub:"Ma page Facebook",reviewMain:"Laisser un avis Google",reviewSub:"Ça m'aide énormément (30 s)",soon:"Bientôt disponible",emailMain:"M'écrire un email",back:"← Retour au site",footTag:"Photographe portrait, sport & événementiel · Dijon & Yonne",legalLink:"Mentions légales & confidentialité"},
- en:{title:"Links — ANDREETTI Photography",desc:"All of Alexandre Andreetti's links — portrait, sport and event photographer in Dijon and the Yonne: website, Instagram, Facebook, Google reviews and contact.",h1:"All my links",sub:"Portrait · sport · event photographer — Dijon & Yonne",trust:"Reply within 48h · Free quote",siteMain:"Official website",siteSub:"Portfolio, services & contact",fbSub:"My Facebook page",reviewMain:"Leave a Google review",reviewSub:"It helps me a lot (30 s)",soon:"Coming soon",emailMain:"Send me an email",back:"← Back to the site",footTag:"Portrait, sport & event photographer · Dijon & Yonne",legalLink:"Legal notice & privacy"},
+ fr:{pgHome:"Accueil",pgPortfolio:"Portfolio",pgServices:"Prestations",pgContact:"Contact",pgAbout:"À propos",title:"Liens — ANDREETTI Photography",desc:"Tous les liens d'Alexandre Andreetti, photographe portrait, sport et événementiel à Dijon et dans l'Yonne : site, Instagram, Facebook, avis Google et contact.",h1:"Tous mes liens",sub:"Photographe portrait · sport · événementiel — Dijon & Yonne",trust:"Réponse sous 48 h · Devis gratuit",siteMain:"Site officiel",siteSub:"Portfolio, prestations & contact",fbSub:"Ma page Facebook",reviewMain:"Laisser un avis Google",reviewSub:"Ça m'aide énormément (30 s)",soon:"Bientôt disponible",emailMain:"M'écrire un email",back:"← Retour au site",footTag:"Photographe portrait, sport & événementiel · Dijon & Yonne",legalLink:"Mentions légales & confidentialité"},
+ en:{pgHome:"Home",pgPortfolio:"Portfolio",pgServices:"Services",pgContact:"Contact",pgAbout:"About",title:"Links — ANDREETTI Photography",desc:"All of Alexandre Andreetti's links — portrait, sport and event photographer in Dijon and the Yonne: website, Instagram, Facebook, Google reviews and contact.",h1:"All my links",sub:"Portrait · sport · event photographer — Dijon & Yonne",trust:"Reply within 48h · Free quote",siteMain:"Official website",siteSub:"Portfolio, services & contact",fbSub:"My Facebook page",reviewMain:"Leave a Google review",reviewSub:"It helps me a lot (30 s)",soon:"Coming soon",emailMain:"Send me an email",back:"← Back to the site",footTag:"Portrait, sport & event photographer · Dijon & Yonne",legalLink:"Legal notice & privacy"},
  es:{title:"Enlaces — ANDREETTI Photography",desc:"Todos los enlaces de Alexandre Andreetti, fotógrafo de retrato, deporte y eventos en Dijon y el Yonne: web, Instagram, Facebook, reseñas de Google y contacto.",h1:"Todos mis enlaces",sub:"Fotógrafo de retrato · deporte · eventos — Dijon y Yonne",trust:"Respuesta en 48 h · Presupuesto gratis",siteMain:"Sitio oficial",siteSub:"Portafolio, servicios y contacto",fbSub:"Mi página de Facebook",reviewMain:"Deja una reseña en Google",reviewSub:"Me ayuda muchísimo (30 s)",soon:"Próximamente",emailMain:"Escríbeme un correo",back:"← Volver al sitio",footTag:"Fotógrafo de retrato, deporte y eventos · Dijon y Yonne",legalLink:"Aviso legal y privacidad"},
  de:{title:"Links — ANDREETTI Photography",desc:"Alle Links von Alexandre Andreetti, Fotograf für Porträt, Sport und Events in Dijon und im Yonne: Website, Instagram, Facebook, Google-Bewertungen und Kontakt.",h1:"Alle meine Links",sub:"Porträt- · Sport- · Eventfotograf — Dijon & Yonne",trust:"Antwort in 48 h · Kostenloses Angebot",siteMain:"Offizielle Website",siteSub:"Portfolio, Leistungen & Kontakt",fbSub:"Meine Facebook-Seite",reviewMain:"Google-Bewertung abgeben",reviewSub:"Das hilft mir sehr (30 s)",soon:"Bald verfügbar",emailMain:"Schreib mir eine E-Mail",back:"← Zurück zur Website",footTag:"Porträt-, Sport- & Eventfotograf · Dijon & Yonne",legalLink:"Impressum & Datenschutz"},
  it:{title:"Link — ANDREETTI Photography",desc:"Tutti i link di Alexandre Andreetti, fotografo di ritratto, sport ed eventi a Digione e nell'Yonne: sito, Instagram, Facebook, recensioni Google e contatto.",h1:"Tutti i miei link",sub:"Fotografo ritratto · sport · eventi — Digione e Yonne",trust:"Risposta in 48 h · Preventivo gratuito",siteMain:"Sito ufficiale",siteSub:"Portfolio, servizi e contatto",fbSub:"La mia pagina Facebook",reviewMain:"Lascia una recensione Google",reviewSub:"Mi aiuta moltissimo (30 s)",soon:"Presto disponibile",emailMain:"Scrivimi un'email",back:"← Torna al sito",footTag:"Fotografo ritratto, sport ed eventi · Digione e Yonne",legalLink:"Note legali e privacy"},

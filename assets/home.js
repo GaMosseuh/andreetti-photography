@@ -8,19 +8,24 @@
    TESTIMONIALS : copier ici les meilleurs avis reçus. source:'google' affiche l'étiquette "Avis Google".
    Exemple : {text:"Photos magnifiques, très pro !", who:"Marie L.", stars:5, source:'google'} */
 var GOOGLE_REVIEW_URL = "https://g.page/r/CUqtmkfR_G4MEBM/review";
-var TESTIMONIALS = [];
+var TESTIMONIALS = [
+  { text:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée. Merci encore !", who:"Diane G. · Mariage", stars:5, source:'google' }
+];
 
 (function renderTestimonials(){
-  var grid = document.getElementById('testiGrid');
-  if(grid && TESTIMONIALS.length){
-    grid.innerHTML = TESTIMONIALS.map(function(t){
+  var pair = document.getElementById('testiPair');
+  var soon = document.getElementById('testiSoon');
+  // chaque vrai avis est inséré comme une carte AVANT la carte "à venir" / le CTA,
+  // dans la même rangée : on garde ainsi la mise en page équilibrée en carrés.
+  if(pair && TESTIMONIALS.length){
+    var html = TESTIMONIALS.map(function(t){
       var stars = t.stars ? '<div class="stars" aria-label="'+t.stars+' étoiles sur 5">'+'★'.repeat(t.stars)+'☆'.repeat(5-t.stars)+'</div>' : '';
       var src = t.source==='google' ? '<span class="gsrc">Avis Google</span>' : '';
-      return '<div class="testi fade-in">'+stars+'<p>«&nbsp;'+t.text+'&nbsp;»</p><div class="who">'+t.who+src+'</div></div>';
+      return '<div class="testi fade-in visible">'+stars+'<p>«&nbsp;'+t.text+'&nbsp;»</p><div class="who">'+t.who+src+'</div></div>';
     }).join('');
+    if(soon) soon.insertAdjacentHTML('beforebegin', html);
   }
   // la carte « à venir » disparaît dès qu'il y a de vrais témoignages
-  var soon = document.getElementById('testiSoon');
   if(soon && TESTIMONIALS.length){ soon.classList.add('hidden'); }
   // le bouton « Donner mon avis sur Google » pointe vers la fiche
   var link = document.getElementById('reviewLink');
