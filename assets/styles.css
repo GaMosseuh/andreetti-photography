@@ -172,7 +172,7 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .testi{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;text-align:center;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:38px 32px 34px;box-shadow:var(--shadow-2)}
 .testi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4285F4 0 25%,#EA4335 25% 50%,#FBBC05 50% 75%,#34A853 75% 100%)}
 .testi .stars{color:#E8A93C;font-size:22px;letter-spacing:6px;margin-bottom:16px}
-.testi p{font-family:var(--font-title);font-size:18px;font-style:italic;color:var(--text2);line-height:1.6;margin-bottom:18px}
+.testi p{font-family:var(--font-body);font-size:14px;font-weight:300;color:var(--text2);line-height:1.75;margin-bottom:18px}
 .testi .who{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
 .testi .gsrc{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal);border-radius:3px;padding:2px 7px}
 /* Paire de cartes carrées : "avis à venir" + CTA Google, équilibrées côte à côte.
