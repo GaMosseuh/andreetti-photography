@@ -21,7 +21,10 @@ var PHOTOS = [
   {cat:'sport',    file:'sport-05.jpg',    h:360},
   {cat:'portrait', file:'portrait-07.jpg', h:220},
   {cat:'evenement',file:'event-05.jpg',    h:240},
-  {cat:'portrait', file:'portrait-08.jpg', h:320}
+  {cat:'portrait', file:'portrait-08.jpg', h:320},
+  {cat:'sport',    file:'sport-06.jpg',    h:380},
+  {cat:'sport',    file:'sport-07.jpg',    h:340},
+  {cat:'sport',    file:'sport-08.jpg',    h:400}
 ];
 var CAR = [
   {cat:'portrait', file:'portrait-01.jpg', cap:'Portrait'},
