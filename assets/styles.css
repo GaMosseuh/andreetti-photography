@@ -157,12 +157,14 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .last-tag-portrait{background:var(--cat-portrait)}
 .last-tag-sport{background:var(--cat-sport)}
 .last-tag-event{background:var(--cat-event)}
-.last-body{padding:16px 18px 20px}
+.last-body{padding:18px 20px 22px}
 .last-date{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
-.last-body h3{font-family:var(--font-title);font-size:21px;font-weight:400;letter-spacing:.02em;color:var(--text);margin-bottom:6px}
-.last-body p{font-size:13.5px;line-height:1.6;color:var(--text2)}
-.last-more{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);transition:color .2s}
-.last-card:hover .last-more{color:var(--teal-dark)}
+.last-body h3{font-family:var(--font-title);font-size:21px;font-weight:400;letter-spacing:.02em;color:var(--text);margin-bottom:8px}
+.last-body p{font-size:13.5px;line-height:1.65;color:var(--text2)}
+/* CTA "Voir les photos" : bien détaché de la description (marge + filet) et
+   plus affirmé. La carte entière reste cliquable ; ceci n'est que l'appel visuel. */
+.last-more{display:inline-block;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);width:100%;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);transition:color .2s,border-color .2s}
+.last-card:hover .last-more{color:var(--teal-dark);border-color:var(--teal)}
 .last-foot{text-align:center;padding:0 24px 64px;margin-top:-28px}
 
 /* TESTIMONIALS */
