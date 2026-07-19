@@ -3,28 +3,32 @@
 "use strict";
 
 /* ---------- DONNÉES PORTFOLIO (les vrais fichiers se déposent dans images/portfolio/) ---------- */
+/* Ordre équilibré et valorisant : alternance portrait / sport / événementiel,
+   belles photos en tête. Les 3 photos de tir à l'arc (sport-06/07/08) sont
+   réparties dans la catégorie Sport comme les autres. La carte "Tir à l'arc"
+   de l'accueil ouvre simplement la galerie Sport. */
 var PHOTOS = [
   {cat:'portrait', file:'portrait-01.jpg', h:360},
   {cat:'sport',    file:'sport-01.jpg',    h:220},
   {cat:'portrait', file:'portrait-02.jpg', h:300},
   {cat:'evenement',file:'event-01.jpg',    h:240},
-  {cat:'sport',    file:'sport-02.jpg',    h:300},
+  {cat:'sport',    file:'sport-06.jpg',    h:380},
   {cat:'portrait', file:'portrait-03.jpg', h:420},
   {cat:'evenement',file:'event-02.jpg',    h:200},
+  {cat:'sport',    file:'sport-02.jpg',    h:300},
   {cat:'portrait', file:'portrait-04.jpg', h:240},
-  {cat:'sport',    file:'sport-03.jpg',    h:260},
+  {cat:'sport',    file:'sport-07.jpg',    h:340},
   {cat:'evenement',file:'event-03.jpg',    h:340},
   {cat:'portrait', file:'portrait-05.jpg', h:300},
-  {cat:'sport',    file:'sport-04.jpg',    h:200},
+  {cat:'sport',    file:'sport-03.jpg',    h:260},
   {cat:'portrait', file:'portrait-06.jpg', h:260},
   {cat:'evenement',file:'event-04.jpg',    h:280},
-  {cat:'sport',    file:'sport-05.jpg',    h:360},
+  {cat:'sport',    file:'sport-08.jpg',    h:400},
   {cat:'portrait', file:'portrait-07.jpg', h:220},
+  {cat:'sport',    file:'sport-04.jpg',    h:200},
   {cat:'evenement',file:'event-05.jpg',    h:240},
   {cat:'portrait', file:'portrait-08.jpg', h:320},
-  {cat:'sport',    file:'sport-06.jpg',    h:380},
-  {cat:'sport',    file:'sport-07.jpg',    h:340},
-  {cat:'sport',    file:'sport-08.jpg',    h:400}
+  {cat:'sport',    file:'sport-05.jpg',    h:360}
 ];
 var CAR = [
   {cat:'portrait', file:'portrait-01.jpg', cap:'Portrait'},
