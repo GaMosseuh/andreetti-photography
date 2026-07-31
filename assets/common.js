@@ -89,6 +89,32 @@ document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagN
   syncThemeBtn();
 })();
 
+/* ---------- BOUTON PARTAGER (injecté sur toutes les pages) ----------
+   Le header est répété dans chaque page HTML. Plutôt que d'éditer 8 fichiers,
+   on greffe ici un bouton « Partager » juste avant le sélecteur de thème.
+   Web Share API sur mobile (partage natif) ; sinon copie de l'URL avec un ✓. */
+window.sharePage=function(){
+  var url=location.href.split('#')[0];
+  var data={title:document.title||'ANDREETTI Photography',url:url};
+  if(navigator.share){ navigator.share(data).catch(function(){}); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){
+    var b=document.getElementById('shareBtn'); if(!b) return;
+    var o=b.innerHTML; b.textContent='✓';
+    b.setAttribute('title','Lien copié'); b.setAttribute('aria-label','Lien copié');
+    setTimeout(function(){ b.innerHTML=o; b.setAttribute('title','Partager'); b.setAttribute('aria-label','Partager cette page'); },1600);
+  }); }
+};
+(function(){
+  var tt=document.getElementById('themeToggle');
+  if(!tt || document.getElementById('shareBtn')) return;
+  var b=document.createElement('button');
+  b.id='shareBtn'; b.type='button'; b.className='nav-icon nav-share';
+  b.setAttribute('aria-label','Partager cette page'); b.setAttribute('title','Partager');
+  b.innerHTML='<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg>';
+  b.addEventListener('click', window.sharePage);
+  tt.parentNode.insertBefore(b, tt);
+})();
+
 /* ---------- BANDEAU COOKIES (cookies essentiels uniquement) ---------- */
 (function(){
   var banner=document.getElementById('cookie-banner');
