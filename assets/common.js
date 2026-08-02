@@ -115,6 +115,28 @@ window.sharePage=function(){
   tt.parentNode.insertBefore(b, tt);
 })();
 
+/* ---------- BOUTON FLOTTANT « Devis gratuit » + LIGNE DE CONFIANCE (toutes pages) ----------
+   Conversion : un appel à l'action toujours visible (pouce sur mobile), présent partout
+   SAUF sur /contact (qui EST déjà le formulaire). data-i18n sur le <span> interne
+   uniquement (pas sur le <a>) pour ne pas effacer l'icône SVG lors des changements de langue. */
+(function(){
+  var page = document.body.getAttribute('data-page');
+  if(page !== 'contact' && !document.querySelector('.float-cta')){
+    var a=document.createElement('a');
+    a.className='float-cta'; a.href='contact.html';
+    a.setAttribute('aria-label','Demander un devis gratuit');
+    a.innerHTML='<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg><span class="fc-txt" data-i18n="floatCta">'+(window.tr?tr('floatCta'):'Devis gratuit')+'</span>';
+    document.body.appendChild(a);
+  }
+  var tag=document.querySelector('.footer .footer-tag');
+  if(tag && !document.querySelector('.foot-trust')){
+    var s=document.createElement('div');
+    s.className='foot-trust'; s.setAttribute('data-i18n','footTrust');
+    s.textContent=(window.tr?tr('footTrust'):'Réponse sous 48 h · Devis gratuit');
+    tag.insertAdjacentElement('afterend', s);
+  }
+})();
+
 /* ---------- BANDEAU COOKIES (cookies essentiels uniquement) ---------- */
 (function(){
   var banner=document.getElementById('cookie-banner');

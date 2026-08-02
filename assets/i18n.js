@@ -52,6 +52,45 @@ var I18N_SEANCES = {
 };
 Object.keys(I18N_SEANCES).forEach(function(l){ I18N[l]=Object.assign(I18N[l]||{}, I18N_SEANCES[l]); });
 
+/* ---------- Éléments de CONVERSION (accueil : niche, avis, tarifs, méthode, FAQ, CTA) ----------
+   FR = source ; EN = secours international (les autres langues retombent sur EN via tr()).
+   Traduction complète 12 langues à faire une fois les formulations validées par Alexandre. */
+var I18N_CONV = {
+  fr:{
+    nicheLine:"Sport, événementiel et portrait — je capture l'énergie et l'émotion de vos moments, à Dijon et dans l'Yonne.",
+    reviewLabel:"Avis vérifié Google",reviewSeeAll:"Lire l'avis complet",
+    tariffsEyebrow:"Prestations",tariffsTitle:"Prestations & tarifs",tariffsText:"Portrait, sport, événementiel : chaque projet est unique, donc chaque devis l'est aussi. Gratuit, sans engagement, réponse sous 48 h.",tariffsBtn:"Voir les prestations & tarifs",priceQuoteShort:"Sur devis",
+    howEyebrow:"Méthode",howTitle:"Comment ça se passe",
+    how1T:"Devis",how1D:"Vous me décrivez votre projet, je réponds sous 48 h avec un devis gratuit.",
+    how2T:"Séance",how2D:"Le jour J, je vous guide et je capture les vrais moments.",
+    how3T:"Livraison",how3D:"Vos photos retouchées dans une galerie privée sous 10 jours.",
+    how4T:"Avis",how4D:"Content du résultat ? Un avis Google m'aide énormément à me faire connaître.",
+    ctaBandTitle:"Prêt à réserver votre séance ?",ctaBandText:"Parlez-moi de votre projet : je vous réponds sous 48 h avec un devis gratuit et sans engagement.",ctaBandBtn:"Demander mon devis gratuit",
+    faqMiniEyebrow:"FAQ",faqMiniTitle:"Questions fréquentes",
+    faqMiniQ1:"Quand vais-je recevoir mes photos ?",faqMiniA1:"Vos photos triées et retouchées sont livrées sous 10 jours dans une galerie privée en ligne, téléchargeables en haute définition.",
+    faqMiniQ2:"Jusqu'où vous déplacez-vous ?",faqMiniA2:"Basé à Dijon et dans l'Yonne, je couvre toute la Bourgogne. Le déplacement est inclus dans le devis pour Dijon, l'Yonne et les environs.",
+    faqMiniQ3:"Combien coûte une prestation ?",faqMiniA3:"Chaque projet est sur devis personnalisé, gratuit et sans engagement, avec une réponse sous 48 h. Le déplacement local est inclus.",
+    faqMiniAll:"Toutes les questions →",floatCta:"Devis gratuit",footTrust:"Réponse sous 48 h · Devis gratuit"
+  },
+  en:{
+    nicheLine:"Sport, events and portraits — I capture the energy and emotion of your moments, in Dijon and the Yonne.",
+    reviewLabel:"Verified Google review",reviewSeeAll:"Read the full review",
+    tariffsEyebrow:"Services",tariffsTitle:"Services & pricing",tariffsText:"Portrait, sport, events: every project is unique, so every quote is too. Free, no obligation, reply within 48h.",tariffsBtn:"See services & pricing",priceQuoteShort:"On quote",
+    howEyebrow:"How it works",howTitle:"How it works",
+    how1T:"Quote",how1D:"Tell me about your project; I reply within 48h with a free quote.",
+    how2T:"Session",how2D:"On the day, I guide you and capture the real moments.",
+    how3T:"Delivery",how3D:"Your edited photos in a private gallery within 10 days.",
+    how4T:"Review",how4D:"Happy with the result? A Google review helps me a lot to get known.",
+    ctaBandTitle:"Ready to book your session?",ctaBandText:"Tell me about your project: I reply within 48h with a free, no-obligation quote.",ctaBandBtn:"Get my free quote",
+    faqMiniEyebrow:"FAQ",faqMiniTitle:"Frequently asked questions",
+    faqMiniQ1:"When will I receive my photos?",faqMiniA1:"Your edited photos are delivered within 10 days in a private online gallery, downloadable in high resolution.",
+    faqMiniQ2:"How far do you travel?",faqMiniA2:"Based in Dijon and the Yonne, I cover all of Burgundy. Travel is included in the quote for Dijon, the Yonne and surroundings.",
+    faqMiniQ3:"How much does a session cost?",faqMiniA3:"Every project is a personalised quote, free and no-obligation, with a reply within 48h. Local travel is included.",
+    faqMiniAll:"All questions →",floatCta:"Free quote",footTrust:"Reply within 48h · Free quote"
+  }
+};
+Object.keys(I18N_CONV).forEach(function(l){ I18N[l]=Object.assign(I18N[l]||{}, I18N_CONV[l]); });
+
 var curLang = 'fr';
 function tr(key){ var l=I18N[curLang]||{}; if(l[key]!=null) return l[key]; if(I18N.en[key]!=null) return I18N.en[key]; if(I18N.fr[key]!=null) return I18N.fr[key]; return null; }
 function applyI18n(){ document.querySelectorAll('[data-i18n]').forEach(function(el){ var v=tr(el.getAttribute('data-i18n')); if(v!=null) el.textContent=v; }); }

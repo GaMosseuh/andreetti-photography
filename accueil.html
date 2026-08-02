@@ -69,6 +69,11 @@
     { "@type": "AdministrativeArea", "name": "Bourgogne-Franche-Comté" }
   ],
   "address": { "@type": "PostalAddress", "addressLocality": "Dijon", "addressRegion": "Bourgogne-Franche-Comté", "addressCountry": "FR" },
+  "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "1", "bestRating": "5", "worstRating": "1" },
+  "review": [
+    { "@type": "Review", "author": { "@type": "Person", "name": "Diane G." }, "datePublished": "2026-07-17", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée. Merci encore !" }
+  ],
   "founder": {
     "@type": "Person",
     "name": "Alexandre Andreetti",
@@ -148,7 +153,7 @@
 </div>
 </div>
 </div>
-<p class="tagline" data-i18n="tagline">Photographe portrait, sport &amp; événementiel · Dijon · Yonne · Bourgogne</p>
+<p class="niche" data-i18n="nicheLine"><strong>Sport, événementiel et portrait</strong> — je capture l'énergie et l'émotion de vos moments, à Dijon et dans l'Yonne.</p>
 
 <div class="dual">
 <div class="carousel-wrap fade-in" aria-roledescription="carrousel" aria-label="Aperçu du portfolio">
@@ -171,6 +176,10 @@
 <div class="stat"><div class="n">10 j</div><div class="l" data-i18n="statDeliveryL">Livraison des photos</div></div>
 </div>
 
+<!-- Preuve sociale : avis Google RÉEL, rempli par home.js depuis TESTIMONIALS[0].
+     Reste masqué tant qu'il n'y a pas d'avis (jamais de faux avis). -->
+<section class="review-strip fade-in" id="reviewStrip" hidden aria-label="Avis clients"></section>
+
 <div class="categories">
 <a class="cat-card fade-in" aria-label="Voir les portraits" href="portfolio.html?cat=portrait">
 <div class="media"><div class="ph ph-portrait"><span class="mono" aria-hidden="true">A<span class="dot">.</span></span></div><img src="images/portfolio/cat-portrait.webp" alt="Portrait en extérieur de nuit sous les lampadaires" data-img loading="lazy" decoding="async"></div>
@@ -185,6 +194,29 @@
 <div class="scrim"></div><span class="cat-label" data-i18n="catEvent">Événementiel</span>
 </a>
 </div>
+
+<!-- Teaser Prestations & tarifs : accès direct depuis l'accueil (les tarifs sont sur devis) -->
+<section class="tariffs fade-in" aria-label="Prestations et tarifs">
+<div class="sec-head" style="padding-top:0"><span class="eyebrow" data-i18n="tariffsEyebrow">Prestations</span><h2 data-i18n="tariffsTitle">Prestations &amp; tarifs</h2><div class="sec-rule"></div></div>
+<p class="tariffs-intro" data-i18n="tariffsText">Portrait, sport, événementiel : chaque projet est unique, donc chaque devis l'est aussi. Gratuit, sans engagement, réponse sous 48 h.</p>
+<div class="tariffs-cards">
+<a class="tariffs-card" href="prestations.html"><div class="tc-ico" aria-hidden="true">📷</div><div class="tc-name" data-i18n="catPortrait">Portrait</div><div class="tc-price" data-i18n="priceQuoteShort">Sur devis</div></a>
+<a class="tariffs-card" href="prestations.html"><div class="tc-ico" aria-hidden="true">⚡</div><div class="tc-name" data-i18n="catSport">Sport</div><div class="tc-price" data-i18n="priceQuoteShort">Sur devis</div></a>
+<a class="tariffs-card" href="prestations.html"><div class="tc-ico" aria-hidden="true">✨</div><div class="tc-name" data-i18n="catEvent">Événementiel</div><div class="tc-price" data-i18n="priceQuoteShort">Sur devis</div></a>
+</div>
+<a class="btn-teal" href="prestations.html" data-i18n="tariffsBtn">Voir les prestations &amp; tarifs</a>
+</section>
+
+<!-- Comment ça se passe : 4 étapes (devis → séance → livraison → avis) -->
+<section class="how fade-in" aria-label="Comment ça se passe">
+<div class="sec-head"><span class="eyebrow" data-i18n="howEyebrow">Méthode</span><h2 data-i18n="howTitle">Comment ça se passe</h2><div class="sec-rule"></div></div>
+<div class="steps">
+<div class="step fade-in"><div class="num">01</div><h4 data-i18n="how1T">Devis</h4><p data-i18n="how1D">Vous me décrivez votre projet, je réponds sous 48 h avec un devis gratuit.</p></div>
+<div class="step fade-in"><div class="num">02</div><h4 data-i18n="how2T">Séance</h4><p data-i18n="how2D">Le jour J, je vous guide et je capture les vrais moments.</p></div>
+<div class="step fade-in"><div class="num">03</div><h4 data-i18n="how3T">Livraison</h4><p data-i18n="how3D">Vos photos retouchées dans une galerie privée sous 10 jours.</p></div>
+<div class="step fade-in"><div class="num">04</div><h4 data-i18n="how4T">Avis</h4><p data-i18n="how4D">Content du résultat ? Un avis Google m'aide énormément à me faire connaître.</p></div>
+</div>
+</section>
 
 <!-- ============================ DERNIÈRES SÉANCES ============================
      POUR METTRE À JOUR APRÈS UN SHOOTING (3 cartes, la plus récente en premier) :
@@ -287,6 +319,26 @@
 </div>
 </div>
 </div>
+
+<!-- FAQ courte : lève les objections avant le contact (FAQ complète + schema sur prestations) -->
+<section class="faq-mini fade-in" aria-label="Questions fréquentes" style="padding:56px 24px 0;max-width:820px;margin:0 auto">
+<div class="sec-head" style="padding-top:0"><span class="eyebrow" data-i18n="faqMiniEyebrow">FAQ</span><h2 data-i18n="faqMiniTitle">Questions fréquentes</h2><div class="sec-rule"></div></div>
+<div class="faq">
+<details class="faq-item"><summary data-i18n="faqMiniQ1">Quand vais-je recevoir mes photos ?</summary><div class="faq-a" data-i18n="faqMiniA1">Vos photos triées et retouchées sont livrées sous 10 jours dans une galerie privée en ligne, téléchargeables en haute définition.</div></details>
+<details class="faq-item"><summary data-i18n="faqMiniQ2">Jusqu'où vous déplacez-vous ?</summary><div class="faq-a" data-i18n="faqMiniA2">Basé à Dijon et dans l'Yonne, je couvre toute la Bourgogne. Le déplacement est inclus dans le devis pour Dijon, l'Yonne et les environs.</div></details>
+<details class="faq-item"><summary data-i18n="faqMiniQ3">Combien coûte une prestation ?</summary><div class="faq-a" data-i18n="faqMiniA3">Chaque projet est sur devis personnalisé, gratuit et sans engagement, avec une réponse sous 48 h. Le déplacement local est inclus.</div></details>
+</div>
+<div style="text-align:center;margin-top:18px"><a class="link-arrow" href="prestations.html"><span data-i18n="faqMiniAll">Toutes les questions →</span></a></div>
+</section>
+
+<!-- CTA final de conversion -->
+<section class="cta-band fade-in" aria-label="Réserver une séance">
+<div class="cta-band-inner">
+<h2 data-i18n="ctaBandTitle">Prêt à réserver votre séance ?</h2>
+<p data-i18n="ctaBandText">Parlez-moi de votre projet : je vous réponds sous 48 h avec un devis gratuit et sans engagement.</p>
+<a class="btn-white" href="contact.html" data-i18n="ctaBandBtn">Demander mon devis gratuit</a>
+</div>
+</section>
 
 <section class="zones fade-in" aria-label="Zones d'intervention">
 <div class="sec-head"><span class="eyebrow" data-i18n="zonesEyebrow">Déplacements</span><h2 data-i18n="zonesTitle">Zones d'intervention</h2><div class="sec-rule"></div></div>

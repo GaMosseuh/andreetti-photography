@@ -18,7 +18,7 @@ var PF_STEP = 9, pfFilter = 'all', pfShown = PF_STEP;
     btn.innerHTML =
       '<div class="media" style="height:'+p.h+'px">'+
         '<div class="ph '+PH_CLASS[p.cat]+'"><span class="lbl">'+CAT_LABEL[p.cat]+'</span></div>'+
-        '<img src="'+base+'.webp" data-fallback="'+base+'.jpg" alt="'+(CAT_ALT[p.cat]||CAT_LABEL[p.cat])+'" loading="lazy" decoding="async" data-img>'+
+        '<img src="'+base+'.webp" data-fallback="'+base+'.jpg" alt="'+(p.alt||CAT_ALT[p.cat]||CAT_LABEL[p.cat])+'" loading="lazy" decoding="async" data-img>'+
         '<span class="wmark">© ANDREETTI</span>'+
         '<span class="zoom-ic" aria-hidden="true">⤢</span>'+
       '</div>';

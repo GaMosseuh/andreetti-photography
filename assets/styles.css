@@ -468,3 +468,59 @@ main a:not([class]){color:var(--teal)}
 .last-card.is-soon:hover{transform:none;box-shadow:var(--shadow-1);border-color:var(--border)}
 .last-card.is-soon .media{filter:saturate(.55)}
 .last-card.is-soon .last-date{color:var(--teal);letter-spacing:.1em}
+
+/* ============================ ÉLÉMENTS DE CONVERSION (v1.8) ============================ */
+/* Phrase de niche renforcée (remplace la tagline plate) */
+.niche{max-width:760px;margin:26px auto 0;padding:0 20px;text-align:center;font-family:var(--font-body);font-weight:300;font-size:18px;line-height:1.6;color:var(--text2)}
+.niche strong{font-weight:500;color:var(--text)}
+
+/* Bandeau avis Google (preuve sociale, haut de page) */
+.review-strip{max-width:820px;margin:34px auto 0;padding:0 20px}
+.review-strip-inner{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);padding:18px 22px}
+.review-strip .rs-stars{color:#F4B400;font-size:17px;letter-spacing:2px}
+.review-strip .rs-note{font-family:var(--font-title);font-size:22px;color:var(--text);line-height:1}
+.review-strip .rs-quote{flex:1;min-width:220px;font-size:14px;font-weight:300;color:var(--text2);line-height:1.6;font-style:normal}
+.review-strip .rs-who{display:block;margin-top:5px;font-size:12px;color:var(--text3)}
+.review-strip .rs-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);white-space:nowrap}
+.review-strip a.rs-link{font-size:12px;letter-spacing:.05em;color:var(--teal);text-decoration:none;white-space:nowrap}
+.review-strip a.rs-link:hover{color:var(--teal-dark);text-decoration:underline}
+
+/* Teaser Prestations & tarifs (accès direct depuis l'accueil) */
+.tariffs{padding:56px 24px 8px;text-align:center}
+.tariffs-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:26px auto 22px}
+.tariffs-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);padding:22px 18px;transition:transform .18s,box-shadow .18s,border-color .18s;text-decoration:none;color:inherit;display:block}
+.tariffs-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:var(--teal)}
+.tariffs-card .tc-ico{font-size:26px}
+.tariffs-card .tc-name{font-family:var(--font-title);font-size:19px;letter-spacing:.06em;margin:8px 0 4px;color:var(--text)}
+.tariffs-card .tc-price{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.tariffs-intro{max-width:620px;margin:0 auto;font-size:15px;font-weight:300;color:var(--text2);line-height:1.7}
+
+/* Bandeau CTA final (conversion) */
+.cta-band{margin:60px auto 0;max-width:1100px;padding:0 24px}
+.cta-band-inner{background:linear-gradient(135deg,var(--teal),var(--teal-dark));border-radius:var(--radius-lg);box-shadow:var(--shadow-2);padding:44px 28px;text-align:center;color:#fff}
+.cta-band-inner h2{font-family:var(--font-title);font-weight:400;font-size:30px;color:#fff;margin-bottom:10px}
+.cta-band-inner p{max-width:560px;margin:0 auto 22px;font-weight:300;font-size:15px;line-height:1.7;color:rgba(255,255,255,.92)}
+.cta-band .btn-white{display:inline-block;background:#fff;color:var(--teal-dark);padding:15px 30px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:transform .18s,box-shadow .18s}
+.cta-band .btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.25)}
+
+/* Bouton flottant "Devis gratuit" (persistant, toutes pages sauf contact) */
+.float-cta{position:fixed;right:18px;bottom:18px;z-index:900;display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:#fff;padding:13px 20px;border-radius:999px;font-family:var(--font-body);font-size:14px;font-weight:500;letter-spacing:.03em;text-decoration:none;box-shadow:0 8px 24px rgba(15,61,71,.32);transition:transform .18s,box-shadow .18s,background .18s}
+.float-cta:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(15,61,71,.42)}
+.float-cta svg{display:block}
+.float-cta .fc-txt{white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.float-cta{transition:none}}
+
+/* Ligne de confiance dans le footer (toutes pages) */
+.foot-trust{display:inline-flex;align-items:center;gap:8px;margin:2px auto 14px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);background:var(--teal-light);border-radius:999px;padding:6px 16px}
+
+@media(max-width:768px){
+  .tariffs-cards{grid-template-columns:1fr;max-width:360px}
+  .tariffs{padding:44px 18px 4px}
+  .cta-band{padding:0 18px}
+  .cta-band-inner{padding:34px 20px}
+  .cta-band-inner h2{font-size:25px}
+  .niche{font-size:16px}
+  .review-strip-inner{padding:16px 18px}
+  /* le bouton flottant laisse la place au pouce, un peu plus compact */
+  .float-cta{right:14px;bottom:14px;padding:12px 17px;font-size:13px}
+}

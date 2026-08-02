@@ -9,28 +9,28 @@
    de l'accueil ouvre simplement la galerie Sport. */
 var PHOTOS = [
   {cat:'portrait', file:'portrait-01.jpg', h:360},
-  {cat:'evenement',file:'event-10.jpg',    h:250},
+  {cat:'evenement',file:'event-10.jpg', alt:"Spectacle sous les vitraux de l'église de Ouanne (Yonne) — reportage",    h:250},
   {cat:'sport',    file:'sport-01.jpg',    h:220},
   {cat:'portrait', file:'portrait-02.jpg', h:300},
   {cat:'evenement',file:'event-01.jpg',    h:240},
-  {cat:'sport',    file:'sport-06.jpg',    h:380},
-  {cat:'evenement',file:'event-06.jpg',    h:400},
+  {cat:'sport',    file:'sport-06.jpg', alt:"Tir à l'arc en extérieur dans l'Yonne — photographe sport",    h:380},
+  {cat:'evenement',file:'event-06.jpg', alt:"Comédienne sur scène — spectacle Hippolyte et Antiope, église de Ouanne (Yonne)",    h:400},
   {cat:'portrait', file:'portrait-03.jpg', h:420},
   {cat:'evenement',file:'event-02.jpg',    h:200},
   {cat:'sport',    file:'sport-02.jpg',    h:300},
   {cat:'portrait', file:'portrait-04.jpg', h:240},
-  {cat:'evenement',file:'event-07.jpg',    h:400},
-  {cat:'sport',    file:'sport-07.jpg',    h:340},
+  {cat:'evenement',file:'event-07.jpg', alt:"Comédiens en costume antique — théâtre à l'église de Ouanne (Yonne)",    h:400},
+  {cat:'sport',    file:'sport-07.jpg', alt:"Tir à l'arc en pleine forêt, Yonne — photographe sport",    h:340},
   {cat:'evenement',file:'event-03.jpg',    h:340},
   {cat:'portrait', file:'portrait-05.jpg', h:300},
   {cat:'sport',    file:'sport-03.jpg',    h:260},
-  {cat:'evenement',file:'event-08.jpg',    h:400},
+  {cat:'evenement',file:'event-08.jpg', alt:"Chanteuse lors du spectacle — reportage événementiel à Ouanne, Yonne",    h:400},
   {cat:'portrait', file:'portrait-06.jpg', h:260},
   {cat:'evenement',file:'event-04.jpg',    h:280},
-  {cat:'evenement',file:'event-09.jpg',    h:400},
-  {cat:'sport',    file:'sport-08.jpg',    h:400},
+  {cat:'evenement',file:'event-09.jpg', alt:"Comédien sur scène — reportage théâtre à Ouanne (Yonne)",    h:400},
+  {cat:'sport',    file:'sport-08.jpg', alt:"Séance de tir à l'arc au petit matin dans l'Yonne",    h:400},
   {cat:'portrait', file:'portrait-07.jpg', h:220},
-  {cat:'evenement',file:'event-11.jpg',    h:250},
+  {cat:'evenement',file:'event-11.jpg', alt:"Salut final de la troupe Les Folies Artistiques — théâtre à Ouanne (Yonne)",    h:250},
   {cat:'sport',    file:'sport-04.jpg',    h:200},
   {cat:'evenement',file:'event-05.jpg',    h:240},
   {cat:'portrait', file:'portrait-08.jpg', h:320},
@@ -49,7 +49,7 @@ var CAT_LABEL = {portrait:'Portrait', sport:'Sport', evenement:'Événementiel'}
 /* Texte alternatif des photos (lu par les lecteurs d'écran et par Google Images).
    Séparé de CAT_LABEL : « Photographie Événementiel » était incorrect. */
 var CAT_ALT = {
-  portrait:  "Photographie de portrait par Alexandre Andreetti",
-  sport:     "Photographie de sport par Alexandre Andreetti",
-  evenement: "Photographie d'événement par Alexandre Andreetti"
+  portrait:  "Photographe portrait à Dijon et dans l'Yonne — Alexandre Andreetti",
+  sport:     "Photographe de sport à Dijon et dans l'Yonne — Alexandre Andreetti",
+  evenement: "Photographe événementiel à Dijon et dans l'Yonne — Alexandre Andreetti"
 };
