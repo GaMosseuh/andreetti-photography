@@ -157,13 +157,15 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .last-tag-portrait{background:var(--cat-portrait)}
 .last-tag-sport{background:var(--cat-sport)}
 .last-tag-event{background:var(--cat-event)}
-.last-body{padding:18px 20px 22px}
+.last-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
 .last-date{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
 .last-body h3{font-family:var(--font-title);font-size:21px;font-weight:400;letter-spacing:.02em;color:var(--text);margin-bottom:8px}
 .last-body p{font-size:13.5px;line-height:1.65;color:var(--text2)}
 /* CTA "Voir les photos" : bien détaché de la description (marge + filet) et
    plus affirmé. La carte entière reste cliquable ; ceci n'est que l'appel visuel. */
-.last-more{display:inline-block;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);width:100%;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);transition:color .2s,border-color .2s}
+.last-more{display:inline-block;margin-top:auto;padding-top:14px;border-top:1px solid var(--border);width:100%;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);transition:color .2s,border-color .2s}
+/* garde un minimum d'air entre le texte et le séparateur quand la description est longue */
+.last-body p{margin-bottom:16px}
 .last-card:hover .last-more{color:var(--teal-dark);border-color:var(--teal)}
 .last-foot{text-align:center;padding:0 24px 64px;margin-top:-28px}
 
@@ -474,17 +476,6 @@ main a:not([class]){color:var(--teal)}
 .niche{max-width:760px;margin:26px auto 0;padding:0 20px;text-align:center;font-family:var(--font-body);font-weight:300;font-size:18px;line-height:1.6;color:var(--text2)}
 .niche strong{font-weight:500;color:var(--text)}
 
-/* Bandeau avis Google (preuve sociale, haut de page) */
-.review-strip{max-width:820px;margin:34px auto 0;padding:0 20px}
-.review-strip-inner{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);padding:18px 22px}
-.review-strip .rs-stars{color:#F4B400;font-size:17px;letter-spacing:2px}
-.review-strip .rs-note{font-family:var(--font-title);font-size:22px;color:var(--text);line-height:1}
-.review-strip .rs-quote{flex:1;min-width:220px;font-size:14px;font-weight:300;color:var(--text2);line-height:1.6;font-style:normal}
-.review-strip .rs-who{display:block;margin-top:5px;font-size:12px;color:var(--text3)}
-.review-strip .rs-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);white-space:nowrap}
-.review-strip a.rs-link{font-size:12px;letter-spacing:.05em;color:var(--teal);text-decoration:none;white-space:nowrap}
-.review-strip a.rs-link:hover{color:var(--teal-dark);text-decoration:underline}
-
 /* Teaser Prestations & tarifs (accès direct depuis l'accueil) */
 .tariffs{padding:56px 24px 8px;text-align:center}
 .tariffs-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:26px auto 22px}
@@ -520,7 +511,6 @@ main a:not([class]){color:var(--teal)}
   .cta-band-inner{padding:34px 20px}
   .cta-band-inner h2{font-size:25px}
   .niche{font-size:16px}
-  .review-strip-inner{padding:16px 18px}
   /* le bouton flottant laisse la place au pouce, un peu plus compact */
   .float-cta{right:14px;bottom:14px;padding:12px 17px;font-size:13px}
 }
