@@ -70,7 +70,7 @@ var I18N_CONV = {
     faqMiniQ1:"Quand vais-je recevoir mes photos ?",faqMiniA1:"Vos photos triées et retouchées sont livrées sous 10 jours dans une galerie privée en ligne, téléchargeables en haute définition.",
     faqMiniQ2:"Jusqu'où vous déplacez-vous ?",faqMiniA2:"Basé à Dijon et dans l'Yonne, je couvre toute la Bourgogne. Le déplacement est inclus dans le devis pour Dijon, l'Yonne et les environs.",
     faqMiniQ3:"Combien coûte une prestation ?",faqMiniA3:"Chaque projet est sur devis personnalisé, gratuit et sans engagement, avec une réponse sous 48 h. Le déplacement local est inclus.",
-    faqMiniAll:"Toutes les questions →",floatCta:"Devis gratuit",footTrust:"Réponse sous 48 h · Devis gratuit"
+    faqMiniAll:"Toutes les questions →",floatCta:"Devis gratuit",footTrust:"Réponse sous 48 h · Devis gratuit",zonesAll:"Voir toutes les villes"
   },
   en:{
     nicheLine:"Sport, events and portraits — I capture the energy and emotion of your moments, in Dijon and the Yonne.",
@@ -86,7 +86,7 @@ var I18N_CONV = {
     faqMiniQ1:"When will I receive my photos?",faqMiniA1:"Your edited photos are delivered within 10 days in a private online gallery, downloadable in high resolution.",
     faqMiniQ2:"How far do you travel?",faqMiniA2:"Based in Dijon and the Yonne, I cover all of Burgundy. Travel is included in the quote for Dijon, the Yonne and surroundings.",
     faqMiniQ3:"How much does a session cost?",faqMiniA3:"Every project is a personalised quote, free and no-obligation, with a reply within 48h. Local travel is included.",
-    faqMiniAll:"All questions →",floatCta:"Free quote",footTrust:"Reply within 48h · Free quote"
+    faqMiniAll:"All questions →",floatCta:"Free quote",footTrust:"Reply within 48h · Free quote",zonesAll:"See all towns"
   }
 };
 Object.keys(I18N_CONV).forEach(function(l){ I18N[l]=Object.assign(I18N[l]||{}, I18N_CONV[l]); });

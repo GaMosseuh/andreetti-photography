@@ -514,3 +514,22 @@ main a:not([class]){color:var(--teal)}
   /* le bouton flottant laisse la place au pouce, un peu plus compact */
   .float-cta{right:14px;bottom:14px;padding:12px 17px;font-size:13px}
 }
+
+/* ---- Versions compactes (allègement accueil v1.8.1) ---- */
+/* Comment ça se passe : une seule ligne */
+.how-compact{padding:38px 24px 6px;text-align:center}
+.how-line{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px}
+.how-step{display:inline-flex;align-items:center;gap:9px;font-size:14px;letter-spacing:.04em;color:var(--text)}
+.how-n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--teal-light);color:var(--teal);font-size:12px;font-weight:600;flex:0 0 auto}
+.how-sep{color:var(--text3);font-size:15px}
+/* Lien FAQ discret sous le CTA final */
+.cta-faq-link{display:inline-block;margin-top:16px;color:rgba(255,255,255,.9);font-size:12px;letter-spacing:.05em;text-decoration:underline;text-underline-offset:3px}
+.cta-faq-link:hover{color:#fff}
+/* Zones condensées : phrase + liste repliable */
+.zones-main{text-align:center;font-size:15px;color:var(--text);letter-spacing:.02em;margin:14px auto 6px;max-width:640px}
+.zones-details{max-width:820px;margin:6px auto 0;text-align:center}
+.zones-details summary{cursor:pointer;display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);list-style:none;padding:6px 4px;transition:color .2s}
+.zones-details summary::-webkit-details-marker{display:none}
+.zones-details summary:hover{color:var(--teal-dark)}
+.zones-details[open] summary{margin-bottom:10px}
+@media(max-width:768px){.how-step{font-size:13px}.how-line{gap:8px 10px}}
