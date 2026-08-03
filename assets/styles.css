@@ -538,4 +538,4 @@ html[data-theme="dark"] .cta-band .btn-white{color:#0b3a44}
 @media(max-width:768px){.how-step{font-size:13px}.how-line{gap:8px 10px}}
 
 /* Hero accueil : voile un peu plus sombre (photo théâtre) pour que le titre ressorte */
-body[data-page="accueil"] .hero-overlay{background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.7))}
+body[data-page="accueil"] .hero-overlay{background:linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.66))}
