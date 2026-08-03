@@ -57,7 +57,7 @@ Object.keys(I18N_SEANCES).forEach(function(l){ I18N[l]=Object.assign(I18N[l]||{}
    Traduction complète 12 langues à faire une fois les formulations validées par Alexandre. */
 var I18N_CONV = {
   fr:{
-    nicheLine:"Sport, événementiel et portrait — je capture l'énergie et l'émotion de vos moments, à Dijon et dans l'Yonne.",
+    nicheLine:"Sport, événementiel et portrait — l'authenticité de vos moments, à Dijon et dans l'Yonne.",
     reviewLabel:"Avis vérifié Google",reviewSeeAll:"Lire l'avis complet",
     tariffsEyebrow:"Prestations",tariffsTitle:"Prestations & tarifs",tariffsText:"Portrait, sport, événementiel : chaque projet est unique, donc chaque devis l'est aussi. Gratuit, sans engagement, réponse sous 48 h.",tariffsBtn:"Voir les prestations & tarifs",priceQuoteShort:"Sur devis",
     howEyebrow:"Méthode",howTitle:"Comment ça se passe",
@@ -73,7 +73,7 @@ var I18N_CONV = {
     faqMiniAll:"Toutes les questions →",floatCta:"Devis gratuit",footTrust:"Réponse sous 48 h · Devis gratuit",zonesAll:"Voir toutes les villes"
   },
   en:{
-    nicheLine:"Sport, events and portraits — I capture the energy and emotion of your moments, in Dijon and the Yonne.",
+    nicheLine:"Sport, events and portraits — the authenticity of your moments, in Dijon and the Yonne.",
     reviewLabel:"Verified Google review",reviewSeeAll:"Read the full review",
     tariffsEyebrow:"Services",tariffsTitle:"Services & pricing",tariffsText:"Portrait, sport, events: every project is unique, so every quote is too. Free, no obligation, reply within 48h.",tariffsBtn:"See services & pricing",priceQuoteShort:"On quote",
     howEyebrow:"How it works",howTitle:"How it works",
