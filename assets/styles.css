@@ -523,8 +523,11 @@ main a:not([class]){color:var(--teal)}
 .how-n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--teal-light);color:var(--teal);font-size:12px;font-weight:600;flex:0 0 auto}
 .how-sep{color:var(--text3);font-size:15px}
 /* Lien FAQ discret sous le CTA final */
-.cta-faq-link{display:inline-block;margin-top:16px;color:rgba(255,255,255,.9);font-size:12px;letter-spacing:.05em;text-decoration:underline;text-underline-offset:3px}
-.cta-faq-link:hover{color:#fff}
+.cta-faq-link{display:block;width:fit-content;margin:20px auto 0;color:rgba(255,255,255,.88);font-size:12px;letter-spacing:.05em;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.45)}
+.cta-faq-link:hover{color:#fff;text-decoration-color:#fff}
+/* Mode sombre : dégradé plus profond pour que le texte et le bouton blancs ressortent */
+html[data-theme="dark"] .cta-band-inner{background:linear-gradient(135deg,#1c5f6d,#0b2b33)}
+html[data-theme="dark"] .cta-band .btn-white{color:#0b3a44}
 /* Zones condensées : phrase + liste repliable */
 .zones-main{text-align:center;font-size:15px;color:var(--text);letter-spacing:.02em;margin:14px auto 6px;max-width:640px}
 .zones-details{max-width:820px;margin:6px auto 0;text-align:center}
