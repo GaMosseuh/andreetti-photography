@@ -536,3 +536,6 @@ html[data-theme="dark"] .cta-band .btn-white{color:#0b3a44}
 .zones-details summary:hover{color:var(--teal-dark)}
 .zones-details[open] summary{margin-bottom:10px}
 @media(max-width:768px){.how-step{font-size:13px}.how-line{gap:8px 10px}}
+
+/* Hero accueil : voile un peu plus sombre (photo théâtre) pour que le titre ressorte */
+body[data-page="accueil"] .hero-overlay{background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.62))}
