@@ -12,6 +12,8 @@ var PF_STEP = 9, pfFilter = 'all', pfShown = PF_STEP;
     btn.type='button';
     btn.className='masonry-item fade-in';
     btn.dataset.category=p.cat;
+    // p.nowmark : la photo a déjà un © incrusté (fichier retouché) -> ne pas en rajouter un
+    if(p.nowmark) btn.dataset.nowmark='1';
     btn.style.transitionDelay=(Math.min(i,8)*0.05)+'s'; // apparition en cascade
     btn.setAttribute('aria-label','Agrandir une photo '+CAT_LABEL[p.cat]);
     var base='images/portfolio/'+p.file.replace(/\.jpg$/,'');
@@ -19,7 +21,7 @@ var PF_STEP = 9, pfFilter = 'all', pfShown = PF_STEP;
       '<div class="media" style="height:'+p.h+'px">'+
         '<div class="ph '+PH_CLASS[p.cat]+'"><span class="lbl">'+CAT_LABEL[p.cat]+'</span></div>'+
         '<img src="'+base+'.webp" data-fallback="'+base+'.jpg" alt="'+(p.alt||CAT_ALT[p.cat]||CAT_LABEL[p.cat])+'" loading="lazy" decoding="async" data-img>'+
-        '<span class="wmark">© ANDREETTI</span>'+
+        (p.nowmark ? '' : '<span class="wmark">© ANDREETTI</span>')+
         '<span class="zoom-ic" aria-hidden="true">⤢</span>'+
       '</div>';
     btn.addEventListener('click', function(){ openLightbox(btn); });
@@ -112,7 +114,9 @@ function updateLightbox(){
   if(hasReal){
     lbImg.style.display='block'; lbFallback.style.display='none';
     lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || capTxt; // reprend le texte alternatif de la vignette
-    if(wmark) wmark.style.display='block'; // filigrane sur les vraies photos
+    // filigrane sur les vraies photos, SAUF celles qui en ont déjà un incrusté
+    // (photos retouchées par Alexandre : le © est déjà dans le fichier) -> sinon doublon
+    if(wmark) wmark.style.display = item.dataset.nowmark==='1' ? 'none' : 'block';
   } else {
     if(wmark) wmark.style.display='none';
     lbImg.removeAttribute('src'); lbImg.style.display='none';
