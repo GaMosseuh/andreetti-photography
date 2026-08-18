@@ -22,3 +22,18 @@
   from = "/index.html"
   to = "/"
   status = 301
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MIGRATION VERS andreettiphoto.fr (18/08/2026)
+# L'ancienne adresse Netlify reste vivante mais renvoie DÉFINITIVEMENT (301) vers
+# le nouveau domaine, page par page. C'est ce qui transfère à andreettiphoto.fr
+# le travail d'indexation déjà acquis : Google suit la redirection et reporte
+# l'ancienneté et la réputation de chaque URL sur la nouvelle.
+# NE PAS SUPPRIMER : sans ça, les liens déjà en circulation (Search Console,
+# anciens partages) tomberaient sur un site en double, ce que Google pénalise.
+# ─────────────────────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "https://andreetti-photography.netlify.app/*"
+  to = "https://andreettiphoto.fr/:splat"
+  status = 301
+  force = true

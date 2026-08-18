@@ -183,8 +183,8 @@ window.sharePhoto=function(){
 /* ---------- MICRODONNÉES IMAGES (SEO Google Images + © affirmé) ---------- */
 (function(){
   try{
-    var base='https://andreetti-photography.netlify.app/images/portfolio/';
-    var imgs=PHOTOS.map(function(p){ return {"@type":"ImageObject",contentUrl:base+p.file.replace(/\.jpg$/,'.webp'),creator:{"@type":"Person",name:"Alexandre Andreetti"},copyrightNotice:"© ANDREETTI",creditText:"ANDREETTI",license:"https://andreetti-photography.netlify.app/mentions-legales.html"}; });
+    var base='https://andreettiphoto.fr/images/portfolio/';
+    var imgs=PHOTOS.map(function(p){ return {"@type":"ImageObject",contentUrl:base+p.file.replace(/\.jpg$/,'.webp'),creator:{"@type":"Person",name:"Alexandre Andreetti"},copyrightNotice:"© ANDREETTI",creditText:"ANDREETTI",license:"https://andreettiphoto.fr/mentions-legales.html"}; });
     var ld={"@context":"https://schema.org","@type":"ImageGallery",name:"Portfolio — ANDREETTI",author:{"@type":"Person",name:"Alexandre Andreetti"},image:imgs};
     var s=document.createElement('script'); s.type='application/ld+json'; s.textContent=JSON.stringify(ld); document.head.appendChild(s);
   }catch(e){}

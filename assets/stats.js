@@ -31,7 +31,7 @@ var UMAMI_SRC = "https://cloud.umami.is/script.js";
 /* Domaines sur lesquels on compte VRAIMENT les visites.
    Sans ça, Umami compte aussi les tests en local (localhost / 127.0.0.1) et les
    stats deviennent fausses. Le jour du domaine perso, il est déjà prévu ici. */
-var UMAMI_DOMAINS = "andreetti-photography.netlify.app,andreetti.photography";
+var UMAMI_DOMAINS = "andreettiphoto.fr,andreetti-photography.netlify.app";
 
 (function () {
   /* 1) Chargement du script de mesure, uniquement si un identifiant est renseigné */
