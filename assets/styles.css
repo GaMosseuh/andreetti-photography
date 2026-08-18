@@ -39,8 +39,8 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);-webkit-backdrop-filter:saturate(180%) blur(8px);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:var(--nav-h)}
-.nav-logo{font-family:var(--font-title);font-size:20px;font-weight:400;letter-spacing:.22em;color:var(--text);cursor:pointer;text-transform:uppercase;background:none;border:0;padding:0;line-height:1}
-.nav-right{display:flex;align-items:center;gap:6px}
+.nav-logo{font-family:var(--font-title);font-size:20px;font-weight:400;letter-spacing:.22em;color:var(--text);cursor:pointer;text-transform:uppercase;background:none;border:0;padding:0;line-height:1;min-width:0;overflow:hidden;white-space:nowrap}
+.nav-right{display:flex;align-items:center;gap:6px;flex:0 0 auto}
 .nav-links{display:flex;gap:6px}
 .nav-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:none;border:0;cursor:pointer;color:var(--text);text-decoration:none;transition:color .2s,background .2s;font-size:17px;line-height:1}
 .nav-lang{appearance:none;-webkit-appearance:none;background:none;border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:11px;letter-spacing:.06em;padding:6px 8px;border-radius:var(--radius-sm);cursor:pointer;transition:border-color .2s;color-scheme:light}
@@ -53,7 +53,7 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .nav-links button:hover,.nav-links button[aria-current="page"],.nav-links a:hover{color:var(--teal);border-bottom-color:var(--teal)}
 .nav-links a.nav-links-item{display:inline-flex;align-items:center;gap:6px}
 .nav-links a.nav-links-item svg{display:block}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:11px}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:11px;flex:0 0 auto}
 .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:transform .3s,opacity .3s}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
@@ -422,7 +422,7 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .hero-title{letter-spacing:.12em}
 .hero-section-title{letter-spacing:.1em}
 }
-@media(max-width:380px){
+@media(max-width:430px){
 .nav-logo{font-size:17px;letter-spacing:.16em}
 }
 
@@ -547,3 +547,23 @@ html[data-theme="dark"] .cta-band .btn-white{color:#0b3a44}
 
 /* Hero accueil : voile un peu plus sombre (photo théâtre) pour que le titre ressorte */
 body[data-page="accueil"] .hero-overlay{background:linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.66))}
+
+/* ═══ BARRE DE NAVIGATION SUR TÉLÉPHONE (correctif 18/08/2026) ═══
+   Signalé par Mickaël sur iPhone : le ☰ était coupé au bord droit de l'écran.
+   Cause : .nav est un flex non repliable (logo + 5 contrôles) dont la largeur
+   minimale dépassait 390 px, et body{overflow-x:hidden} masquait le débordement
+   au lieu de le signaler. L'ancienne règle de réduction du logo se déclenchait
+   à 380 px : elle ne s'appliquait donc JAMAIS sur les iPhone (390/414/430 px).
+   Ne touche qu'au comportement responsive, pas au design. */
+@media(max-width:430px){
+  .nav{padding:0 12px}
+  .nav-right{gap:2px}
+  .nav-lang{font-size:10px;padding:5px 4px;letter-spacing:.02em}
+  .nav-icon{width:34px;height:34px;font-size:15px}
+  .hamburger{padding:11px 6px}
+}
+/* Sous 400 px, l'icône de partage saute : elle fait doublon avec le partage
+   natif du navigateur, et c'est elle qui poussait le ☰ hors de l'écran. */
+@media(max-width:400px){
+  .nav-share{display:none}
+}
