@@ -133,9 +133,14 @@
 <button class="lightbox-share" id="lbShare" onclick="sharePhoto()" aria-label="Partager" title="Partager">⤴</button>
 <button class="lightbox-prev" onclick="navLightbox(-1)" aria-label="Photo précédente">‹</button>
 <div class="lightbox-stage">
+<!-- .lb-media épouse exactement la photo affichée : le filigrane s'accroche donc à l'IMAGE
+     et non au cadre plein écran (sinon, sur une photo verticale, il partait se coller au bord
+     de l'écran, à côté de la photo). Corrigé le 18/08/2026. -->
+<div class="lb-media" id="lbMedia">
 <img src="" alt="" id="lightboxImg">
-<div class="lb-fallback" id="lbFallback"><span class="mono" style="font-family:var(--font-title);font-size:34px;letter-spacing:.18em">A<span class="dot">.</span></span><span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase" data-i18n="imgAVenir">Image à venir</span></div>
 <span class="lb-wmark" id="lbWmark" style="display:none">© ANDREETTI</span>
+</div>
+<div class="lb-fallback" id="lbFallback"><span class="mono" style="font-family:var(--font-title);font-size:34px;letter-spacing:.18em">A<span class="dot">.</span></span><span style="font-size:12px;letter-spacing:.12em;text-transform:uppercase" data-i18n="imgAVenir">Image à venir</span></div>
 <div class="lb-caption" id="lbCaption"></div>
 </div>
 <button class="lightbox-next" onclick="navLightbox(1)" aria-label="Photo suivante">›</button>

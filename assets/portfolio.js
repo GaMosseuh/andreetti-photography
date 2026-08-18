@@ -64,6 +64,7 @@ var lbItems = [], lbIdx = 0, lastFocus = null;
 var lightbox = document.getElementById('lightbox');
 var lbImg = document.getElementById('lightboxImg');
 var lbFallback = document.getElementById('lbFallback');
+var lbMedia = document.getElementById('lbMedia'); // bloc qui épouse la photo (porte le filigrane)
 var lbCaption = document.getElementById('lbCaption');
 
 function getVisibleItems(){ return [].slice.call(document.querySelectorAll('.masonry-item:not(.hidden)')); }
@@ -113,12 +114,14 @@ function updateLightbox(){
   var wmark = document.getElementById('lbWmark');
   if(hasReal){
     lbImg.style.display='block'; lbFallback.style.display='none';
+    if(lbMedia) lbMedia.style.display='inline-block';
     lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || capTxt; // reprend le texte alternatif de la vignette
     // filigrane sur les vraies photos, SAUF celles qui en ont déjà un incrusté
     // (photos retouchées par Alexandre : le © est déjà dans le fichier) -> sinon doublon
     if(wmark) wmark.style.display = item.dataset.nowmark==='1' ? 'none' : 'block';
   } else {
     if(wmark) wmark.style.display='none';
+    if(lbMedia) lbMedia.style.display='none';
     lbImg.removeAttribute('src'); lbImg.style.display='none';
     var ph = item.querySelector('.ph');
     lbFallback.className='lb-fallback '+(ph?ph.className.replace('ph ',''):'ph-portrait');

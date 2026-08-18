@@ -116,7 +116,12 @@ window.setLang=function(code){
 };
 (function(){
   var saved; try{ saved=localStorage.getItem('lang'); }catch(e){}
-  var code=saved;
-  if(!code){ var b=(navigator.language||'fr').slice(0,2).toLowerCase(); code=I18N[b]?b:'fr'; }
+  /* FRANÇAIS PAR DÉFAUT — NE PAS REMETTRE LA DÉTECTION AUTOMATIQUE.
+     Avant, on lisait navigator.language au premier chargement. Googlebot explore depuis les
+     États-Unis et s'annonce en anglais : le site basculait donc en anglais POUR GOOGLE, et
+     setLang() réécrivait l'attribut lang du <html> de "fr" en "en". Résultat : titre et
+     description anglais dans les résultats de recherche (constaté le 11/08/2026).
+     Le choix explicite d'un visiteur reste mémorisé dans localStorage. */
+  var code = saved || 'fr';
   setLang(code);
 })();

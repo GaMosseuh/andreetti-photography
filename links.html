@@ -283,7 +283,9 @@ window.sharePage=function(){
 (function(){
  var saved;try{saved=localStorage.getItem('lang');}catch(e){}
  var code=saved;
- if(!code){var b=(navigator.language||'fr').slice(0,2).toLowerCase();code=I18N[b]?b:'fr';}
+ /* Français par défaut : ne pas détecter navigator.language (Googlebot s'annonce en anglais
+    -> la page basculait en anglais pour Google). Le choix du visiteur reste mémorisé. */
+ if(!code){code='fr';}
  setLang(code);
  syncThemeIcon();
 })();

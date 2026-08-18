@@ -247,7 +247,15 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:var(--radius-sm);cursor:zoom-in;will-change:transform}
 .lightbox .lb-fallback{display:none;width:min(80vw,520px);aspect-ratio:3/2;border-radius:var(--radius-md);flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff}
 .lightbox .lb-caption{position:absolute;left:0;right:0;bottom:-34px;text-align:center;color:rgba(255,255,255,.85);font-size:12px;letter-spacing:.06em}
-.lightbox .lb-wmark{position:absolute;right:14px;bottom:12px;z-index:5;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);text-shadow:0 1px 4px rgba(0,0,0,.6);pointer-events:none}
+/* .lb-media : bloc qui se rétracte à la taille RÉELLE de la photo affichée.
+   display:inline-block = il épouse l'image au lieu de prendre toute la largeur ;
+   line-height:0 = supprime les 2-3 px de blanc que les navigateurs ajoutent sous une image.
+   Sans ce bloc, le filigrane s'accrochait au cadre plein écran et se retrouvait À CÔTÉ
+   des photos verticales (bug constaté le 12/08/2026). */
+.lightbox .lb-media{position:relative;display:inline-block;line-height:0;max-width:90vw;max-height:85vh}
+.lightbox .lb-media img{display:block}
+/* le filigrane se cale sur la photo, plus sur l'écran */
+.lightbox .lb-wmark{position:absolute;right:14px;bottom:12px;z-index:5;line-height:normal;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.62);text-shadow:0 1px 3px rgba(0,0,0,.65);pointer-events:none}
 .lightbox-close{position:absolute;top:18px;right:22px;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:12px;line-height:1}
 .lightbox-share{position:absolute;top:20px;right:64px;background:none;border:none;color:#fff;font-size:19px;cursor:pointer;padding:12px;line-height:1}
 .lightbox-share:hover{color:var(--teal)}
