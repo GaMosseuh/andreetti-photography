@@ -85,6 +85,11 @@ Alexandre — ANDREETTI Photography`;
       },
       body: JSON.stringify({
         from: 'ANDREETTI Photography <onboarding@resend.dev>',
+        /* NE PAS remplacer par contact@andreettiphoto.fr tant que le domaine n'est pas
+           verifie dans Resend : en offre gratuite avec domaine non verifie, Resend refuse
+           d'envoyer AILLEURS que vers l'adresse du titulaire du compte (ce Gmail).
+           Le formulaire continue donc de notifier ce Gmail, ce qui convient puisque
+           contact@andreettiphoto.fr y est de toute facon redirige. */
         to: ['contact.andreettiphotography@gmail.com'],
         reply_to: email,
         subject: `📸 Nouveau message via andreetti.photography — ${nom}`,

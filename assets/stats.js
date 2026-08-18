@@ -3,7 +3,7 @@
    ----------------------------------------------------------------------------
    POUR ACTIVER (2 minutes) :
      1. Crée un compte gratuit sur  https://cloud.umami.is
-     2. Ajoute ton site ("Add website"), nom : ANDREETTI, domaine : andreetti.photography
+     2. Ajoute ton site ("Add website"), nom : ANDREETTI, domaine : andreettiphoto.fr
      3. Umami te donne un identifiant (Website ID) qui ressemble à :
           b3f2c1a4-9d7e-4c88-a1b2-5f6e7d8c9a0b
      4. Colle-le ci-dessous entre les guillemets, à la place du vide. C'est tout.
