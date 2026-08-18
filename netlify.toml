@@ -7,9 +7,36 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# ─────────────────────────────────────────────────────────────────────────────
+# MIGRATION VERS andreettiphoto.fr (18/08/2026)
+# L'ancienne adresse Netlify reste vivante mais renvoie DÉFINITIVEMENT (301) vers
+# le nouveau domaine, page par page. C'est ce qui transfère à andreettiphoto.fr
+# le travail d'indexation déjà acquis : Google suit la redirection et reporte
+# l'ancienneté de chaque URL sur la nouvelle adresse.
+#
+# ⚠️ CES DEUX RÈGLES DOIVENT RESTER EN PREMIER. Netlify applique les règles dans
+# l'ordre du fichier : si la réécriture de "/" (plus bas) passait avant, elle
+# attraperait aussi la racine de l'ancien domaine, qui servirait alors le site
+# en double au lieu de rediriger.
+# La racine est traitée à part car "/*" ne couvre pas "/" de façon fiable ici.
+# NE PAS SUPPRIMER : sans ça, les liens déjà en circulation créeraient du
+# contenu dupliqué, ce que Google pénalise.
+# ─────────────────────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "https://andreetti-photography.netlify.app/"
+  to = "https://andreettiphoto.fr/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://andreetti-photography.netlify.app/*"
+  to = "https://andreettiphoto.fr/:splat"
+  status = 301
+  force = true
+
 # La page d'accueil s'appelle accueil.html (nommage cohérent avec portfolio.html,
 # contact.html, etc.). Le web exige qu'une page réponde à la racine "/" :
-# cette règle sert accueil.html quand on ouvre andreetti.photography.
+# cette règle sert accueil.html quand on ouvre andreettiphoto.fr.
 # status = 200 => réécriture, l'adresse affichée reste "/" (pas de redirection,
 # pas de contenu dupliqué : accueil.html a un canonical qui pointe sur "/").
 [[redirects]]
@@ -22,18 +49,3 @@
   from = "/index.html"
   to = "/"
   status = 301
-
-# ─────────────────────────────────────────────────────────────────────────────
-# MIGRATION VERS andreettiphoto.fr (18/08/2026)
-# L'ancienne adresse Netlify reste vivante mais renvoie DÉFINITIVEMENT (301) vers
-# le nouveau domaine, page par page. C'est ce qui transfère à andreettiphoto.fr
-# le travail d'indexation déjà acquis : Google suit la redirection et reporte
-# l'ancienneté et la réputation de chaque URL sur la nouvelle.
-# NE PAS SUPPRIMER : sans ça, les liens déjà en circulation (Search Console,
-# anciens partages) tomberaient sur un site en double, ce que Google pénalise.
-# ─────────────────────────────────────────────────────────────────────────────
-[[redirects]]
-  from = "https://andreetti-photography.netlify.app/*"
-  to = "https://andreettiphoto.fr/:splat"
-  status = 301
-  force = true
