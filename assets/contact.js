@@ -20,11 +20,11 @@ form.addEventListener('submit', function(e){
   })
     .then(function(r){ if(!r.ok) throw new Error(r.status); })
     .then(function(){
-      fb.className='feedback ok'; fb.textContent=tr('feedbackOk');
+      afficherRetour(fb, 'ok', '✓ ' + tr('feedbackOk'));
       form.reset(); btn.disabled=false; btn.textContent=tr('btnSend');
     })
     .catch(function(){
-      fb.className='feedback err'; fb.textContent=tr('feedbackErr');
+      afficherRetour(fb, 'err', '⚠ ' + tr('feedbackErr'));
       btn.disabled=false; btn.textContent=tr('btnSend');
     });
 });
@@ -39,3 +39,20 @@ form.addEventListener('submit', function(e){
   for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===p){ sel.selectedIndex=i; break; } }
 })();
 
+
+
+/* Affiche le message de retour du formulaire de facon impossible a rater :
+   icone, animation courte, defilement dans le champ de vision s il est hors ecran,
+   et focus deplace dessus pour les lecteurs d ecran (role=status + tabindex -1). */
+function afficherRetour(fb, type, texte){
+  if(!fb) return;
+  fb.className = 'feedback ' + type + ' show';
+  fb.textContent = texte;
+  fb.setAttribute('tabindex', '-1');
+  try{
+    var r = fb.getBoundingClientRect();
+    var horsEcran = r.top < 70 || r.bottom > window.innerHeight;
+    if(horsEcran) fb.scrollIntoView({behavior:'smooth', block:'center'});
+  }catch(e){}
+  setTimeout(function(){ try{ fb.focus({preventScroll:true}); }catch(e){} }, 120);
+}

@@ -93,17 +93,42 @@ document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagN
    Le header est répété dans chaque page HTML. Plutôt que d'éditer 8 fichiers,
    on greffe ici un bouton « Partager » juste avant le sélecteur de thème.
    Web Share API sur mobile (partage natif) ; sinon copie de l'URL avec un ✓. */
-window.sharePage=function(){
-  var url=location.href.split('#')[0];
-  var data={title:document.title||'ANDREETTI Photography',url:url};
-  if(navigator.share){ navigator.share(data).catch(function(){}); return; }
-  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){
-    var b=document.getElementById('shareBtn'); if(!b) return;
-    var o=b.innerHTML; b.textContent='✓';
-    b.setAttribute('title','Lien copié'); b.setAttribute('aria-label','Lien copié');
-    setTimeout(function(){ b.innerHTML=o; b.setAttribute('title','Partager'); b.setAttribute('aria-label','Partager cette page'); },1600);
-  }); }
+/* Textes de partage, adaptes a chaque page. Sans ca, WhatsApp ou Facebook
+   n affichent qu une URL nue. On n ajoute PAS l adresse dans le texte : la
+   plupart des applications l ajoutent deja, et on aurait le lien en double. */
+var PARTAGE_TEXTES = {
+  accueil:     {t:"ANDREETTI Photography",                       d:"Photographe portrait, sport et événementiel à Dijon et dans l’Yonne. Devis gratuit, réponse sous 48 h."},
+  portfolio:   {t:"Portfolio — ANDREETTI Photography",           d:"Les photos d’Alexandre Andreetti : portrait, sport, événementiel à Dijon et dans l’Yonne."},
+  prestations: {t:"Prestations & tarifs — ANDREETTI Photography", d:"Portrait, sport, événementiel à Dijon. Devis gratuit, réponse sous 48 h, livraison sous 10 jours."},
+  contact:     {t:"Contacter ANDREETTI Photography",             d:"Un projet photo à Dijon ou dans l’Yonne ? Devis gratuit, réponse sous 48 h."},
+  apropos:     {t:"Alexandre Andreetti, photographe",            d:"Photographe portrait, sport et événementiel à Dijon et dans l’Yonne."},
+  links:       {t:"ANDREETTI Photography",                       d:"Photographe portrait, sport et événementiel à Dijon et dans l’Yonne. Devis gratuit, réponse sous 48 h."}
 };
+window.sharePage=function(){
+  var url  = location.href.split('#')[0];
+  var page = document.body.getAttribute('data-page') || 'accueil';
+  var txt  = PARTAGE_TEXTES[page] || PARTAGE_TEXTES.accueil;
+  var data = {title: txt.t, text: txt.d, url: url};
+  var b    = document.getElementById('shareBtn');
+  function confirmer(msg){
+    if(!b) return;
+    var o = b.innerHTML;
+    b.classList.add('ok'); b.textContent = '✓';
+    b.setAttribute('title', msg); b.setAttribute('aria-label', msg);
+    /* on REMET toujours le bouton dans son etat normal : sinon il reste allume. */
+    setTimeout(function(){
+      b.classList.remove('ok'); b.innerHTML = o;
+      b.setAttribute('title','Partager'); b.setAttribute('aria-label','Partager cette page');
+      if(b.blur) b.blur(); // evite le survol collant sur Android apres un appui
+    }, 2000);
+  }
+  if(navigator.share){
+    navigator.share(data).then(function(){ if(b&&b.blur) b.blur(); }).catch(function(){ if(b&&b.blur) b.blur(); });
+    return;
+  }
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ confirmer('Lien copié'); }); }
+};
+
 (function(){
   var tt=document.getElementById('themeToggle');
   if(!tt || document.getElementById('shareBtn')) return;
@@ -142,8 +167,20 @@ window.sharePage=function(){
   var banner=document.getElementById('cookie-banner');
   if(!banner) return;
   var ok; try{ ok=localStorage.getItem('cookie-ack'); }catch(e){}
-  if(!ok){ setTimeout(function(){ banner.classList.add('show'); }, 800); }
-  window.acceptCookies=function(){ banner.classList.remove('show'); try{ localStorage.setItem('cookie-ack','1'); }catch(e){} };
+  /* Quand le bandeau cookies est visible, il recouvrait le bouton flottant
+     "Devis gratuit" en bas a droite (constate le 21/08 sur tous les ecrans <= 768 px).
+     On mesure sa hauteur reelle et on remonte le bouton d autant. */
+  function calerBouton(){
+    var h = banner.classList.contains('show') ? banner.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--cookie-h', Math.round(h)+'px');
+  }
+  if(!ok){ setTimeout(function(){ banner.classList.add('show'); calerBouton(); }, 800); }
+  window.addEventListener('resize', calerBouton);
+  window.acceptCookies=function(){
+    banner.classList.remove('show');
+    calerBouton();
+    try{ localStorage.setItem('cookie-ack','1'); }catch(e){}
+  };
 })();
 
 /* ---------- PRELOADER (intro courte, ne bloque pas le chargement des images) ----------

@@ -9,5 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Les dates <lastmod> du sitemap sont remises au jour du déploiement :
+      # Google s'en sert comme signal de fraîcheur.
+      - name: Mettre le sitemap à la date du jour
+        run: node maj-sitemap.js
       - name: Déployer sur Netlify
         run: npx --yes netlify-cli deploy --prod --dir=. --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }}

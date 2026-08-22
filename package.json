@@ -1,0 +1,9 @@
+{
+  "name": "andreetti-photography",
+  "private": true,
+  "description": "Site vitrine ANDREETTI Photography — statique, hébergé sur Netlify.",
+  "scripts": {
+    "predeploy": "node maj-sitemap.js",
+    "deploy": "netlify deploy --prod --dir=."
+  }
+}

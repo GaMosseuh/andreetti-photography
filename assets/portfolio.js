@@ -16,12 +16,18 @@ var PF_STEP = 9, pfFilter = 'all', pfShown = PF_STEP;
     if(p.nowmark) btn.dataset.nowmark='1';
     btn.style.transitionDelay=(Math.min(i,8)*0.05)+'s'; // apparition en cascade
     btn.setAttribute('aria-label','Agrandir une photo '+CAT_LABEL[p.cat]);
+    /* On memorise l adresse de la photo SUR la vignette. La visionneuse s en sert
+       directement au lieu de recopier l image de la grille : une vignette encore en
+       chargement differe (loading=lazy) faisait afficher "IMAGE A VENIR" a tort. */
+    btn.dataset.photo = 'images/portfolio/'+p.file.replace(/[.]jpg$/,'')+'.webp';
+    btn.dataset.photoAlt = (p.alt||CAT_ALT[p.cat]||CAT_LABEL[p.cat]);
     var base='images/portfolio/'+p.file.replace(/\.jpg$/,'');
     btn.innerHTML =
       '<div class="media" style="height:'+p.h+'px">'+
         '<div class="ph '+PH_CLASS[p.cat]+'"><span class="lbl">'+CAT_LABEL[p.cat]+'</span></div>'+
         '<img src="'+base+'.webp" data-fallback="'+base+'.jpg" alt="'+(p.alt||CAT_ALT[p.cat]||CAT_LABEL[p.cat])+'" loading="lazy" decoding="async" data-img>'+
-        (p.nowmark ? '' : '<span class="wmark">© ANDREETTI</span>')+
+        /* plus de <span> filigrane ici : il est pose par CSS (::after) sur .media,
+           ce qui le rend independant de l ordre des balises. Voir styles.css. */
         '<span class="zoom-ic" aria-hidden="true">⤢</span>'+
       '</div>';
     btn.addEventListener('click', function(){ openLightbox(btn); });
@@ -37,6 +43,10 @@ function renderPortfolio(){
   var count = 0, total = 0;
   items.forEach(function(item){
     var match = (pfFilter==='all' || item.dataset.category===pfFilter);
+    /* data-match distingue "ecartee par le filtre" de "pas encore affichee par la
+       pagination". La visionneuse navigue sur data-match, donc sur TOUTES les photos
+       de la categorie, meme celles pas encore revelees par "Voir plus". */
+    item.dataset.match = match ? '1' : '0';
     if(match){
       total++;
       var within = (count < pfShown);
@@ -67,7 +77,10 @@ var lbFallback = document.getElementById('lbFallback');
 var lbMedia = document.getElementById('lbMedia'); // bloc qui épouse la photo (porte le filigrane)
 var lbCaption = document.getElementById('lbCaption');
 
-function getVisibleItems(){ return [].slice.call(document.querySelectorAll('.masonry-item:not(.hidden)')); }
+/* Avant : '.masonry-item:not(.hidden)' -> ne renvoyait que les 9 photos affichees par
+   la pagination. Avec 33 photos, la visionneuse tournait donc en rond sur 9 (bug
+   constate le 19/08). Desormais : toutes les photos de la categorie active. */
+function getVisibleItems(){ return [].slice.call(document.querySelectorAll('.masonry-item[data-match="1"]')); }
 function openLightbox(el){
   lbItems = getVisibleItems();
   if(!lbItems.length) return;
@@ -107,32 +120,59 @@ function updateLightbox(){
   var item = lbItems[lbIdx];
   if(!item) return;
   resetZoom();
-  var img = item.querySelector('img');
   var capTxt = CAT_LABEL[item.dataset.category] || '';
   lbCaption.textContent = capTxt;
-  var hasReal = img && img.naturalWidth>0 && img.classList.contains('loaded');
   var wmark = document.getElementById('lbWmark');
-  if(hasReal){
-    lbImg.style.display='block'; lbFallback.style.display='none';
-    if(lbMedia) lbMedia.style.display='inline-block';
-    lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || capTxt; // reprend le texte alternatif de la vignette
-    // filigrane sur les vraies photos, SAUF celles qui en ont déjà un incrusté
-    // (photos retouchées par Alexandre : le © est déjà dans le fichier) -> sinon doublon
-    if(wmark) wmark.style.display = item.dataset.nowmark==='1' ? 'none' : 'block';
-  } else {
-    if(wmark) wmark.style.display='none';
-    if(lbMedia) lbMedia.style.display='none';
-    lbImg.removeAttribute('src'); lbImg.style.display='none';
-    var ph = item.querySelector('.ph');
-    lbFallback.className='lb-fallback '+(ph?ph.className.replace('ph ',''):'ph-portrait');
-    lbFallback.style.display='flex';
-    // le placeholder agrandi reprend la forme (ratio) de la vignette cliquée
-    var media = item.querySelector('.media');
-    var w = media ? media.offsetWidth : 3, h = media ? media.offsetHeight : 2;
-    lbFallback.style.aspectRatio = w + ' / ' + h;
-    if(h > w){ lbFallback.style.height = '78vh'; lbFallback.style.width = 'auto'; }
-    else { lbFallback.style.height = 'auto'; lbFallback.style.width = 'min(86vw, 560px)'; }
-  }
+
+  /* On charge la photo depuis l adresse memorisee sur la vignette, et NON depuis
+     l image de la grille : celle-ci peut ne pas encore etre chargee (loading=lazy),
+     ce qui faisait afficher "IMAGE A VENIR" sur des photos qui existent pourtant. */
+  var src = item.dataset.photo;
+  if(!src){ montrerPlaceholder(item); return; }
+
+  lbFallback.style.display='none';
+  if(lbMedia) lbMedia.style.display='inline-block';
+  lbImg.style.display='block';
+  lbImg.alt = item.dataset.photoAlt || capTxt;
+  /* .no-wm : cette photo a deja un (c) incruste dans le fichier -> pas de second. */
+  if(lbMedia) lbMedia.classList.toggle('no-wm', item.dataset.nowmark==='1');
+  if(wmark) wmark.style.display='none'; // remplace par le ::after de .lb-media
+
+  /* Indicateur de chargement : il n apparait qu au-dela de 250 ms, pour ne pas
+     clignoter sur les photos deja en cache. */
+  var attente = setTimeout(function(){ lightbox.classList.add('loading'); }, 250);
+  function fini(){ clearTimeout(attente); lightbox.classList.remove('loading'); }
+
+  lbImg.onload  = function(){ fini(); precharger(); };
+  lbImg.onerror = function(){ fini(); montrerPlaceholder(item); };
+  if(lbImg.getAttribute('src') === src){ fini(); precharger(); }
+  else { lbImg.src = src; }
+}
+
+/* Precharge UNIQUEMENT la photo suivante et la precedente : de quoi supprimer le
+   temps blanc au changement, sans charger tout le portfolio (quota Netlify). */
+function precharger(){
+  if(!lbItems.length) return;
+  [1,-1].forEach(function(d){
+    var v = lbItems[(lbIdx + d + lbItems.length) % lbItems.length];
+    if(v && v.dataset.photo){ var im = new Image(); im.src = v.dataset.photo; }
+  });
+}
+
+/* Repli : uniquement si la photo est reellement introuvable. */
+function montrerPlaceholder(item){
+  var wmark = document.getElementById('lbWmark');
+  if(wmark) wmark.style.display='none';
+  if(lbMedia) lbMedia.style.display='none';
+  lbImg.removeAttribute('src'); lbImg.style.display='none';
+  var ph = item.querySelector('.ph');
+  lbFallback.className='lb-fallback '+(ph?ph.className.replace('ph ',''):'ph-portrait');
+  lbFallback.style.display='flex';
+  var media = item.querySelector('.media');
+  var w = media ? media.offsetWidth : 3, h = media ? media.offsetHeight : 2;
+  lbFallback.style.aspectRatio = w + ' / ' + h;
+  if(h > w){ lbFallback.style.height = '78vh'; lbFallback.style.width = 'auto'; }
+  else { lbFallback.style.height = 'auto'; lbFallback.style.width = 'min(86vw, 560px)'; }
 }
 /* clavier + piège de focus dans la lightbox */
 document.addEventListener('keydown', function(e){
@@ -172,13 +212,8 @@ window.addEventListener('mousemove', function(e){ if(!lbDrag) return; lbX=e.clie
 window.addEventListener('mouseup', function(){ if(lbDrag){ lbDrag=false; if(lbScale>1) lbImg.style.cursor='grab'; } });
 
 /* ---------- PARTAGE D'UNE PHOTO (Web Share API + repli copie du lien) ---------- */
-window.sharePhoto=function(){
-  var btn=document.getElementById('lbShare');
-  var url=location.href.split('#')[0];
-  var data={title:'ANDREETTI — Photographe', text:'Photographie ANDREETTI', url:url};
-  if(navigator.share){ navigator.share(data).catch(function(){}); }
-  else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ if(btn){ btn.classList.add('ok'); btn.textContent='✓'; setTimeout(function(){ btn.classList.remove('ok'); btn.textContent='⤴'; },1500); } }); }
-};
+/* sharePhoto() supprimee : le partage se fait desormais uniquement depuis la barre
+   du haut (window.sharePage dans common.js), avec un texte adapte a chaque page. */
 
 /* ---------- MICRODONNÉES IMAGES (SEO Google Images + © affirmé) ---------- */
 (function(){
@@ -199,3 +234,83 @@ window.sharePhoto=function(){
   if(btn) filterPortfolio(cat, btn);
 })();
 
+
+/* ═══════════ GESTES TACTILES DANS LA VISIONNEUSE (ajouté le 21/08/2026) ═══════════
+   Avant, sur téléphone, seules les flèches permettaient de changer de photo et le
+   zoom n'existait pas. Désormais :
+     • pincement à deux doigts .......... zoome / dézoome
+     • glissement à un doigt, zoomé ..... déplace la photo
+     • balayage à un doigt, non zoomé ... photo suivante / précédente
+     • double-tap ....................... remet au zoom normal
+   Le balayage ne change de photo QUE si l'on est au zoom normal : sinon il déplacerait
+   la photo, ce qui est le geste attendu quand on est zoomé. */
+(function(){
+  if(!lbImg) return;
+  var d0=0, s0=1, doigts=0, xDep=0, yDep=0, tDep=0, dernierTap=0, aBouge=false;
+
+  function distance(t){
+    var dx=t[0].clientX-t[1].clientX, dy=t[0].clientY-t[1].clientY;
+    return Math.sqrt(dx*dx+dy*dy);
+  }
+
+  lbImg.addEventListener('touchstart', function(e){
+    doigts = e.touches.length;
+    aBouge = false;
+    if(doigts===2){ d0=distance(e.touches); s0=lbScale; }
+    else if(doigts===1){
+      xDep=e.touches[0].clientX; yDep=e.touches[0].clientY; tDep=Date.now();
+      if(lbScale>1){ lbSX=xDep-lbX; lbSY=yDep-lbY; }
+      /* double-tap : deux appuis rapprochés -> retour au zoom normal */
+      var maintenant=Date.now();
+      if(maintenant-dernierTap < 300){ resetZoom(); dernierTap=0; }
+      else dernierTap=maintenant;
+    }
+  }, {passive:true});
+
+  lbImg.addEventListener('touchmove', function(e){
+    aBouge = true;
+    if(e.touches.length===2 && d0>0){
+      e.preventDefault();                       // empêche le zoom de la page entière
+      var f = distance(e.touches)/d0;
+      lbScale = Math.min(4, Math.max(1, s0*f));
+      if(lbScale===1){ lbX=0; lbY=0; }
+      applyZoom();
+    } else if(e.touches.length===1 && lbScale>1){
+      e.preventDefault();                       // on déplace la photo, pas la page
+      lbX = e.touches[0].clientX - lbSX;
+      lbY = e.touches[0].clientY - lbSY;
+      applyZoom();
+    }
+  }, {passive:false});
+
+  lbImg.addEventListener('touchend', function(e){
+    /* balayage : uniquement au zoom normal, un seul doigt, geste franc et rapide */
+    if(doigts===1 && lbScale<=1 && aBouge && e.changedTouches.length){
+      var dx = e.changedTouches[0].clientX - xDep;
+      var dy = e.changedTouches[0].clientY - yDep;
+      var duree = Date.now()-tDep;
+      if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)*1.5 && duree < 700){
+        navLightbox(dx < 0 ? 1 : -1);           // vers la gauche = photo suivante
+      }
+    }
+    doigts = e.touches.length;
+    if(doigts===0){ d0=0; }
+  }, {passive:true});
+})();
+
+/* ORDINATEUR : un clic zoome, un second declique. Le curseur indique l etat.
+   (Avant, il fallait double-cliquer et rien n indiquait que c etait possible.)
+   On ne l active que sur les appareils avec un vrai pointeur, pour ne pas entrer
+   en conflit avec les gestes tactiles ci-dessus. */
+(function(){
+  if(!lbImg) return;
+  var pointeurFin = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!pointeurFin) return;
+  function majCurseur(){ lbImg.style.cursor = lbScale>1 ? 'zoom-out' : 'zoom-in'; }
+  lbImg.addEventListener('click', function(e){
+    e.stopPropagation();               // ne pas fermer la visionneuse
+    if(lbScale>1){ resetZoom(); } else { lbScale=2.2; applyZoom(); }
+    majCurseur();
+  });
+  lbImg.addEventListener('mouseenter', majCurseur);
+})();

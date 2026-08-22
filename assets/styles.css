@@ -17,7 +17,10 @@ html[data-theme="dark"]{
 --shadow-1:0 4px 16px rgba(0,0,0,.40);--shadow-2:0 14px 34px rgba(0,0,0,.55);
 }
 html[data-theme="dark"] .nav{background:rgba(14,26,30,.92)}
-html[data-theme="dark"] .feedback.err{background:#3A1C1C;color:#F0B4B4}
+/* En sombre, l ancien reglage donnait du bleu sombre (#1A7A8A) sur fond bleu sombre
+   (#16323A) : contraste trop faible, message quasi invisible (constate le 19/08). */
+html[data-theme="dark"] .contact-form .feedback.ok{background:#12333B;color:#BEEAF2;border-left-color:#4FB6C7}
+html[data-theme="dark"] .contact-form .feedback.err{background:#3A1C1C;color:#FFD2D2;border-left-color:#E06A6A}
 html[data-theme="dark"] .contact-info-item .ic{color:var(--teal)}
 html[data-theme="dark"] .filter-btn:hover,html[data-theme="dark"] .filter-btn[aria-pressed="true"]{background:var(--teal-dark);border-color:var(--teal-dark);color:#fff}
 html{scroll-behavior:auto}
@@ -256,9 +259,9 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .lightbox .lb-media img{display:block}
 /* le filigrane se cale sur la photo, plus sur l'écran */
 .lightbox .lb-wmark{position:absolute;right:14px;bottom:12px;z-index:5;line-height:normal;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.62);text-shadow:0 1px 3px rgba(0,0,0,.65);pointer-events:none}
-.lightbox-close{position:absolute;top:18px;right:22px;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:12px;line-height:1}
-.lightbox-share{position:absolute;top:20px;right:64px;background:none;border:none;color:#fff;font-size:19px;cursor:pointer;padding:12px;line-height:1}
-.lightbox-share:hover{color:var(--teal)}
+.lightbox-close{position:absolute;top:18px;right:22px;z-index:10;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:12px;line-height:1;min-width:44px;min-height:44px}
+.lightbox-share{position:absolute;top:20px;right:64px;z-index:10;background:none;border:none;color:#fff;font-size:19px;cursor:pointer;padding:12px;line-height:1;min-width:44px;min-height:44px}
+@media (hover:hover){.lightbox-share:hover{color:var(--teal)}}
 .lightbox-share.ok{color:var(--teal)}
 
 /* KEN BURNS (léger zoom lent sur la photo d'accueil) */
@@ -267,10 +270,14 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 
 /* PRELOADER (court écran d'intro à l'ouverture) */
 #preloader{position:fixed;inset:0;z-index:4000;background:var(--white);display:flex;align-items:center;justify-content:center;transition:opacity .5s ease,visibility .5s}
-#preloader.hide{opacity:0;visibility:hidden}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
 #preloader .pl-logo{font-family:var(--font-title);font-size:24px;letter-spacing:.3em;color:var(--text);text-transform:uppercase;animation:plpulse 1.4s ease-in-out infinite}
 @keyframes plpulse{0%,100%{opacity:.45}50%{opacity:1}}
-.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:28px;cursor:pointer;padding:14px 18px;border-radius:var(--radius-sm)}
+/* z-index 10 : l'image porte will-change:transform, ce qui en fait un calque
+   autonome passant devant tout element sans z-index. Sans cette ligne, les fleches
+   se retrouvaient DERRIERE la photo (bug constate le 19/08 sur Galaxy A54).
+   min-width/height 44px = taille minimale d'une cible tactile confortable. */
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(0,0,0,.42);border:none;color:#fff;font-size:28px;cursor:pointer;padding:14px 18px;border-radius:var(--radius-sm);min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .lightbox-prev{left:16px}.lightbox-next{right:16px}
 
 /* PRESTATIONS */
@@ -307,9 +314,15 @@ html[data-theme="dark"] .nav-lang{color-scheme:dark}
 .contact-form .btn-submit{width:100%;margin-top:24px;padding:13px;font-size:12px}
 .contact-form .btn-submit:disabled{opacity:.6;cursor:wait}
 .contact-form .note{text-align:center;font-size:12px;color:var(--text3);margin-top:12px}
-.contact-form .feedback{display:none;padding:14px;border-radius:var(--radius-md);text-align:center;margin-top:16px;font-size:13px}
-.contact-form .feedback.ok{display:block;background:var(--teal-light);color:var(--teal-dark)}
-.contact-form .feedback.err{display:block;background:#FDECEC;color:#9B2C2C}
+/* Message de retour du formulaire. C est le SEUL signal que recoit quelqu un qui
+   vient d envoyer un message : s il ne le voit pas, il croit que ca n a pas marche.
+   Il doit donc etre impossible a rater dans les deux themes. */
+.contact-form .feedback{display:none;padding:16px 18px;border-radius:var(--radius-md);text-align:left;margin-top:18px;font-size:15px;font-weight:500;line-height:1.5;border-left:4px solid transparent}
+.contact-form .feedback.show{animation:fbIn .28s ease both}
+@keyframes fbIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.contact-form .feedback.show{animation:none}}
+.contact-form .feedback.ok{display:block;background:#E4F4F7;color:#0B3F49;border-left-color:#1A7A8A}
+.contact-form .feedback.err{display:block;background:#FDECEC;color:#8A1F1F;border-left-color:#C53030}
 .contact-side{align-self:start;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-md);padding:30px 28px}
 .contact-side h3{font-family:var(--font-body);font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
 .contact-info-item{display:grid;grid-template-columns:38px 1fr;align-items:center;gap:14px;font-size:14px;color:var(--text2);padding:14px 0;border-bottom:1px solid var(--border)}
@@ -567,3 +580,55 @@ body[data-page="accueil"] .hero-overlay{background:linear-gradient(180deg,rgba(0
 @media(max-width:400px){
   .nav-share{display:none}
 }
+
+/* Indicateur de chargement de la visionneuse : n'apparaît qu'au-delà de 250 ms
+   (classe posée par portfolio.js), pour ne pas clignoter sur une photo en cache. */
+.lightbox.loading .lightbox-stage::after{
+  content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;
+  border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;
+  animation:lbSpin .8s linear infinite;z-index:11;pointer-events:none}
+@keyframes lbSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.lightbox.loading .lightbox-stage::after{animation:none}}
+
+/* ═══════════════════ FILIGRANE « © ANDREETTI » ═══════════════════
+   Pose le filigrane sur TOUTE photo affichée : vignettes du portfolio, visionneuse,
+   carrousel de l'accueil, cartes de catégories, dernières séances.
+
+   Pourquoi un pseudo-élément ::after et non un <span> dans le HTML :
+   l'ancienne règle était « .media img.loaded ~ .wmark », c'est-à-dire « le filigrane
+   qui SUIT une image chargée ». Elle dépendait donc de l'ordre des balises et de la
+   classe .loaded : si l'un des deux changeait, le filigrane disparaissait sans bruit.
+   Un ::after est attaché au conteneur : il ne peut plus être perdu.
+
+   ► INTERRUPTEUR UNIQUE : le filigrane ne s'affiche que si <html> porte
+     l'attribut data-filigrane="on", posé par assets/data.js (var FILIGRANE_HTML).
+     Le jour où les photos auront le © incrusté dans le fichier, il suffira de passer
+     FILIGRANE_HTML à false dans data.js : UN SEUL endroit, rien d'autre à toucher.
+
+   ► Exception : les photos qui ont DÉJÀ un © incrusté (data.js -> nowmark:true)
+     portent .no-wm et n'en reçoivent pas un second. */
+html[data-filigrane="on"] .masonry-item:not([data-nowmark="1"]) .media::after,
+html[data-filigrane="on"] .cat-card .media::after,
+html[data-filigrane="on"] .last-card:not(.is-soon) .media::after,
+html[data-filigrane="on"] .carousel-slide .media::after,
+html[data-filigrane="on"] .lb-media:not(.no-wm)::after{
+  content:"© ANDREETTI";
+  position:absolute;right:9px;bottom:8px;z-index:3;
+  font-family:var(--font-body);font-size:10px;font-weight:400;
+  letter-spacing:.1em;text-transform:uppercase;line-height:normal;
+  color:rgba(255,255,255,.6);text-shadow:0 1px 3px rgba(0,0,0,.6);
+  pointer-events:none;
+}
+/* en grand dans la visionneuse : un peu plus lisible et plus éloigné du bord */
+html[data-filigrane="on"] .lb-media:not(.no-wm)::after{
+  right:14px;bottom:12px;font-size:12px;letter-spacing:.12em;
+  color:rgba(255,255,255,.62);text-shadow:0 1px 3px rgba(0,0,0,.65);
+}
+
+/* Le bouton flottant remonte au-dessus du bandeau cookies tant qu'il est affiché.
+   --cookie-h est mesurée par common.js (0 px quand le bandeau est fermé), car la
+   hauteur du bandeau varie selon la largeur de l'écran. */
+.float-cta{bottom:calc(18px + var(--cookie-h, 0px));transition:bottom .25s ease,transform .18s,box-shadow .18s,background .18s}
+@media(max-width:768px){ .float-cta{bottom:calc(14px + var(--cookie-h, 0px))} }
+/* .tagline : ligne unique centrée — on borne quand même sa largeur sur très grand écran */
+.tagline{max-width:1100px;margin-left:auto;margin-right:auto}

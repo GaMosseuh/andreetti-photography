@@ -134,7 +134,9 @@
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo agrandie">
 <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">✕</button>
-<button class="lightbox-share" id="lbShare" onclick="sharePhoto()" aria-label="Partager" title="Partager">⤴</button>
+<!-- Bouton partage retire de la visionneuse le 21/08/2026 : une photo n a pas d adresse
+     propre, le lien partage renvoyait de toute facon vers la page. Le partage reste
+     disponible dans la barre du haut, et cela degage de la place a cote du bouton fermer. -->
 <button class="lightbox-prev" onclick="navLightbox(-1)" aria-label="Photo précédente">‹</button>
 <div class="lightbox-stage">
 <!-- .lb-media épouse exactement la photo affichée : le filigrane s'accroche donc à l'IMAGE

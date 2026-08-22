@@ -2,6 +2,14 @@
    Généré depuis l'ancien index.html monopage (refonte multi-pages du 15/07/2026). */
 "use strict";
 
+/* ══ INTERRUPTEUR UNIQUE DU FILIGRANE ══
+   true  = le site pose lui-meme "(c) ANDREETTI" sur chaque photo affichee.
+   false = plus aucun filigrane pose par le site.
+   A passer a false LE JOUR OU les photos auront le filigrane incruste dans le
+   fichier (reexport depuis le Studio). C est le SEUL endroit a modifier. */
+var FILIGRANE_HTML = true;
+try{ document.documentElement.setAttribute('data-filigrane', FILIGRANE_HTML ? 'on' : 'off'); }catch(e){}
+
 /* ---------- DONNÉES PORTFOLIO (les vrais fichiers se déposent dans images/portfolio/) ---------- */
 /* Ordre équilibré et valorisant : alternance portrait / sport / événementiel,
    belles photos en tête. Les 3 photos de tir à l'arc (sport-06/07/08) sont
