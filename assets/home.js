@@ -9,6 +9,8 @@
    Exemple : {text:"Photos magnifiques, très pro !", who:"Marie L.", stars:5, source:'google'} */
 var GOOGLE_REVIEW_URL = "https://g.page/r/CUqtmkfR_G4MEBM/review";
 var TESTIMONIALS = [
+  /* 2e avis Google, publie le 27/08/2026. Texte recopie mot pour mot. */
+  { text:"Super shooting sur Paris avec Alexandre, on s’est promené au jardin du Luxembourg et on a fait plein de super photos. Merci beaucoup!!", who:"Emmaneth (Anne) · Séance photo", date:"Août 2026", stars:5, source:'google' },
   { text:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", who:"Diane G. · Mariage", date:"Juillet 2026", stars:5, source:'google' }
 ];
 
