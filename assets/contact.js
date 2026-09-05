@@ -13,17 +13,28 @@ form.addEventListener('submit', function(e){
   var btn=document.getElementById('submitBtn');
   var fb=document.getElementById('feedback');
   btn.disabled=true; btn.textContent=tr('sending');
-  fetch('/', {
+  /* CORRECTION 26/08 : en zone de mauvaise reception, fetch peut ne JAMAIS repondre.
+     Le bouton restait alors bloque sur "Envoi en cours" indefiniment, sans aucun moyen
+     de reessayer autrement qu en rechargeant la page. On abandonne donc au bout de 20 s
+     et on affiche le message d erreur, qui invite a ecrire directement par mail. */
+  var horsDelai = null;
+  var abandon = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  if(abandon) horsDelai = setTimeout(function(){ abandon.abort(); }, 20000);
+  var options = {
     method:'POST',
     headers:{'Content-Type':'application/x-www-form-urlencoded'},
     body: new URLSearchParams(new FormData(form)).toString()
-  })
+  };
+  if(abandon) options.signal = abandon.signal;
+  fetch('/', options)
     .then(function(r){ if(!r.ok) throw new Error(r.status); })
     .then(function(){
+      clearTimeout(horsDelai);
       afficherRetour(fb, 'ok', '✓ ' + tr('feedbackOk'));
       form.reset(); btn.disabled=false; btn.textContent=tr('btnSend');
     })
     .catch(function(){
+      clearTimeout(horsDelai);
       afficherRetour(fb, 'err', '⚠ ' + tr('feedbackErr'));
       btn.disabled=false; btn.textContent=tr('btnSend');
     });

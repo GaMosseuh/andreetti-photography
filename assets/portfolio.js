@@ -58,7 +58,14 @@ function renderPortfolio(){
     }
   });
   var more = document.getElementById('voirPlus');
-  if(more) more.style.display = (total > pfShown) ? 'inline-block' : 'none';
+  if(more){
+    var reste = (total > pfShown);
+    more.style.display = reste ? 'inline-block' : 'none';
+    /* CORRECTION 26/08 : le conteneur du bouton garde un padding bas de 64 px. Une fois
+       toutes les photos affichees, cela laissait un grand vide sous la grille. On masque
+       donc le conteneur lui-meme, pas seulement le bouton. */
+    if(more.parentElement) more.parentElement.style.display = reste ? '' : 'none';
+  }
 }
 function filterPortfolio(cat, btn){
   document.querySelectorAll('.filter-btn').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
@@ -71,6 +78,7 @@ function voirPlus(){ pfShown += PF_STEP; renderPortfolio(); }
 
 /* ---------- LIGHTBOX ---------- */
 var lbItems = [], lbIdx = 0, lastFocus = null;
+var lbAttente = null, lbJeton = 0; // minuteur du rond de chargement + numero de la navigation en cours
 var lightbox = document.getElementById('lightbox');
 var lbImg = document.getElementById('lightboxImg');
 var lbFallback = document.getElementById('lbFallback');
@@ -140,8 +148,20 @@ function updateLightbox(){
 
   /* Indicateur de chargement : il n apparait qu au-dela de 250 ms, pour ne pas
      clignoter sur les photos deja en cache. */
-  var attente = setTimeout(function(){ lightbox.classList.add('loading'); }, 250);
-  function fini(){ clearTimeout(attente); lightbox.classList.remove('loading'); }
+  /* CORRECTION 26/08 : le rond de chargement restait a tourner indefiniment sur une
+     photo pourtant affichee, des qu on enchainait vite les fleches. Chaque appel
+     creait SON minuteur local : celui d une navigation deja abandonnee se declenchait
+     apres coup et rallumait le rond, sans plus personne pour l eteindre.
+     On partage donc UN seul minuteur, et un numero de navigation (lbJeton) fait
+     ignorer tout ce qui revient d une photo qu on a deja quittee. */
+  var jeton = ++lbJeton;
+  clearTimeout(lbAttente);
+  lbAttente = setTimeout(function(){ if(jeton === lbJeton) lightbox.classList.add('loading'); }, 250);
+  function fini(){
+    if(jeton !== lbJeton) return;      // reponse d une photo abandonnee : on l ignore
+    clearTimeout(lbAttente);
+    lightbox.classList.remove('loading');
+  }
 
   lbImg.onload  = function(){ fini(); precharger(); };
   lbImg.onerror = function(){ fini(); montrerPlaceholder(item); };

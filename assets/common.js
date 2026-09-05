@@ -59,6 +59,21 @@ function closeMobile(){
   document.body.style.overflow='';
 }
 
+/* CORRECTION 26/08 : le menu mobile restait affiche quand la fenetre s elargissait.
+   .mobile-menu.open{display:flex} n a aucune limite de largeur : en passant en mode
+   ordinateur (rotation d une tablette, fenetre agrandie), le panneau restait par-dessus
+   la page ET le defilement restait bloque (body overflow:hidden pose a l ouverture).
+   Des qu on repasse au-dessus du seuil ou le bouton ☰ disparait, on referme. */
+(function(){
+  if(!window.matchMedia) return;
+  var grandEcran = window.matchMedia('(min-width:769px)');
+  function siGrandEcran(e){
+    if(e.matches && document.querySelector('.mobile-menu.open')) closeMobile();
+  }
+  if(grandEcran.addEventListener) grandEcran.addEventListener('change', siGrandEcran);
+  else if(grandEcran.addListener) grandEcran.addListener(siGrandEcran); // navigateurs anciens
+})();
+
 /* ---------- Dissuasion du téléchargement (clic droit + glisser désactivés sur les images) ---------- */
 document.addEventListener('contextmenu', function(e){ if(e.target && e.target.tagName==='IMG') e.preventDefault(); });
 document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagName==='IMG') e.preventDefault(); });
