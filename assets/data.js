@@ -61,3 +61,34 @@ var CAT_ALT = {
   sport:     "Photographe de sport à Dijon et dans l'Yonne — Alexandre Andreetti",
   evenement: "Photographe événementiel à Dijon et dans l'Yonne — Alexandre Andreetti"
 };
+
+/* ---------- AVIS CLIENTS (fiche Google Business) ----------
+   Ajoute le 15/09/2026 (v1.9). Les avis vivent ICI, jamais en dur dans le HTML.
+
+   POUR AJOUTER UN AVIS : copier une ligne, la coller EN TETE de la liste (le plus recent
+   en premier), puis remplacer les valeurs. Rien d autre a toucher.
+
+   REGLE ABSOLUE : le texte se recopie MOT POUR MOT depuis la fiche Google, fautes,
+   majuscules et ponctuation comprises. On ne corrige pas, on ne raccourcit pas.
+   Un retour a la ligne dans l avis s ecrit 
+.
+
+   prenom : le prenom seul, tel qu il apparait sur Google. Jamais le nom de famille.
+   texte  : le texte exact de l avis
+   note   : nombre d etoiles, de 1 a 5
+   date   : date de publication sur Google, au format AAAA-MM-JJ
+   source : "google" (le badge renvoie vers la fiche, pour que l avis soit verifiable)
+
+   Textes releves sur la fiche Google le 15/09/2026, caractere par caractere
+   (apostrophe droite chez Celia, apostrophe typographique chez Emmaneth : c est
+   ce qu elles ont tape, on le garde). */
+var AVIS = [
+  { prenom:"Célia",           texte:"Une super expérience !!! Les photos sont supers belles et Alexandre a su me mettre à l'aise!!\nMerci encore", note:5, date:"2026-09-15", source:"google" },
+  { prenom:"Emmaneth (Anne)", texte:"Super shooting sur Paris avec Alexandre, on s’est promené au jardin du Luxembourg et on a fait plein de super photos. Merci beaucoup!!", note:5, date:"2026-08-27", source:"google" },
+  { prenom:"Diane",           texte:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", note:5, date:"2026-07-17", source:"google" }
+];
+
+/* La fiche Google (pour lire et verifier les avis) et le lien pour en deposer un.
+   Les deux menent a la meme fiche : verifie le 15/09/2026. Meme lien que la signature mail. */
+var GOOGLE_FICHE_URL = "https://g.page/r/CUqtmkfR_G4MEBM";
+var GOOGLE_AVIS_URL  = "https://g.page/r/CUqtmkfR_G4MEBM/review";

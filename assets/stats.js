@@ -87,6 +87,7 @@ var UMAMI_DOMAINS = "andreettiphoto.fr,andreetti-photography.netlify.app";
     if (h.indexOf("g.page") !== -1) { suivre("avis-google", { depuis: page }); return; }
     if (h.indexOf("instagram.com") !== -1) { suivre("instagram", { depuis: page }); return; }
     if (h.indexOf("facebook.com") !== -1) { suivre("facebook", { depuis: page }); return; }
+    if (h.indexOf("linkedin.com") !== -1) { suivre("linkedin", { depuis: page }); return; }
     if (h.indexOf("mailto:") === 0) { suivre("clic-email", { depuis: page }); return; }
     if (h.indexOf("links.html") !== -1) { suivre("page-liens", { depuis: page }); return; }
 

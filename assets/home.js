@@ -3,38 +3,101 @@
 "use strict";
 
 /* ---------- AVIS CLIENTS ----------
-   GOOGLE_REVIEW_URL : coller ici le lien "Demander des avis" de la fiche Google Business
-   (dès qu'il est renseigné, le bouton "Donner mon avis sur Google" apparaît automatiquement).
-   TESTIMONIALS : copier ici les meilleurs avis reçus. source:'google' affiche l'étiquette "Avis Google".
-   Exemple : {text:"Photos magnifiques, très pro !", who:"Marie L.", stars:5, source:'google'} */
-var GOOGLE_REVIEW_URL = "https://g.page/r/CUqtmkfR_G4MEBM/review";
-var TESTIMONIALS = [
-  /* 2e avis Google, publie le 27/08/2026. Texte recopie mot pour mot. */
-  { text:"Super shooting sur Paris avec Alexandre, on s’est promené au jardin du Luxembourg et on a fait plein de super photos. Merci beaucoup!!", who:"Emmaneth (Anne) · Séance photo", date:"Août 2026", stars:5, source:'google' },
-  { text:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", who:"Diane G. · Mariage", date:"Juillet 2026", stars:5, source:'google' }
-];
+   Refait le 15/09/2026 (v1.9). Les avis sont dans assets/data.js (tableau AVIS) :
+   ce bloc ne fait que les afficher, il n y a rien a modifier ici pour en ajouter un.
+   Les cartes sont construites avec textContent, jamais innerHTML : le texte d un avis
+   ne peut pas casser la page, et ses retours a la ligne sont gardes par le CSS
+   (white-space:pre-line). Les etoiles sont de vrais SVG, au dore de la charte. */
+(function afficherAvis(){
+  var grille  = document.getElementById('avisGrille');
+  var attente = document.getElementById('testiSoon');
+  if(!grille) return;
+  var liste = (typeof AVIS !== 'undefined' && AVIS && AVIS.length) ? AVIS : [];
+  var fiche = (typeof GOOGLE_FICHE_URL !== 'undefined') ? GOOGLE_FICHE_URL : '';
+  var depot = (typeof GOOGLE_AVIS_URL  !== 'undefined') ? GOOGLE_AVIS_URL  : '';
+  var t = (typeof tr === 'function') ? tr : function(k){ return k; };
+  var NS = 'http://www.w3.org/2000/svg';
+  var MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
-(function renderTestimonials(){
-  var pair = document.getElementById('testiPair');
-  var soon = document.getElementById('testiSoon');
-  // chaque vrai avis est inséré comme une carte AVANT la carte "à venir" / le CTA,
-  // dans la même rangée : on garde ainsi la mise en page équilibrée en carrés.
-  if(pair && TESTIMONIALS.length){
-    var html = TESTIMONIALS.map(function(t){
-      var stars = t.stars ? '<div class="stars" aria-label="'+t.stars+' étoiles sur 5">'+'★'.repeat(t.stars)+'☆'.repeat(5-t.stars)+'</div>' : '';
-      var src = t.source==='google' ? '<span class="gsrc">Avis Google</span>' : '';
-      var texte = t.text.replace(/\n/g, '<br>'); // respecte les retours à la ligne de l'avis
-      // la DATE de l'avis est toujours affichée (obligatoire pour chaque témoignage)
-      var dateHtml = t.date ? '<div class="testi-date">'+t.date+'</div>' : '';
-      return '<div class="testi fade-in visible">'+stars+'<p>«&nbsp;'+texte+'&nbsp;»</p><div class="who">'+t.who+src+'</div>'+dateHtml+'</div>';
-    }).join('');
-    if(soon) soon.insertAdjacentHTML('beforebegin', html);
+  function etoile(pleine){
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    if(!pleine) svg.setAttribute('class', 'vide');
+    var chemin = document.createElementNS(NS, 'path');
+    chemin.setAttribute('d', 'M12 2.6l2.7 5.9 6.4.7-4.8 4.3 1.3 6.3L12 16.9 6.4 20l1.3-6.3L3 9.4l6.4-.7z');
+    svg.appendChild(chemin);
+    return svg;
   }
-  // la carte « à venir » disparaît dès qu'il y a de vrais témoignages
-  if(soon && TESTIMONIALS.length){ soon.classList.add('hidden'); }
-  // le bouton « Donner mon avis sur Google » pointe vers la fiche
-  var link = document.getElementById('reviewLink');
-  if(link && GOOGLE_REVIEW_URL){ link.href = GOOGLE_REVIEW_URL; }
+  /* AAAA-MM-JJ -> "15 septembre 2026". Decoupage a la main : new Date("2026-09-15")
+     est lu en heure UTC et peut afficher la veille selon le fuseau du visiteur. */
+  function dateLisible(iso){
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    if(!m) return iso || '';
+    var a = +m[1], mo = +m[2], j = +m[3];
+    var langue = (typeof curLang !== 'undefined' && curLang) ? curLang : 'fr';
+    if(langue !== 'fr'){
+      try{ return new Date(Date.UTC(a, mo-1, j)).toLocaleDateString(langue, {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}); }catch(e){}
+    }
+    return j + ' ' + MOIS[mo-1] + ' ' + a;
+  }
+
+  liste.forEach(function(avis){
+    var note = Math.max(0, Math.min(5, parseInt(avis.note, 10) || 0));
+    var carte = document.createElement('figure');
+    carte.className = 'testi';
+
+    var etoiles = document.createElement('div');
+    etoiles.className = 'avis-etoiles';
+    etoiles.setAttribute('role', 'img');
+    etoiles.setAttribute('aria-label', String(t('avisEtoiles')).replace('{n}', note));
+    for(var i = 1; i <= 5; i++) etoiles.appendChild(etoile(i <= note));
+
+    var citation = document.createElement('blockquote');
+    var p = document.createElement('p');
+    p.textContent = '\u00AB\u00A0' + avis.texte + '\u00A0\u00BB';   // guillemets autour, texte intact
+    citation.appendChild(p);
+
+    var legende = document.createElement('figcaption');
+    var qui = document.createElement('div');
+    qui.className = 'who';
+    var prenom = document.createElement('span');
+    prenom.className = 'avis-prenom';
+    prenom.textContent = avis.prenom;
+    qui.appendChild(prenom);
+    if(avis.source === 'google' && fiche){
+      var badge = document.createElement('a');
+      badge.className = 'gsrc';
+      badge.href = fiche;
+      badge.target = '_blank';
+      badge.rel = 'noopener noreferrer';
+      badge.setAttribute('data-i18n', 'avisBadge');
+      badge.textContent = t('avisBadge');
+      badge.setAttribute('aria-label', t('avisBadge') + ', ' + avis.prenom + ' : ' + t('avisOuvrir'));
+      qui.appendChild(badge);
+    }
+    legende.appendChild(qui);
+    if(avis.date){
+      var quand = document.createElement('time');
+      quand.className = 'testi-date';
+      quand.setAttribute('datetime', avis.date);
+      quand.textContent = dateLisible(avis.date);
+      legende.appendChild(quand);
+    }
+
+    carte.appendChild(etoiles);
+    carte.appendChild(citation);
+    carte.appendChild(legende);
+    grille.insertBefore(carte, attente || null);
+  });
+
+  // la carte d'attente n'apparait que s'il n'y a encore aucun avis
+  if(attente) attente.classList.toggle('hidden', liste.length > 0);
+  var lienFiche = document.getElementById('avisFiche');
+  if(lienFiche){ if(fiche) lienFiche.href = fiche; else lienFiche.hidden = true; }
+  var lienDepot = document.getElementById('reviewLink');
+  if(lienDepot && depot) lienDepot.href = depot;
 })();
 
 /* ---------- CONSTRUCTION CARROUSEL ---------- */

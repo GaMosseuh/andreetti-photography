@@ -632,3 +632,34 @@ html[data-filigrane="on"] .lb-media:not(.no-wm)::after{
 @media(max-width:768px){ .float-cta{bottom:calc(14px + var(--cookie-h, 0px))} }
 /* .tagline : ligne unique centrée — on borne quand même sa largeur sur très grand écran */
 .tagline{max-width:1100px;margin-left:auto;margin-right:auto}
+
+/* ═══ SECTION AVIS v1.9 (15/09/2026) ═══
+   Les cartes gardent le look valide en juillet (liseré Google, centrees, ombre).
+   Nouveau : grille qui centre toujours la derniere carte (2 ou 3 avis ne font pas vide),
+   vraies etoiles SVG au dore de la charte, lien vers la fiche Google, bouton discret. */
+.avis-grille{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:24px;max-width:1100px;margin:0 auto}
+.avis-grille > .testi,.avis-grille > .testi-soon{flex:1 1 300px;max-width:350px;margin:0}
+.testi blockquote{margin:0}
+.testi blockquote p{white-space:pre-line}          /* garde les retours a la ligne de l avis */
+.testi figcaption{margin-top:auto}
+/* Etoiles : dore #E8A93C de la charte. Le fin contour plus fonce leur donne un contraste
+   de 3,7:1 sur fond blanc (le dore seul n est qu a 2,1:1, sous le minimum de 3:1). */
+.avis-etoiles{display:flex;justify-content:center;gap:5px;margin-bottom:16px}
+.avis-etoiles svg{width:20px;height:20px;display:block;fill:#E8A93C;stroke:#B07A1E;stroke-width:1;stroke-linejoin:round}
+.avis-etoiles svg.vide{fill:transparent;stroke:var(--text3)}
+.testi .avis-prenom{font-weight:500}
+.testi .testi-date{display:block}
+/* Badge "Avis Google" devenu lien vers la fiche : cible tactile portee a 24 px de haut */
+.testi a.gsrc{display:inline-flex;align-items:center;min-height:24px;padding:3px 9px;text-decoration:none;transition:background .18s,color .18s}
+@media (hover:hover){.testi a.gsrc:hover{background:var(--teal);color:#fff}}
+.testi a.gsrc:focus-visible,.avis-lien-fiche:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.avis-actions{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 28px;margin-top:34px}
+/* la fleche est un element flex a part : l espace avant elle etait avale, d ou "Google→" colle.
+   On espace par gap et on ne souligne que le texte. */
+.avis-lien-fiche{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:13px;letter-spacing:.03em;color:var(--teal);text-decoration:none}
+.avis-lien-fiche span:first-child{text-decoration:underline;text-underline-offset:4px}
+@media (hover:hover){.avis-lien-fiche:hover .avis-fleche{transform:translateX(3px)}}
+.avis-fleche{transition:transform .18s}
+a.btn-ghost-teal.avis-laisser{display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.avis-laisser svg{width:14px;height:14px;fill:currentColor;flex:0 0 auto}
+@media(max-width:760px){.avis-grille > .testi{max-width:440px}}

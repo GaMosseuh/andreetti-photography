@@ -101,6 +101,26 @@ var I18N_CONV = {
 };
 Object.keys(I18N_CONV).forEach(function(l){ I18N[l]=Object.assign(I18N[l]||{}, I18N_CONV[l]); });
 
+/* ---------- Section avis v1.9 (15/09/2026) ----------
+   testiTitle remplace "Ils m ont fait confiance" par "Ils en parlent".
+   avisEtoiles : {n} est remplace par la note. Les TEXTES des avis ne se traduisent jamais :
+   ce sont les mots des clientes, ils restent tels quels dans toutes les langues. */
+var I18N_AVIS = {
+  fr:{testiTitle:"Ils en parlent",avisVoirTous:"Lire les avis sur Google",avisBadge:"Avis Google",avisEtoiles:"{n} étoiles sur 5",avisOuvrir:"ouvre la fiche Google dans un nouvel onglet"},
+  en:{testiTitle:"What clients say",avisVoirTous:"Read the reviews on Google",avisBadge:"Google review",avisEtoiles:"{n} out of 5 stars",avisOuvrir:"opens the Google profile in a new tab"},
+  es:{testiTitle:"Lo que dicen",avisVoirTous:"Leer las reseñas en Google",avisBadge:"Reseña de Google",avisEtoiles:"{n} de 5 estrellas",avisOuvrir:"abre la ficha de Google en una pestaña nueva"},
+  de:{testiTitle:"Was Kunden sagen",avisVoirTous:"Bewertungen auf Google lesen",avisBadge:"Google-Bewertung",avisEtoiles:"{n} von 5 Sternen",avisOuvrir:"öffnet das Google-Profil in einem neuen Tab"},
+  it:{testiTitle:"Cosa dicono",avisVoirTous:"Leggi le recensioni su Google",avisBadge:"Recensione Google",avisEtoiles:"{n} stelle su 5",avisOuvrir:"apre la scheda Google in una nuova scheda"},
+  pt:{testiTitle:"O que dizem",avisVoirTous:"Ler as avaliações no Google",avisBadge:"Avaliação Google",avisEtoiles:"{n} de 5 estrelas",avisOuvrir:"abre o perfil Google num novo separador"},
+  nl:{testiTitle:"Wat klanten zeggen",avisVoirTous:"Lees de reviews op Google",avisBadge:"Google-review",avisEtoiles:"{n} van de 5 sterren",avisOuvrir:"opent het Google-profiel in een nieuw tabblad"},
+  zh:{testiTitle:"他们怎么说",avisVoirTous:"在 Google 上查看评价",avisBadge:"Google 评价",avisEtoiles:"{n} 星（满分 5 星）",avisOuvrir:"在新标签页中打开 Google 商家资料"},
+  ja:{testiTitle:"皆さまの声",avisVoirTous:"Google でレビューを見る",avisBadge:"Google のレビュー",avisEtoiles:"5つ星中{n}つ星",avisOuvrir:"新しいタブで Google のページを開きます"},
+  hi:{testiTitle:"वे क्या कहते हैं",avisVoirTous:"Google पर समीक्षाएँ पढ़ें",avisBadge:"Google समीक्षा",avisEtoiles:"5 में से {n} सितारे",avisOuvrir:"नए टैब में Google प्रोफ़ाइल खोलता है"},
+  ar:{testiTitle:"ماذا يقولون",avisVoirTous:"اقرأ التقييمات على Google",avisBadge:"تقييم Google",avisEtoiles:"{n} من 5 نجوم",avisOuvrir:"يفتح صفحة Google في علامة تبويب جديدة"},
+  ru:{testiTitle:"Что говорят клиенты",avisVoirTous:"Читать отзывы в Google",avisBadge:"Отзыв в Google",avisEtoiles:"{n} из 5 звёзд",avisOuvrir:"открывает профиль Google в новой вкладке"}
+};
+Object.keys(I18N_AVIS).forEach(function(l){ I18N[l]=Object.assign(I18N[l]||{}, I18N_AVIS[l]); });
+
 var curLang = 'fr';
 function tr(key){ var l=I18N[curLang]||{}; if(l[key]!=null) return l[key]; if(I18N.en[key]!=null) return I18N.en[key]; if(I18N.fr[key]!=null) return I18N.fr[key]; return null; }
 function applyI18n(){ document.querySelectorAll('[data-i18n]').forEach(function(el){ var v=tr(el.getAttribute('data-i18n')); if(v!=null) el.textContent=v; }); }
