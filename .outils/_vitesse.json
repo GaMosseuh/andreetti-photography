@@ -1,0 +1,106 @@
+{
+ "avant (v1.9)": {
+  "accueil": {
+   "fichiers": 20,
+   "externes": 4,
+   "total": 1052250,
+   "images": 878906,
+   "code": 68700,
+   "polices": 104644,
+   "lcp": 3612,
+   "charge": 4941
+  },
+  "portfolio": {
+   "fichiers": 16,
+   "externes": 4,
+   "total": 657835,
+   "images": 486072,
+   "code": 67119,
+   "polices": 104644,
+   "lcp": 3420,
+   "charge": 4406
+  },
+  "prestations": {
+   "fichiers": 10,
+   "externes": 4,
+   "total": 183740,
+   "images": 0,
+   "code": 79096,
+   "polices": 104644,
+   "lcp": 1656,
+   "charge": 2249
+  },
+  "contact": {
+   "fichiers": 10,
+   "externes": 4,
+   "total": 164798,
+   "images": 0,
+   "code": 60154,
+   "polices": 104644,
+   "lcp": 2360,
+   "charge": 2060
+  },
+  "apropos": {
+   "fichiers": 10,
+   "externes": 4,
+   "total": 282887,
+   "images": 119708,
+   "code": 58535,
+   "polices": 104644,
+   "lcp": 3272,
+   "charge": 2611
+  }
+ },
+ "nouveau (v2.0)": {
+  "accueil": {
+   "fichiers": 14,
+   "externes": 0,
+   "total": 677903,
+   "images": 546584,
+   "code": 45423,
+   "polices": 85896,
+   "lcp": 4008,
+   "charge": 4016
+  },
+  "portfolio": {
+   "fichiers": 16,
+   "externes": 0,
+   "total": 292252,
+   "images": 149518,
+   "code": 56838,
+   "polices": 85896,
+   "lcp": 2684,
+   "charge": 1729
+  },
+  "prestations": {
+   "fichiers": 13,
+   "externes": 0,
+   "total": 302411,
+   "images": 170892,
+   "code": 45623,
+   "polices": 85896,
+   "lcp": 1648,
+   "charge": 1660
+  },
+  "contact": {
+   "fichiers": 11,
+   "externes": 0,
+   "total": 130601,
+   "images": 0,
+   "code": 44705,
+   "polices": 85896,
+   "lcp": 1728,
+   "charge": 1718
+  },
+  "apropos": {
+   "fichiers": 11,
+   "externes": 0,
+   "total": 249148,
+   "images": 119708,
+   "code": 43544,
+   "polices": 85896,
+   "lcp": 2244,
+   "charge": 1980
+  }
+ }
+}

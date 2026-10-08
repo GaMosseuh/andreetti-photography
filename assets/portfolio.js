@@ -51,6 +51,42 @@ function adresse(e, photo){
   return location.pathname + (q.length ? '?' + q.join('&') : '');
 }
 
+/* ---------- des rangees de hauteur reguliere ----------
+   Chaque photo garde ses proportions (jamais recadree, jamais etiree). On remplit les
+   rangees une a une et on coupe la ou la hauteur de la rangee est la plus proche de la
+   hauteur visee (--h, dans styles.css) : toutes les rangees font alors toute la largeur,
+   avec des hauteurs voisines. Sans ce calcul, le CSS seul donne deja une grille correcte. */
+function justifier(g){
+  if(!g || !g.clientWidth) return;
+  var tuiles = [].filter.call(g.querySelectorAll('.tuile'), function(t){ return !t.hidden; });
+  if(!tuiles.length) return;
+  var cs = getComputedStyle(g), L = g.clientWidth;
+  var ecart = parseFloat(cs.columnGap) || 8, cible = parseFloat(cs.getPropertyValue('--h')) || 300;
+  var rangees = [], rangee = [], somme = 0;
+  function fermer(h){ rangees.push({ t: rangee, h: h }); rangee = []; somme = 0; }
+  tuiles.forEach(function(t){
+    var r = parseFloat(t.style.getPropertyValue('--r')) || 1;
+    if(rangee.length){
+      var avec = (L - ecart * rangee.length) / (somme + r);
+      if(avec < cible){
+        var sans = (L - ecart * (rangee.length - 1)) / somme;
+        if(Math.abs(sans - cible) <= Math.abs(avec - cible)){ fermer(sans); rangee.push(t); somme = r; t.__r = r; return; }
+        rangee.push(t); somme += r; t.__r = r; fermer(avec); return;
+      }
+    }
+    rangee.push(t); somme += r; t.__r = r;
+  });
+  /* la derniere rangee n est pas forcee a toute la largeur : elle garde la hauteur visee */
+  if(rangee.length) fermer(Math.min((L - ecart * (rangee.length - 1)) / somme, cible * 1.15));
+  rangees.forEach(function(x){
+    x.t.forEach(function(t){ t.style.flex = '0 0 auto'; t.style.maxWidth = 'none'; t.style.width = (Math.floor(t.__r * x.h * 100) / 100 - 0.02) + 'px'; });
+  });
+  g.classList.add('juste');
+}
+function justifierTout(){ justifier(galerie); justifier(serieGal); }
+var minuteurTaille = null;
+window.addEventListener('resize', function(){ clearTimeout(minuteurTaille); minuteurTaille = setTimeout(justifierTout, 80); });
+
 /* ---------- affichage ---------- */
 function montrerPanneau(el, oui){ if(el){ el.hidden = !oui; el.classList.toggle('actif', oui); } }
 function afficher(e, focus){
@@ -78,6 +114,7 @@ function afficher(e, focus){
       t.hidden = !(e.cat === 'tous' || (p && p.cat === e.cat));
     });
   }
+  justifierTout();
 }
 /* les photos que la visionneuse doit faire defiler, selon l endroit d ou l on vient */
 function listePour(e){

@@ -1,0 +1,6 @@
+const fs = require("fs");
+function patch(f, paires) { let s = fs.readFileSync(f, "utf8"); for (const [a, b] of paires) { const n = s.split(a).length - 1; if (n !== 1) { console.error(f + " : motif trouve " + n + " fois : " + a.slice(0, 70)); process.exit(1); } s = s.replace(a, b); } fs.writeFileSync(f, s); console.log(f + " : " + paires.length + " retouches"); }
+patch("accueil.html", [["<img src=\"/images/hero.webp\" alt=", "<img src=\"/images/hero.webp\" srcset=\"/images/hero-900.webp 900w, /images/hero.webp 1920w\" sizes=\"100vw\" alt="],
+ ["     Pour changer la photo : remplacer images/hero.webp (paysage, environ 1920 px de large). -->", "     Pour changer la photo : remplacer images/hero.webp (paysage, environ 1920 px de large)\n     ET sa version legere pour telephone images/hero-900.webp (la meme, en 900 px de large). -->"]]);
+patch(".outils/construire.js", [["'<link rel=\"preload\" as=\"image\" href=\"/images/hero.webp\" fetchpriority=\"high\">'", "'<link rel=\"preload\" as=\"image\" href=\"/images/hero.webp\" imagesrcset=\"/images/hero-900.webp 900w, /images/hero.webp 1920w\" imagesizes=\"100vw\" fetchpriority=\"high\">'"]]);
+patch("assets/rendu.js", [["image(p, '(max-width:760px) 100vw, 34vw', { vite: i === 0 })", "image(p, '(max-width:760px) 100vw, 34vw')"]]);

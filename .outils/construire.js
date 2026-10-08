@@ -152,7 +152,7 @@ function tete(page, D, htmlPage) {
     '<link rel="preload" href="/assets/polices/inter-latin.woff2" as="font" type="font/woff2" crossorigin>',
     '<link rel="preload" href="/assets/polices/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>',
     '<link rel="stylesheet" href="/assets/styles.css">');
-  if (page.id === "accueil") h.push('<link rel="preload" as="image" href="/images/hero.webp" fetchpriority="high">');
+  if (page.id === "accueil") h.push('<link rel="preload" as="image" href="/images/hero.webp" imagesrcset="/images/hero-900.webp 900w, /images/hero.webp 1920w" imagesizes="100vw" fetchpriority="high">');
   if (!page.robots) {
     h.push(ld(service(D), D));
     if (page.id !== "accueil") h.push(ld(filAriane(page), D));

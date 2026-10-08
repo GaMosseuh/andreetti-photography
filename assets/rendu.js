@@ -108,7 +108,7 @@ function universAccueil(){
   return UNIVERS_ACCUEIL.map(function(u, i){
     var p = photo(u.photo); if(!p) return '';
     return '<a href="/portfolio?vue=photos&amp;cat=' + ech(u.cat) + '">' +
-      image(p, '(max-width:760px) 100vw, 34vw', { vite: i === 0 }) +
+      image(p, '(max-width:760px) 100vw, 34vw') +
       '<span class="univers-texte"><span class="univers-nom">' + ech(univers(u.cat)) + '</span>' +
       '<span class="univers-voir">' + ech(trad('universVoir')) + '<i class="fleche" aria-hidden="true"></i></span></span></a>';
   }).join('');

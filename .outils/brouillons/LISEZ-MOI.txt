@@ -1,0 +1,10 @@
+BROUILLONS DE LA VERSION 2.0 (octobre 2026)
+
+Ces fichiers sont les petits scripts jetables qui ont servi une seule fois pendant la
+fabrication de la version 2.0 du site (import des photos, tri des traductions, essais).
+Ils ne servent plus et ne sont pas publies sur le site (tout le dossier .outils reste
+sur l ordinateur). Ils sont gardes ici, ranges, parce que la regle est de ne rien supprimer.
+Certains ne fonctionnent plus tels quels depuis qu ils ont ete ranges dans ce sous-dossier.
+
+Les vrais outils du site sont dans le dossier du dessus (.outils) : construire.js,
+verifier.js, photos.js, photo-profil.js, captures.js, les tests...
