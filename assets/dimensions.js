@@ -2,9 +2,6 @@
    Pour chaque photo : [largeur, hauteur, largeur de la grande taille (0 = pas de grande taille)].
    Sert a reserver la bonne place avant que l image arrive : la page ne saute plus. */
 var DIMENSIONS = {
-  "cat-event":[1800,1200,0],
-  "cat-portrait":[1440,1800,0],
-  "cat-sport":[1800,1012,0],
   "event-01":[1200,1800,1600],
   "event-02":[1800,1200,2400],
   "event-03":[1800,1350,2400],

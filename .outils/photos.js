@@ -84,11 +84,31 @@ async function importer(source, prefixe) {
   console.log(JSON.stringify(await dimensions()));
   console.log("\nLignes a copier dans assets/data.js (tableau PHOTOS), puis a completer :\n" + lignes.join("\n"));
 }
-module.exports = { fabriquer, petite, dimensions, DOS };
+/* L image PAYSAGE d une carte « Dernieres seances » de l accueil (format 4:3).
+       node .outils/photos.js carte "C:\chemin\vers\la photo.jpg" seance-elsa
+   -> cree images/seances/seance-elsa.webp ; il reste a ecrire ce nom dans assets/data.js,
+      champ imageAccueil de la seance. La photo est recadree en 4:3 autour du sujet, jamais
+      etiree ni agrandie. Ajouter haut, centre ou bas a la fin pour choisir le cadrage. */
+async function carte(source, nom, place) {
+  const dos = path.join(RACINE, "images", "seances");
+  fs.mkdirSync(dos, { recursive: true });
+  const meta = await sharp(source).rotate().metadata();
+  const couche = meta.orientation >= 5;
+  const W = couche ? meta.height : meta.width, H = couche ? meta.width : meta.height;
+  const l = Math.round(Math.min(1200, W, H * 4 / 3)), h = Math.round(l * 3 / 4);
+  const position = place === "haut" ? "top" : place === "bas" ? "bottom" : place === "centre" ? "centre" : sharp.strategy.attention;
+  const dest = path.join(dos, nom.replace(/\.webp$/i, "") + ".webp");
+  if (fs.existsSync(dest)) throw new Error("images/seances/" + path.basename(dest) + " existe deja : choisir un autre nom (on ne remplace pas une image sans le decider).");
+  const r = await sharp(source).rotate().resize({ width: l, height: h, fit: "cover", position }).webp({ quality: 82 }).toFile(dest);
+  console.log("images/seances/" + path.basename(dest) + " : " + r.width + " x " + r.height + " px, " + Math.round(r.size / 1024) + " Ko");
+  console.log("Reste a ecrire dans assets/data.js, pour la seance concernee :   imageAccueil:\"" + path.basename(dest) + "\"");
+}
+module.exports = { fabriquer, petite, dimensions, carte, DOS };
 if (require.main === module) {
   const [cmd, a, b] = process.argv.slice(2);
   (async () => {
     if (cmd === "importer" && a && b) await importer(a, b);
+    else if (cmd === "carte" && a && b) await carte(a, b, process.argv[5]);
     else if (cmd === "dimensions" || !cmd) console.log(JSON.stringify(await dimensions()));
     else console.log("usage : node .outils/photos.js importer <dossier ou fichier> <prefixe>   |   node .outils/photos.js dimensions");
   })().catch(e => { console.error("ECHEC :", e.message); process.exit(1); });

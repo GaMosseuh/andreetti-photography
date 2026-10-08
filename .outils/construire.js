@@ -39,6 +39,8 @@ const ICONES = {
   partage: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg>',
   theme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 000 17z" fill="currentColor" stroke="none"/></svg>',
   message: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" stroke-linejoin="round"/></svg>',
+  photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17l5-4 4 3 3-2 4 3"/></svg>',
+  etoile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2l2.6 5.6 6.1.7-4.6 4.1 1.3 6L12 16.5l-5.4 3.1 1.3-6-4.6-4.1 6.1-.7z"/></svg>',
   mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>',
   telephone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 006 6l1.5-2 4 1.5v3a2 2 0 01-2.2 2A16.5 16.5 0 014.5 5.700a2 2 0 012-2.200z" stroke-linejoin="round"/></svg>',
   lieu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-6.500-5.800-6.500-10.500a6.500 6.500 0 0113 0C18.500 15.200 12 21 12 21z"/><circle cx="12" cy="10.500" r="2.300"/></svg>',
@@ -135,10 +137,11 @@ function tete(page, D, htmlPage) {
     "     Le fichier google6071a8daa44044c2.html a la racine fait la meme chose en secours. -->",
     '<meta name="google-site-verification" content="AsFyBL63fL2S-Izu1Oi_3jA-iGOKLUJJGYdxtkft53U" />',
     '<meta name="google-site-verification" content="1CpIicORCdYnNOE4eiCDTbtQpq73NWiVUg8BA25iDsM" />');
-  h.push('<meta name="theme-color" content="#F5FAFB" media="(prefers-color-scheme: light)">', '<meta name="theme-color" content="#0E1A1E" media="(prefers-color-scheme: dark)">',
+  h.push('<meta name="theme-color" content="#0E1A1E">',
     '<link rel="canonical" href="' + url + '">', '<link rel="alternate" hreflang="fr" href="' + url + '">', '<link rel="alternate" hreflang="x-default" href="' + url + '">',
-    "<!-- Theme clair/sombre applique avant l affichage (pas de clignotement). Signale aussi que les scripts fonctionnent. -->",
-    "<script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light'){d.setAttribute('data-theme',s);}else{d.setAttribute('data-theme',(window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches)?'light':'dark');}}catch(e){d.setAttribute('data-theme','dark');}})();</script>",
+    "<!-- Le mode SOMBRE est le mode par defaut, pour tout le monde. Le mode clair ne s affiche que si le visiteur l a choisi avec le bouton.",
+    "     Ce petit script s execute avant l affichage (pas de clignotement) et signale aussi que les scripts fonctionnent. -->",
+    "<script>(function(){var d=document.documentElement,t='dark';d.classList.add('js');try{if(localStorage.getItem('theme')==='light')t='light';}catch(e){}d.setAttribute('data-theme',t);})();</script>",
     '<meta property="og:type" content="website">', '<meta property="og:site_name" content="ANDREETTI">', '<meta property="og:title" content="' + t + '">',
     '<meta property="og:description" content="' + d + '">', '<meta property="og:url" content="' + url + '">', '<meta property="og:locale" content="fr_FR">',
     '<meta property="og:image" content="' + SITE + '/images/partage.webp">', '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
@@ -198,7 +201,7 @@ function bas(page, D) {
     '<div class="contenu pied-grille">',
     '<div class="pied-marque"><a class="pied-logo" href="/" aria-label="ANDREETTI, accueil">ANDREETTI</a>' +
       '<p data-i18n="footTag">Photographe portrait, sport et événementiel à Dijon et dans l\'Yonne</p>' +
-      '<p class="pied-promesse" data-i18n="footPromesse">Devis gratuit · Réponse sous 48 h</p></div>',
+      '<p class="pied-promesse" data-i18n="footPromesse">Devis&nbsp;gratuit · Réponse&nbsp;sous&nbsp;48&nbsp;h</p></div>',
     '<nav class="pied-nav" aria-label="Plan du site">' + MENU.map(([id, href, cle, nom]) => '<a href="' + href + '" data-i18n="' + cle + '">' + nom + "</a>").join("") + "</nav>",
     '<div class="pied-contact"><a href="mailto:' + C.mail + '">' + C.mail + "</a>" +
       '<div class="reseaux">' + reseaux(C, "reseau") + "</div></div>",
@@ -208,7 +211,7 @@ function bas(page, D) {
       '<a href="' + D.GOOGLE_AVIS_URL + '" target="_blank" rel="noopener noreferrer" data-i18n="footReview">Laisser un avis</a>' +
       '<a href="/mentions-legales" data-i18n="legalLink">Mentions légales et confidentialité</a></div>',
     "</footer>",
-    page.id === "contact" || page.id === "merci" ? "" : '<a class="devis-flottant" href="/contact">' + ICONES.message + '<span data-i18n="floatCta">Devis gratuit</span></a>',
+    page.id === "contact" || page.id === "merci" || page.id === "links" ? "" : '<a class="devis-flottant" href="/contact">' + ICONES.message + '<span data-i18n="floatCta">Devis gratuit</span></a>',
     scripts.map(s => '<script src="/assets/' + s + '"></script>').join("\n")
   ].filter(Boolean).join("\n");
 }
@@ -246,6 +249,8 @@ function blocs(html, D, page) {
   });
   /* icones : <!--@icone nom--> ... <!--/@icone--> */
   html = html.replace(/(<!--@icone ([a-z]+)-->)[\s\S]*?(<!--\/@icone-->)/g, (m, a, nom, b) => { if (!ICONES[nom]) throw new Error("icone inconnue : " + nom); return a + ICONES[nom] + b; });
+  /* les trois reseaux : <!--@reseaux--> ... <!--/@reseaux--> */
+  html = html.replace(/(<!--@reseaux-->)[\s\S]*?(<!--\/@reseaux-->)/g, (m, a, b) => a + reseaux(D.COORDONNEES, "reseau") + b);
   /* telephone : <!--@tel--> ... <!--/@tel--> */
   html = html.replace(/(<!--@tel-->)[\s\S]*?(<!--\/@tel-->)/g, (m, a, b) => a + lienTel(D.COORDONNEES) + b);
   /* les sections qui n existent que s il y a une video */

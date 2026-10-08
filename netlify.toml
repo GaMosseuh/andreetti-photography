@@ -1,23 +1,27 @@
 [functions]
   directory = "netlify/functions"
 
-# Les images ne changent jamais sans changer de nom : cache navigateur d'un an
+# Les images et les polices ne changent jamais sans changer de nom : le navigateur les garde un an.
 [[headers]]
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+[[headers]]
+  for = "/assets/polices/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # ─────────────────────────────────────────────────────────────────────────────
-# MIGRATION VERS andreettiphoto.fr (18/08/2026)
+# 1. MIGRATION VERS andreettiphoto.fr (18/08/2026)
 # L'ancienne adresse Netlify reste vivante mais renvoie DÉFINITIVEMENT (301) vers
 # le nouveau domaine, page par page. C'est ce qui transfère à andreettiphoto.fr
 # le travail d'indexation déjà acquis : Google suit la redirection et reporte
 # l'ancienneté de chaque URL sur la nouvelle adresse.
 #
 # ⚠️ CES DEUX RÈGLES DOIVENT RESTER EN PREMIER. Netlify applique les règles dans
-# l'ordre du fichier : si la réécriture de "/" (plus bas) passait avant, elle
-# attraperait aussi la racine de l'ancien domaine, qui servirait alors le site
-# en double au lieu de rediriger.
+# l'ordre du fichier : si une autre règle passait avant, elle attraperait aussi
+# l'ancien domaine, qui servirait alors le site en double au lieu de rediriger.
 # La racine est traitée à part car "/*" ne couvre pas "/" de façon fiable ici.
 # NE PAS SUPPRIMER : sans ça, les liens déjà en circulation créeraient du
 # contenu dupliqué, ce que Google pénalise.
@@ -34,18 +38,88 @@
   status = 301
   force = true
 
-# La page d'accueil s'appelle accueil.html (nommage cohérent avec portfolio.html,
-# contact.html, etc.). Le web exige qu'une page réponde à la racine "/" :
-# cette règle sert accueil.html quand on ouvre andreettiphoto.fr.
-# status = 200 => réécriture, l'adresse affichée reste "/" (pas de redirection,
-# pas de contenu dupliqué : accueil.html a un canonical qui pointe sur "/").
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. UNE SEULE FORME D'ADRESSE, SANS ".html" (v2.0, 8 octobre 2026)
+# Avant, chaque page répondait à deux adresses (/portfolio et /portfolio.html) et
+# le site disait à Google de retenir celle en ".html" alors que tous les liens
+# pointaient vers l'autre. Désormais la seule adresse est la courte : celle en
+# ".html" y renvoie définitivement (301), pour que les anciens liens marchent encore.
+# Netlify sert tout seul portfolio.html quand on demande /portfolio.
+#
+# "force = true" est obligatoire : sans lui, Netlify sert le fichier ".html" qui
+# existe et ignore la règle.
+# Le fichier google6071a8daa44044c2.html (vérification Search Console) n'est PAS
+# dans cette liste et ne doit jamais y être : il doit rester accessible tel quel.
+# Pour ajouter une page au site : ajouter ici sa ligne, sur le même modèle.
+# ─────────────────────────────────────────────────────────────────────────────
 [[redirects]]
-  from = "/"
-  to = "/accueil.html"
-  status = 200
+  from = "/accueil.html"
+  to = "/"
+  status = 301
+  force = true
 
-# Sécurité : /index.html n'existe plus, on renvoie proprement vers l'accueil.
+[[redirects]]
+  from = "/accueil"
+  to = "/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/index.html"
   to = "/"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/portfolio.html"
+  to = "/portfolio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prestations.html"
+  to = "/prestations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/apropos.html"
+  to = "/apropos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/links.html"
+  to = "/links"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mentions-legales.html"
+  to = "/mentions-legales"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/merci.html"
+  to = "/merci"
+  status = 301
+  force = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3. LA PAGE D'ACCUEIL
+# Elle s'appelle accueil.html (nommage cohérent avec portfolio.html, contact.html,
+# etc.). Le web exige qu'une page réponde à la racine "/" : cette règle sert
+# accueil.html quand on ouvre andreettiphoto.fr.
+# status = 200 => réécriture : l'adresse affichée reste "/", sans redirection.
+# ─────────────────────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "/"
+  to = "/accueil.html"
+  status = 200

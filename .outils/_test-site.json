@@ -1,0 +1,15 @@
+{
+ "resultats": [
+  {
+   "nom": "Les 20 largeurs (320 → 3840 px), clair et sombre, sur 11 écrans : rien ne déborde, rien n'est coupé",
+   "ok": true,
+   "detail": "440 mesures"
+  }
+ ],
+ "chiffres": {
+  "largeurs": {
+   "mesures": 440,
+   "defauts": []
+  }
+ }
+}

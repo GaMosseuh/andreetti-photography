@@ -1,0 +1,289 @@
+evitement | Aller au contenu
+navHome | Accueil
+      (EN existant) Home
+navPortfolio | Portfolio
+      (EN existant) Portfolio
+navServices | Prestations
+      (EN existant) Services
+navAbout | À propos
+      (EN existant) About
+navContact | Contact
+      (EN existant) Contact
+ctaDevis | Demander mon devis gratuit
+heroCta1 | Voir le portfolio
+      (EN existant) View portfolio
+heroCta2 | Me contacter
+      (EN existant) Get in touch
+tagline | Photographe portrait, sport &amp; événementiel à Dijon et dans l'Yonne
+      (EN existant) Portrait, sport & event photographer in Dijon and the Yonne
+whoText | Je m'appelle Alexandre, photographe basé à Dijon et dans l'Yonne. Portrait, sport, événementiel : je capture l'authenticité des moments.
+      (EN existant) I'm Alexandre, a photographer based in Dijon and the Yonne. Portrait, sport, events — I capture the authenticity of every moment.
+whoMore | En savoir plus sur moi
+      (EN existant) Learn more
+statFree | Gratuit
+      (EN existant) Free
+statQuoteL | Devis personnalisé
+      (EN existant) Custom quote
+statReplyL | Délai de réponse
+      (EN existant) Reply time
+statDeliveryN | 10 jours
+statDeliveryL | Livraison des photos
+      (EN existant) Photo delivery
+tariffsEyebrow | Prestations
+      (EN existant) Services
+tariffsTitle | Prestations et tarifs
+      (EN existant) Services & pricing
+prestaIntro | Pour un portrait, les prix sont fixes et tout est compris. Pour un club, une association ou un événement, chaque demande est différente, donc je vous fais un devis, gratuit et sous 48 h.
+catPortrait | Portrait
+      (EN existant) Portrait
+offrePortraitPrix | Formules à prix fixe
+offrePortraitTexte | 40, 50 ou 65 € selon la formule, tout compris.
+catSport | Sport
+      (EN existant) Sport
+surDevis | Sur devis
+offreSportTexte | Matchs, tournois, entraînements, photos d'équipe et portraits de joueurs.
+catEvent | Événementiel
+      (EN existant) Events
+offreEventTexte | Spectacles, concerts, galas, assemblées, journées associatives, inaugurations.
+tariffsBtn | Voir les prestations et les tarifs
+      (EN existant) See services & pricing
+lastEyebrow | Actualité
+      (EN existant) News
+lastTitle | Dernières séances
+      (EN existant) Latest sessions
+lastAll | Voir tout le portfolio
+      (EN existant) View the full portfolio
+igText | Mes dernières photos et les coulisses sont sur Instagram.
+      (EN existant) My latest photos and behind-the-scenes are on Instagram.
+testiEyebrow | Témoignages
+      (EN existant) Testimonials
+testiTitle | Ils en parlent
+      (EN existant) What clients say
+avisVoirTous | Lire les avis sur Google
+      (EN existant) Read the reviews on Google
+footReview | Laisser un avis
+      (EN existant) Leave a review
+videoEyebrow | En vidéo
+videoTitre | Je me présente
+videoNote | La vidéo est hébergée par YouTube. Elle ne se charge que si vous la lancez.
+ctaBandTitle | Prêt à réserver votre séance ?
+      (EN existant) Ready to book your session?
+ctaBandText | Parlez-moi de votre projet : je vous réponds sous 48 h avec un devis gratuit et sans engagement.
+      (EN existant) Tell me about your project: I reply within 48h with a free, no-obligation quote.
+faqMiniAll | Toutes les questions
+      (EN existant) All questions →
+zonesEyebrow | Déplacements
+      (EN existant) Coverage
+zonesTitle | Zones d'intervention
+      (EN existant) Areas covered
+zonesIntro | Basé à Dijon et dans l'Yonne, je me déplace dans toute la région pour vos séances et reportages.
+      (EN existant) Based in Dijon and the Yonne, I travel across the region for your sessions and reportages.
+deplacementRegle | Déplacement compris jusqu'à 25 km autour de Dijon. Plus loin, ou dans l'Yonne où je suis régulièrement, le déplacement est indiqué dans le devis.
+zonesAll | Voir toutes les villes
+      (EN existant) See all towns
+footTag | Photographe portrait, sport et événementiel à Dijon et dans l'Yonne
+      (EN existant) Portrait, sport & event photographer · Dijon & Yonne
+footPromesse | Devis gratuit · Réponse sous 48 h
+footLinks | Mes liens
+      (EN existant) My links
+legalLink | Mentions légales et confidentialité
+      (EN existant) Legal notice & privacy
+floatCta | Devis gratuit
+      (EN existant) Free quote
+portfolioSous | Photographe portrait, sport et événementiel à Dijon
+ongletSeances | Séances
+ongletPhotos | Toutes les photos
+serieRetour | Toutes les séances
+serieQuestion | Vous voulez des photos comme celles-ci ?
+serieDevisBtn | Demander un devis
+filtreTous | Tout
+appelTitre | Vous avez un projet en tête ?
+appelTexte | Décrivez-moi ce que vous cherchez. Le devis est gratuit, et je vous réponds sous 48 h.
+prestaSous | Photographe à Dijon · Devis gratuit sous 48 h
+formulesTitre | Trois formules à prix fixe
+formulesNote1 | Photos triées et retouchées, livrées sous 10 jours en haute définition.
+formulesNote2 | Duo, couple, famille, séance plus longue ou besoin particulier : je vous fais un devis.
+avisPortraitTitre | Ce qu'en disent les clientes
+devisEyebrow | Clubs, associations, événements
+devisTitre | Sport et événementiel, sur devis
+sportTexte | Matchs, tournois, entraînements, photos d'équipe et portraits de joueurs. Je trie, je retouche, et vous recevez des photos prêtes à publier sur vos réseaux.
+sportP1 | Tri et retouche inclus
+sportP2 | Photos prêtes pour Instagram et Facebook
+sportP3 | En option : un dossier de photos par joueur
+quoteBtn | Demander un devis
+      (EN existant) Request a quote
+eventTexte | Spectacles, concerts, galas, assemblées, journées associatives, inaugurations. Je suis là du début à la fin, et vous recevez un reportage complet de votre événement.
+eventP1 | Reportage du début à la fin
+eventP2 | Photos triées et retouchées
+eventP3 | Livraison sous 10 jours
+methodEyebrow | Méthode
+      (EN existant) Method
+methodTitle | Comment ça se passe
+      (EN existant) How it works
+step1T | Échange
+      (EN existant) Get in touch
+step1D | On discute de votre projet et de vos attentes.
+      (EN existant) We discuss your project and expectations.
+step2T | Devis
+      (EN existant) Quote
+step2D | Je vous envoie un devis clair, gratuit, sous 48 h.
+      (EN existant) I offer you a clear, tailored package.
+step3T | Séance
+      (EN existant) Shoot
+step3D | Le jour J, on capture les vrais moments.
+      (EN existant) On the day, we capture the real moments.
+step4T | Livraison
+      (EN existant) Delivery
+step4D | Photos triées et retouchées, livrées sous 10 jours.
+      (EN existant) Private gallery and retouched photos within 10 days.
+faqEyebrow | Questions
+      (EN existant) FAQ
+faqTitle | Questions fréquentes
+      (EN existant) Frequently asked questions
+faqQ1 | Comment se déroule une séance photo ?
+      (EN existant) How does a photo session work?
+faqA1 | On commence toujours par échanger sur votre projet : l'ambiance que vous cherchez, le lieu, vos envies. Le jour J, je vous guide du début à la fin, pas besoin d'avoir l'habitude d'être pris en photo. Une séance portrait dure environ une heure, dans un lieu qu'on choisit ensemble. Mon but, c'est que vous oubliiez l'appareil et que les photos restent naturelles.
+      (EN existant) We always start by talking through your project: the mood you're after, the location, what you have in mind. On the day, I'll guide you from start to finish, no experience in front of the camera needed. A portrait session lasts about an hour, in a location we choose together. My goal is for you to forget the camera is even there, so the photos stay natural.
+faqQ2 | Combien coûte une prestation ?
+      (EN existant) How much does a session cost?
+faqA2 | Pour un portrait, les prix sont affichés juste au-dessus : 40, 50 ou 65 € selon la formule, tout compris. Pour le sport et les événements, chaque demande est différente : décrivez-moi votre besoin dans le formulaire et je vous envoie un devis gratuit sous 48 h.
+      (EN existant) Every project is different, which is why I work with a custom quote. The quote is free and comes with no obligation. Describe what you need through the contact form and I'll get back to you within 48 hours with a clear, tailored package. And of course, travel to Dijon, the Yonne and the surrounding area is included.
+faqQ3 | Comment et quand vais-je recevoir mes photos ?
+      (EN existant) How and when will I get my photos?
+faqA3 | Vos photos triées et retouchées sont livrées sous 10 jours dans une galerie privée en ligne, accessible uniquement avec votre lien. Vous pouvez les visionner, les télécharger en haute définition et les partager avec vos proches. Petit conseil : pensez à bien télécharger vos photos dès réception, car la galerie ne reste pas en ligne indéfiniment.
+      (EN existant) Your sorted and retouched photos are delivered within 10 days in a private online gallery, accessible only with your link. You can view them, download them in high definition and share them with your loved ones. A quick tip: download your photos as soon as you get them, since the gallery isn't kept online forever.
+faqQ4 | Qui a les droits sur les photos ?
+      (EN existant) Who owns the rights to the photos?
+faqA4 | Vous recevez vos photos avec un droit d'usage personnel complet : impression, partage, réseaux sociaux. De mon côté, je peux publier certaines images dans mon portfolio ou sur mes réseaux, mais uniquement avec votre accord, que je vous demande toujours avant. Et si vous préférez que vos photos restent totalement privées, c'est votre droit et je le respecte sans condition.
+      (EN existant) You receive your photos with full personal usage rights: printing, sharing, social media. On my side, I may publish certain images in my portfolio or on my social media, but only with your consent, which I always ask for beforehand. And if you'd rather keep your photos completely private, that's entirely your right and I respect it without question.
+faqQ5 | Que se passe-t-il en cas de mauvais temps ?
+      (EN existant) What happens if the weather is bad?
+faqA5 | Pour une séance en extérieur, si la météo ne s'y prête vraiment pas, on reporte simplement à une date qui vous convient, sans aucun frais. Dans tous les cas, on fait le point ensemble la veille en fonction du temps annoncé.
+      (EN existant) For an outdoor session, if the weather really doesn't cooperate, we simply reschedule to a date that suits you, at no extra cost. Either way, we check in together the day before based on the forecast.
+faqQ6 | Comment réserver une date ?
+      (EN existant) How do I book a date?
+faqA6 | Envoyez-moi un message via le formulaire de contact avec la date souhaitée. Après validation du devis, la date est bloquée pour vous. Pour les événements importants (couverture complète, association, club), pensez à réserver plusieurs semaines à l'avance.
+      (EN existant) Send me a message through the contact form with your preferred date. Once the quote is confirmed, the date is reserved for you. For bigger events (full coverage, associations, clubs), it's best to book several weeks ahead.
+faqQ7 | Je ne suis pas à l'aise devant un objectif, c'est grave ?
+      (EN existant) I'm not comfortable in front of a camera, is that a problem?
+faqA7 | Pas du tout, et rassurez-vous : c'est le cas de la plupart des gens que je photographie. Mon travail, c'est justement de vous mettre à l'aise. On discute, on bouge, on essaie des choses, et les meilleures photos arrivent souvent au moment où on ne s'y attend pas. Le naturel, c'est le cœur de mon approche.
+      (EN existant) Not at all, and don't worry: that's the case for most people I photograph. My job is precisely to help you feel at ease. We talk, move around, try things out, and the best photos often happen when you least expect them. Keeping it natural is at the heart of how I work.
+faqQ8 | Tu te déplaces jusqu'où ?
+      (EN existant) How far do you travel?
+faqA8 | Je suis basé à Dijon, et le déplacement est compris jusqu'à 25 km autour. Je suis aussi régulièrement dans l'Yonne (Auxerre, Sens, Joigny, Avallon…) et je me déplace dans toute la Bourgogne. Au-delà de 25 km autour de Dijon, le déplacement est simplement indiqué dans le devis, selon la distance. Votre projet est plus loin ? Parlons-en.
+      (EN existant) I'm based in Dijon and the Yonne (89), and I travel across Burgundy: Auxerre, Sens, Joigny, Avallon, the greater Dijon area and beyond. Travel is included in the quote for Dijon, the Yonne and the surrounding area. Is your project further away? Let's talk about it, anything is possible.
+aproposSous | Alexandre ANDREETTI, photographe à Dijon
+bio1 | Photographe passionné de 19 ans, basé à Dijon et dans l'Yonne (89), en Bourgogne. Portrait, sport, événementiel : je capture les moments authentiques et les émotions vraies.
+      (EN existant) A passionate 19-year-old photographer based in Dijon and the Yonne (89), Burgundy. Portrait, sport, events — I capture authentic moments and genuine emotions.
+bio2 | J'ai commencé par photographier ce qui m'entourait : mes proches, les terrains de sport, les soirées locales. De cette pratique est née une exigence : raconter des instants justes, sans artifice.
+      (EN existant) I started by photographing what surrounded me: my friends, the sports fields, local parties. From that practice grew a standard — to tell honest moments, without artifice.
+bio3 | Aujourd'hui, je travaille avec des particuliers, des clubs et des associations de toute la région, avec la même envie : faire des images dont on est fier.
+      (EN existant) Today I work with individuals, clubs and associations across the region, with the same drive: to make images you can be proud of.
+parcoursEyebrow | Expériences
+parcoursTitre | Ce que j'ai déjà fait
+p1Quand | Octobre 2024
+p1Texte | <strong>Un mariage en Islande.</strong> Mon premier vrai travail payé, et j'étais le photographe du mariage.
+voirPhotos | Voir les photos
+p2Quand | Été 2024
+p2Texte | <strong>Un festival de musique :</strong> la captation vidéo de 11 groupes sur deux scènes, et pas mal de photos.
+p3Quand | Février 2023 et février 2024
+p3Texte | <strong>Le TIM Essonne,</strong> un tournoi international de tennis des moins de 14 ans. La première fois dans le cadre de mon SNU, la deuxième en bénévole, parce que j'avais envie d'y retourner. J'y faisais les photos, les interviews avec un journaliste et le montage vidéo pour la communication du tournoi.
+p4Texte | <strong>Deux matchs de compétition de volley.</strong>
+p5Quand | Juillet 2026
+p5Texte | <strong>Du théâtre,</strong> avec le spectacle « Hippolyte et Antiope » à l'église de Ouanne.
+p6Quand | Septembre 2026
+p6Texte | <strong>Mon premier club,</strong> avec un match du CL Marsannay Handball.
+p7Texte | Des séances portrait, à Dijon et à Paris.
+p8Texte | Et des événements privés, comme des anniversaires.
+parcoursPlus | À côté de la photo, je fais aussi du montage vidéo (DaVinci Resolve) et de la mise en page (Photoshop, Illustrator, InDesign). J'ai déjà réalisé la charte graphique d'une entreprise. Je retouche toutes mes photos moi-même.
+parcoursFin | Votre projet ne ressemble à rien de tout ça ? Dites-le-moi, je vous dirai franchement si je suis la bonne personne.
+approachTitle | Mon approche
+      (EN existant) My approach
+approachText | Écouter avant de déclencher, privilégier le naturel, livrer un travail soigné dans les délais.
+      (EN existant) Listen before pressing the shutter · favour the natural · deliver polished work on time.
+valFiab | Fiabilité
+      (EN existant) Reliability
+valQual | Qualité
+      (EN existant) Quality
+valAuth | Authenticité
+      (EN existant) Authenticity
+valResp | Respect
+      (EN existant) Respect
+valProg | Progression
+      (EN existant) Progress
+spamNote | Je réponds à chaque mail. Pas de réponse sous 48 h ? Pensez à regarder vos spams.
+contactSous | Photographe à Dijon · Devis gratuit
+contactIntro | Dites-moi ce que vous cherchez, même en deux lignes. Je vous réponds sous 48 h.
+lblNom | Votre nom
+      (EN existant) Your name
+lblEmail | Votre adresse mail
+      (EN existant) Your email address
+lblPrestation | Ce qui vous intéresse
+      (EN existant) Type of service
+lblMessage | Votre message
+      (EN existant) Your message
+aideMessage | Si vous les connaissez : la date, le lieu, le nombre de personnes.
+btnSend | Envoyer
+      (EN existant) Send
+spamPhrase | Je réponds à chaque mail. Si vous n'avez pas de réponse sous 48 h, pensez à regarder vos spams.
+coordTitle | Coordonnées
+      (EN existant) Contact details
+coordLoc | Dijon et l'Yonne (89), déplacements en Bourgogne
+      (EN existant) Dijon & Yonne (89) · Travel across Burgundy
+coordResp | Réponse sous 48 h, devis gratuit
+      (EN existant) Reply within 48h · Free quote
+lkSub | Photographe portrait, sport et événementiel
+lkGeo | Dijon · Côte-d'Or · Yonne
+lkDevisDetail | Portrait, sport, événementiel
+lkSite | Voir mes photos
+lkSiteDetail | Le portfolio, séance par séance
+lkFacebook | Ma page Facebook
+lkAvis | Laisser un avis Google
+lkAvisDetail | Ça m'aide énormément (30 secondes)
+lkMail | M'écrire un mail
+lkExplorer | Explorer le site
+mlTitre | Mentions légales et confidentialité
+mlMaj | Dernière mise à jour : octobre 2026
+mlEditeurT | Éditeur du site
+mlEditeur1 | Le présent site <strong>andreettiphoto.fr</strong> est édité par <strong>Alexandre ANDREETTI</strong>, photographe.
+mlLocalisation | Localisation : Yonne (89), France
+mlMailLabel | Mail :
+mlTelLabel | Téléphone :
+mlEditeur2 | Directeur de la publication : Alexandre ANDREETTI.
+mlHebergeurT | Hébergeur
+mlHebergeur1 | Le site est hébergé par <strong>Netlify, Inc.</strong>
+mlEtatsUnis | États-Unis
+mlProprieteT | Propriété intellectuelle
+mlPropriete1 | L'ensemble des photographies, textes et éléments graphiques présents sur ce site sont la propriété exclusive d'Alexandre ANDREETTI, sauf mention contraire. Toute reproduction, représentation, diffusion ou téléchargement, total ou partiel, sans autorisation écrite préalable, est interdit et constitue une contrefaçon (articles L.335-2 et suivants du Code de la propriété intellectuelle).
+mlDonneesT | Données personnelles (RGPD)
+mlDonnees1 | Le formulaire de contact recueille <strong>votre nom</strong>, <strong>votre adresse mail</strong>, la prestation qui vous intéresse et <strong>votre message</strong>, dans l'unique but de répondre à votre demande.
+mlDonnees2 | Ces informations sont transmises par mail (via les services Netlify Forms et Resend) et ne sont ni revendues, ni cédées à des tiers. Elles sont conservées le temps nécessaire au traitement de votre demande, puis supprimées.
+mlDonnees3 | Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données : il suffit d'en faire la demande par mail à <a href="mailto:contact@andreettiphoto.fr">contact@andreettiphoto.fr</a>.
+mlCookiesT | Cookies
+mlCookies1 | Ce site n'utilise <strong>aucun cookie de suivi ou publicitaire</strong>. Seules deux préférences (le thème clair ou sombre, et la langue choisie) sont enregistrées dans votre navigateur. Elles ne sont jamais transmises.
+mlCookies2 | Les polices de caractères sont servies par le site lui-même : ouvrir une page ne contacte aucun service extérieur.
+mlAudienceT | Mesure d'audience
+mlAudience1 | Ce site utilise <strong>Umami</strong>, un outil de statistiques respectueux de la vie privée, afin de connaître la fréquentation du site (nombre de visites, pages consultées, contenus qui intéressent les visiteurs).
+mlAudience2 | Aucun cookie n'est déposé et aucune donnée personnelle n'est collectée : les mesures sont anonymes et agrégées. Aucun visiteur n'est identifié individuellement, et aucune donnée n'est revendue ni utilisée à des fins publicitaires. Conformément aux recommandations de la CNIL, cette mesure d'audience anonyme ne nécessite pas de consentement préalable.
+mlVideoT | Vidéo
+mlVideo1 | Quand une vidéo est proposée sur le site, elle est hébergée par YouTube. Rien n'est chargé depuis YouTube tant que vous ne lancez pas la vidéo. Si vous la lancez, YouTube peut déposer ses propres cookies, selon ses règles.
+mlAvisT | Avis clients
+mlAvis1 | Les avis affichés sur ce site sont recopiés mot pour mot depuis la fiche Google d'ANDREETTI Photography, où chacun peut les vérifier. Seul le prénom de leur auteur est affiché.
+mlReseauxT | Réseaux sociaux
+mlReseaux1 | Vous pouvez suivre le travail d'Alexandre ANDREETTI sur <a href="https://instagram.com/andreetti.photography" target="_blank" rel="noopener noreferrer">Instagram</a>, <a href="https://www.facebook.com/Andreetti.photography" target="_blank" rel="noopener noreferrer">Facebook</a> et <a href="https://www.linkedin.com/in/alexandre-andreetti/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+merciTitre | Message envoyé
+merciTexte | Merci pour votre message. Je vous réponds sous 48 h.
+merciSpam | Si vous n'avez pas de réponse sous 48 h, pensez à regarder vos spams.
+retourAccueil | Retour à l'accueil
+introuvableTitre | Page introuvable
+introuvableTexte | Cette page n'existe pas, ou elle a été déplacée.
+
+ATTRIBUTS:
+universLabel | aria-label @accueil
+ongletsLabel | aria-label @portfolio
+filtresLabel | aria-label @portfolio
+devisSportPhoto | aria-label @prestations
+devisEventPhoto | aria-label @prestations
+valeursLabel | aria-label @apropos
+lkLabel | aria-label @links
+lkPages | aria-label @links

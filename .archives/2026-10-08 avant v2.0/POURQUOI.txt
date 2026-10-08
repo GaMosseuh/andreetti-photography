@@ -1,0 +1,18 @@
+ARCHIVE DU 8 OCTOBRE 2026 — avant la version 2.0 du site
+
+Rien n est supprime : tout ce que la v2.0 a remplace ou cesse d utiliser est range ici.
+Ce dossier commence par un point : Netlify ne le publie pas, il n est pas en ligne.
+
+  site-v1.9\            toutes les pages et tous les scripts de la v1.9, tels qu ils etaient
+                        en ligne (sans les photos, qui n ont pas change de place)
+  i18n.js, i18n-faq.js  les anciens fichiers de traduction (12 langues). Les 10 langues mises
+                        en veille sont reprises dans assets\i18n-autres.js
+  assets\home.js        l ancien script de l accueil (carrousel, avis) : remplace par
+                        assets\rendu.js et assets\common.js
+  maj-sitemap.js        l ancien outil du plan du site : remplace par .outils\construire.js
+  images\               les photos qui ne servent plus : les trois vignettes de categories
+                        (cat-*.webp, doublons de photos du portfolio) et l ancienne image de
+                        la carte « Tir a l arc » des dernieres seances (seance-1.webp)
+
+La version complete en ligne avant la v2.0 est aussi sur le NAS :
+  W:\andreetti.photography\Entreprise\Site web\2026-10-08 ARCHIVE version en ligne avant v2.0.zip

@@ -173,6 +173,27 @@ function formules(){
   }).join('');
 }
 
+/* une photo seule qui mene a sa seance (blocs Sport et Evenementiel des prestations) */
+function photoSerie(id){
+  var p = photo(id); if(!p) return '';
+  return image(p, '(max-width:760px) 100vw, 40vw') + '<span class="formule-exemple">' + ech(trad('serieOuvrir')) + '<i class="fleche" aria-hidden="true"></i></span>';
+}
+
+/* ---------- contact : la liste « Ce qui vous interesse » ----------
+   La valeur envoyee (value) est toujours en francais : c est ce qu Alexandre lit dans son mail.
+   data-cle sert au lien direct  /contact?prestation=portrait-etudiant  */
+function optionsPrestation(){
+  var o = '<option value="À préciser" data-cle="">' + ech(trad('optAPreciser')) + '</option>';
+  if(typeof FORMULES !== 'undefined') FORMULES.forEach(function(f){
+    o += '<option value="' + ech(f.nom.fr + ' (' + f.prix + ' €)') + '" data-cle="portrait-' + ech(f.id) + '">' + ech(txt(f.nom) + ' · ' + txt(f.duree) + ' · ' + f.prix + ' €') + '</option>';
+  });
+  o += '<option value="Portrait (autre demande)" data-cle="portrait">' + ech(trad('optPortraitAutre')) + '</option>';
+  o += '<option value="Sport" data-cle="sport">' + ech(univers('sport')) + '</option>';
+  o += '<option value="Événementiel" data-cle="evenementiel">' + ech(univers('evenement')) + '</option>';
+  o += '<option value="Autre" data-cle="autre">' + ech(trad('optAutre')) + '</option>';
+  return o;
+}
+
 /* ---------- video de presentation ---------- */
 function videoPresente(){ return typeof VIDEO_PRESENTATION !== 'undefined' && !!VIDEO_PRESENTATION.youtube; }
 /* Une vignette et un bouton : le lecteur YouTube n est charge qu au clic (voir common.js) */
@@ -190,6 +211,6 @@ return {
   etoiles: etoiles, avis: avis,
   universAccueil: universAccueil, cartesSeances: cartesSeances, nbCartesSeances: nbCartesSeances,
   casesSeances: casesSeances, teteSerie: teteSerie, nbPhotos: nbPhotos,
-  formules: formules, video: video, videoPresente: videoPresente, univers: univers
+  formules: formules, photoSerie: photoSerie, optionsPrestation: optionsPrestation, video: video, videoPresente: videoPresente, univers: univers
 };
 })();

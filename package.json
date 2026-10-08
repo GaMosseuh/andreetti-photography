@@ -3,7 +3,10 @@
   "private": true,
   "description": "Site vitrine ANDREETTI Photography — statique, hébergé sur Netlify.",
   "scripts": {
-    "predeploy": "node maj-sitemap.js",
+    "construire": "node .outils/construire.js",
+    "verifier": "node .outils/verifier.js",
+    "test": "node .outils/verifier.js && node .outils/test-visionneuse.js && node .outils/test-site.js",
+    "predeploy": "node .outils/construire.js && node .outils/verifier.js",
     "deploy": "netlify deploy --prod --dir=."
   }
 }

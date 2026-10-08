@@ -41,6 +41,8 @@ function remplirBlocs(zone){
   });
   /* la video : la section n existe que si un identifiant YouTube est renseigne dans data.js */
   document.querySelectorAll('[data-si="video"]').forEach(function(el){ el.hidden = !Rendu.videoPresente(); });
+  /* previent les scripts de page que les blocs viennent d etre (re)ecrits */
+  try{ document.dispatchEvent(new CustomEvent('blocsremplis')); }catch(e){}
 }
 
 /* ---------- THEME CLAIR / SOMBRE ---------- */
@@ -59,15 +61,8 @@ function remplirBlocs(zone){
     try{ localStorage.setItem('theme', suivant); }catch(e){}
     sync();
   };
-  /* tant que le visiteur n a rien choisi, on suit le reglage de son appareil */
-  if(window.matchMedia){
-    var mq = window.matchMedia('(prefers-color-scheme:dark)');
-    var suivre = function(e){
-      var memo = null; try{ memo = localStorage.getItem('theme'); }catch(err){}
-      if(!memo){ root.setAttribute('data-theme', e.matches ? 'dark' : 'light'); sync(); }
-    };
-    if(mq.addEventListener) mq.addEventListener('change', suivre); else if(mq.addListener) mq.addListener(suivre);
-  }
+  /* Le sombre est le mode par defaut pour tous les visiteurs (decision d Alexandre) : on ne
+     suit pas le reglage de l appareil. Le clair n apparait que si le visiteur le choisit. */
   document.addEventListener('languechange', sync);
   window.__syncTheme = sync;
 })();
@@ -170,6 +165,8 @@ document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagN
     remplirBlocs();
     brancherImages();
     construireLangues();
+    /* le numero de telephone : le lien « appeler » est pose ici (voir .outils/construire.js) */
+    document.querySelectorAll('a.tel[data-tel]').forEach(function(a){ try{ a.href = 'tel:' + atob(a.getAttribute('data-tel')); }catch(e){} });
     if(window.__syncTheme) window.__syncTheme();
     if(typeof applyI18n === 'function' && curLang !== 'fr') applyI18n();
     var b = document.querySelector('.burger'); if(b) b.setAttribute('aria-label', tr('menuOuvrir'));

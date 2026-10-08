@@ -1,24 +1,27 @@
-DERNIÈRES SÉANCES — où déposer la photo
-=======================================
+DERNIERES SEANCES — les images des cartes de l accueil
+=====================================================
 
-C'est ici que va la photo de la section « Dernières séances » de l'accueil.
+Ce dossier contient l image PAYSAGE (format 4:3) de chaque carte « Dernieres seances »
+de la page d accueil. Depuis la v2.0 (8 octobre 2026), les cartes sont ecrites a partir
+de la liste SERIES du fichier  assets/data.js  : il n y a plus rien a modifier dans la page.
 
-À FAIRE :
-  Dépose ta photo dans CE dossier, nommée exactement :
+    seance-marsannay.webp   carte « Handball a Marsannay »
+    seance-2.webp           carte « Theatre a Ouanne »
 
-      seance-1.webp      (carte "Tir à l'arc en extérieur")
+AJOUTER L IMAGE D UNE NOUVELLE CARTE (par exemple celle d Elsa) :
 
-  Format conseillé : .webp, environ 1200 px de large, paysage.
-  (Un .jpg fonctionne aussi : dans ce cas dis-le-moi, j'adapte une ligne.)
+  1. Lancer cette commande, en donnant la photo et un nom :
 
-C'est tout. La photo apparaît automatiquement, aucun code à toucher.
-Tant qu'elle n'est pas là, un fond coloré s'affiche à la place : rien ne casse.
+         node .outils/photos.js carte "C:\chemin\vers\la photo.jpg" seance-elsa
 
-PLUS TARD :
-  Quand tu auras de nouvelles séances à montrer, les cartes 2 et 3 sont
-  actuellement en « Arrive prochainement ». Demande-moi de les activer :
-  il faudra alors seance-2.webp et seance-3.webp ici, plus le titre,
-  la date et la description de chaque séance.
+     Elle cree ici  seance-elsa.webp , recadree en 4:3 autour du sujet, jamais etiree.
+     (Ajouter  haut ,  centre  ou  bas  a la fin si le cadrage automatique ne convient pas.)
 
-Le mode d'emploi complet est écrit en commentaire dans accueil.html,
-juste au-dessus de la section (cherche "DERNIÈRES SÉANCES").
+  2. Dans  assets/data.js , a la seance concernee, ecrire le nom du fichier :
+
+         imageAccueil:"seance-elsa.webp"
+
+  3. Lancer  node .outils/construire.js
+
+Une seance qui n a encore aucune photo dans le portfolio n a pas de carte : rien de vide
+ne s affiche. Si l image de la carte manque, la carte prend la photo de couverture de la seance.
