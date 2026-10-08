@@ -1,0 +1,9 @@
+{
+  "name": "andreetti-outils",
+  "private": true,
+  "description": "Outils de fabrication et de test du site (jamais publies : Netlify ignore les dossiers qui commencent par un point).",
+  "devDependencies": {
+    "puppeteer-core": "^24.0.0",
+    "sharp": "^0.34.0"
+  }
+}

@@ -14,9 +14,9 @@
      - le nombre de visites et les pages vues (automatique)
      - les clics sur les onglets du menu (Portfolio, Contact, À propos…)
      - les clics sur les photos du portfolio (quelle photo intéresse)
-     - les clics sur les cartes de catégorie et les "Dernières séances"
+     - les clics sur les trois univers de l'accueil, les séances et les formules portrait
      - les clics sur les boutons importants (devis, contact, avis Google)
-     - les clics vers Instagram / Facebook / la page Liens
+     - les clics vers Instagram / Facebook / LinkedIn / la page Liens, et sur le téléphone
      - l'envoi du formulaire de contact
 
    VIE PRIVÉE : Umami ne pose AUCUN cookie et n'identifie personne
@@ -55,47 +55,47 @@ var UMAMI_DOMAINS = "andreettiphoto.fr,andreetti-photography.netlify.app";
   }
   window.suivreEvenement = suivre; // utilisable ailleurs (ex. formulaire)
 
-  /* 3) Un seul écouteur pour toute la page (léger et robuste) */
+  /* 3) Un seul ecouteur pour toute la page (leger et robuste).
+        Mis a jour le 8 octobre 2026 pour la v2.0 : nouvelles pages, seances, formules, telephone. */
   document.addEventListener("click", function (e) {
     var el = e.target.closest ? e.target.closest("a, button") : null;
     if (!el) return;
-
     var page = document.body.getAttribute("data-page") || "?";
+    var h = el.getAttribute("href") || "";
 
-    // Onglets du menu (desktop + mobile)
-    var nav = el.getAttribute("data-nav");
-    if (nav) { suivre("menu", { onglet: nav, depuis: page }); return; }
+    // Menu (barre du haut, menu du telephone, pied de page)
+    if (el.closest(".nav-liens, .menu-mobile, .pied-nav") && h.charAt(0) === "/") { suivre("menu", { onglet: h === "/" ? "accueil" : h.slice(1).split("?")[0], depuis: page }); return; }
 
-    // Photo du portfolio agrandie
-    if (el.classList.contains("masonry-item")) {
-      var img = el.querySelector("img");
-      var fichier = img ? (img.getAttribute("src") || "").split("/").pop() : "?";
-      suivre("photo", { fichier: fichier, categorie: el.dataset.category || "?" });
-      return;
-    }
-
-    // Carte de catégorie (accueil) et carte "Dernières séances"
-    if (el.classList.contains("cat-card") || el.classList.contains("last-card")) {
-      var href = el.getAttribute("href") || "";
-      var cat = (href.split("cat=")[1] || "?").split("&")[0];
-      suivre(el.classList.contains("cat-card") ? "categorie" : "derniere-seance", { categorie: cat });
-      return;
-    }
+    // Photo ouverte en grand
+    if (el.classList.contains("tuile")) { suivre("photo", { fichier: el.getAttribute("data-photo") || "?" }); return; }
+    // Seance ouverte (case du portfolio ou carte de l accueil)
+    if (el.classList.contains("case") || el.classList.contains("carte-seance")) { suivre(el.classList.contains("case") ? "seance" : "derniere-seance", { seance: (h.split("serie=")[1] || "?").split("&")[0] }); return; }
+    // Les trois univers de l accueil
+    if (el.closest(".univers")) { suivre("categorie", { categorie: (h.split("cat=")[1] || "?").split("&")[0] }); return; }
+    // Onglets et filtres du portfolio
+    if (el.hasAttribute("data-vue")) { suivre("portfolio-vue", { vue: el.getAttribute("data-vue") }); return; }
+    if (el.hasAttribute("data-cat")) { suivre("portfolio-filtre", { categorie: el.getAttribute("data-cat") }); return; }
+    // Formules portrait : la photo d exemple, ou le bouton de reservation
+    if (el.classList.contains("formule-photo")) { suivre("formule-exemple", { photo: (h.split("photo=")[1] || "?") }); return; }
+    if (h.indexOf("prestation=") !== -1) { suivre("devis", { prestation: (h.split("prestation=")[1] || "?").split("&")[0], depuis: page }); return; }
+    // Telephone, langue, video
+    if (el.classList.contains("tel")) { suivre("clic-telephone", { depuis: page }); return; }
+    if (el.hasAttribute("data-langue")) { suivre("langue", { langue: el.getAttribute("data-langue") }); return; }
+    if (el.classList.contains("video-vignette")) { suivre("video-lancee", { depuis: page }); return; }
 
     // Liens sortants importants
-    var h = el.getAttribute("href") || "";
     if (h.indexOf("g.page") !== -1) { suivre("avis-google", { depuis: page }); return; }
     if (h.indexOf("instagram.com") !== -1) { suivre("instagram", { depuis: page }); return; }
     if (h.indexOf("facebook.com") !== -1) { suivre("facebook", { depuis: page }); return; }
     if (h.indexOf("linkedin.com") !== -1) { suivre("linkedin", { depuis: page }); return; }
     if (h.indexOf("mailto:") === 0) { suivre("clic-email", { depuis: page }); return; }
-    if (h.indexOf("links.html") !== -1) { suivre("page-liens", { depuis: page }); return; }
+    if (h === "/links") { suivre("page-liens", { depuis: page }); return; }
 
-    // Boutons d'action (devis, contact, portfolio…)
-    if (el.classList.contains("btn-teal") || el.classList.contains("btn-ghost") || el.classList.contains("btn-ghost-teal")) {
+    // Boutons d action (devis, contact...)
+    if (el.classList.contains("btn") || el.classList.contains("btn-2") || el.classList.contains("devis-flottant")) {
       suivre("bouton", { texte: (el.textContent || "").trim().slice(0, 40), depuis: page });
     }
-  }, true); // phase de capture : l'événement est relevé même si un autre code arrête sa propagation
+  }, true); // phase de capture : l evenement est releve meme si un autre code arrete sa propagation
 
   /* 4) Envoi du formulaire de contact */
   var form = document.querySelector('form[name="contact"]');

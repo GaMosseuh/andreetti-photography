@@ -1,0 +1,50 @@
+const fs = require("fs"); const p = "assets/stats.js"; let s = fs.readFileSync(p, "utf8");
+const i = s.indexOf("  /* 3) Un seul écouteur pour toute la page"), j = s.indexOf("  /* 4) Envoi du formulaire de contact */");
+if (i < 0 || j < 0) { console.error("bornes"); process.exit(1); }
+const nouveau = [
+"  /* 3) Un seul ecouteur pour toute la page (leger et robuste).",
+"        Mis a jour le 8 octobre 2026 pour la v2.0 : nouvelles pages, seances, formules, telephone. */",
+"  document.addEventListener(\"click\", function (e) {",
+"    var el = e.target.closest ? e.target.closest(\"a, button\") : null;",
+"    if (!el) return;",
+"    var page = document.body.getAttribute(\"data-page\") || \"?\";",
+"    var h = el.getAttribute(\"href\") || \"\";",
+"",
+"    // Menu (barre du haut, menu du telephone, pied de page)",
+"    if (el.closest(\".nav-liens, .menu-mobile, .pied-nav\") && h.charAt(0) === \"/\") { suivre(\"menu\", { onglet: h === \"/\" ? \"accueil\" : h.slice(1).split(\"?\")[0], depuis: page }); return; }",
+"",
+"    // Photo ouverte en grand",
+"    if (el.classList.contains(\"tuile\")) { suivre(\"photo\", { fichier: el.getAttribute(\"data-photo\") || \"?\" }); return; }",
+"    // Seance ouverte (case du portfolio ou carte de l accueil)",
+"    if (el.classList.contains(\"case\") || el.classList.contains(\"carte-seance\")) { suivre(el.classList.contains(\"case\") ? \"seance\" : \"derniere-seance\", { seance: (h.split(\"serie=\")[1] || \"?\").split(\"&\")[0] }); return; }",
+"    // Les trois univers de l accueil",
+"    if (el.closest(\".univers\")) { suivre(\"categorie\", { categorie: (h.split(\"cat=\")[1] || \"?\").split(\"&\")[0] }); return; }",
+"    // Onglets et filtres du portfolio",
+"    if (el.hasAttribute(\"data-vue\")) { suivre(\"portfolio-vue\", { vue: el.getAttribute(\"data-vue\") }); return; }",
+"    if (el.hasAttribute(\"data-cat\")) { suivre(\"portfolio-filtre\", { categorie: el.getAttribute(\"data-cat\") }); return; }",
+"    // Formules portrait : la photo d exemple, ou le bouton de reservation",
+"    if (el.classList.contains(\"formule-photo\")) { suivre(\"formule-exemple\", { photo: (h.split(\"photo=\")[1] || \"?\") }); return; }",
+"    if (h.indexOf(\"prestation=\") !== -1) { suivre(\"devis\", { prestation: (h.split(\"prestation=\")[1] || \"?\").split(\"&\")[0], depuis: page }); return; }",
+"    // Telephone, langue, video",
+"    if (el.classList.contains(\"tel\")) { suivre(\"clic-telephone\", { depuis: page }); return; }",
+"    if (el.hasAttribute(\"data-langue\")) { suivre(\"langue\", { langue: el.getAttribute(\"data-langue\") }); return; }",
+"    if (el.classList.contains(\"video-vignette\")) { suivre(\"video-lancee\", { depuis: page }); return; }",
+"",
+"    // Liens sortants importants",
+"    if (h.indexOf(\"g.page\") !== -1) { suivre(\"avis-google\", { depuis: page }); return; }",
+"    if (h.indexOf(\"instagram.com\") !== -1) { suivre(\"instagram\", { depuis: page }); return; }",
+"    if (h.indexOf(\"facebook.com\") !== -1) { suivre(\"facebook\", { depuis: page }); return; }",
+"    if (h.indexOf(\"linkedin.com\") !== -1) { suivre(\"linkedin\", { depuis: page }); return; }",
+"    if (h.indexOf(\"mailto:\") === 0) { suivre(\"clic-email\", { depuis: page }); return; }",
+"    if (h === \"/links\") { suivre(\"page-liens\", { depuis: page }); return; }",
+"",
+"    // Boutons d action (devis, contact...)",
+"    if (el.classList.contains(\"btn\") || el.classList.contains(\"btn-2\") || el.classList.contains(\"devis-flottant\")) {",
+"      suivre(\"bouton\", { texte: (el.textContent || \"\").trim().slice(0, 40), depuis: page });",
+"    }",
+"  }, true); // phase de capture : l evenement est releve meme si un autre code arrete sa propagation",
+"", ""].join("\n");
+s = s.slice(0, i) + nouveau + s.slice(j);
+s = s.replace("     - les clics sur les cartes de catégorie et les \"Dernières séances\"", "     - les clics sur les trois univers de l'accueil, les séances et les formules portrait");
+s = s.replace("     - les clics vers Instagram / Facebook / la page Liens", "     - les clics vers Instagram / Facebook / LinkedIn / la page Liens, et sur le téléphone");
+fs.writeFileSync(p, s); console.log("stats.js mis a jour");

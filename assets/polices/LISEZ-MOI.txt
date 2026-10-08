@@ -1,0 +1,12 @@
+POLICES DU SITE (charte : Cormorant Garamond pour les titres, Inter pour le texte)
+
+Depuis la v2.0 (8 octobre 2026) les polices sont servies par le site lui-meme, et plus par
+les serveurs de Google. Deux raisons : la page s affiche plus vite (un aller-retour en moins
+vers un autre site), et aucun visiteur n est signale a Google en ouvrant le site.
+
+Ce sont exactement les memes polices qu avant, telechargees depuis Google Fonts le 08/10/2026.
+Toutes deux sont libres (licence SIL Open Font License) : on a le droit de les heberger.
+
+Seuls les caracteres latins sont ici (francais, anglais, et les accents europeens).
+Si une langue comme le russe, le japonais ou l arabe etait reactivee, ses textes
+s afficheraient avec la police du telephone ou de l ordinateur du visiteur.
