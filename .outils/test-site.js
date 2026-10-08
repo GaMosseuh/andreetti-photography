@@ -112,6 +112,12 @@ async function consoleNav() {
 
 /* ═══════ 3. LES LANGUES ═══════ */
 async function langues() {
+  /* on repart d un navigateur qui n a rien retenu : les parties precedentes du test
+     (la console, en anglais) laissent sinon l anglais en memoire et faussent la suite */
+  const vide = await nav.newPage();
+  await vide.goto(base + "/", { waitUntil: "domcontentloaded" });
+  await vide.evaluate(() => { try { localStorage.clear(); sessionStorage.clear(); } catch (e) {} });
+  await vide.close();
   /* francais par defaut, meme avec un navigateur regle en anglais */
   const page = await nav.newPage();
   await page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });

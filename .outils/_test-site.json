@@ -4,12 +4,142 @@
    "nom": "Les 20 largeurs (320 → 3840 px), clair et sombre, sur 11 écrans : rien ne déborde, rien n'est coupé",
    "ok": true,
    "detail": "440 mesures"
+  },
+  {
+   "nom": "Console du navigateur : aucune erreur sur 11 écrans, en français et en anglais",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "Français par défaut, même avec un navigateur réglé en anglais (cas de Google)",
+   "ok": true,
+   "detail": "langue de la page : fr ; titre lu : « Prestations et tarifs »"
+  },
+  {
+   "nom": "Le sélecteur ne propose que FR et EN",
+   "ok": true,
+   "detail": "FR*, EN"
+  },
+  {
+   "nom": "Passage en anglais : tous les textes sont traduits, sur chaque écran",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "Retour au français : chaque texte revient exactement comme avant",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "L'anglais choisi est gardé d'une page à l'autre",
+   "ok": true,
+   "detail": "titre : « Services and prices »"
+  },
+  {
+   "nom": "Les textes des avis ne sont jamais traduits (seule la date l'est)",
+   "ok": true,
+   "detail": "date affichée : October 6, 2026"
+  },
+  {
+   "nom": "Une langue en veille déjà choisie (ex. espagnol) retombe sur le français, sans erreur",
+   "ok": true,
+   "detail": "langue : fr"
+  },
+  {
+   "nom": "Contrastes : tous les textes au-dessus du minimum (4,5:1 ; 3:1 pour les gros titres), clair et sombre",
+   "ok": true,
+   "detail": "2246 textes mesurés ; le plus faible : 4.59:1 (accueil clair : button « EN »)"
+  },
+  {
+   "nom": "Textes posés sur des photos : voile sombre suffisant même sur une photo toute blanche",
+   "ok": true,
+   "detail": "haut de l'accueil, voile de 46 à 66 % : titre de 52 px à 4.9:1 au niveau du titre ; panneaux des univers, voile de 62 % en bas : 4.8:1 ; zones concernées : hero, , formule-photo, devis-photo"
+  },
+  {
+   "nom": "Chaque bouton de devis préremplit la bonne prestation dans le formulaire",
+   "ok": true,
+   "detail": "7 liens essayés : portrait-etudiant, portrait-essentiel, portrait-confort, sport, evenementiel"
+  },
+  {
+   "nom": "Sans lien particulier, le formulaire propose « Je ne sais pas encore » et les 8 choix",
+   "ok": true,
+   "detail": "8 choix, par défaut : À préciser"
+  },
+  {
+   "nom": "Chaque photo d'exemple d'une formule ouvre la même photo en grand dans le portfolio",
+   "ok": true,
+   "detail": "Portrait étudiant → portrait-06 ; Portrait essentiel → portrait-08 ; Portrait confort → portrait-07"
+  },
+  {
+   "nom": "Chaque carte « Dernières séances » et chaque case du portfolio ouvre la bonne séance, avec toutes ses photos",
+   "ok": true,
+   "detail": "2 cartes à l'accueil (Handball à Marsannay, Théâtre à Ouanne) et 4 cases au portfolio (Handball à Marsannay 10, Théâtre à Ouanne 6, Tir à l'arc 3, Mariage en Islande 2)"
+  },
+  {
+   "nom": "Un clic sur une case ouvre la série ; « retour » revient aux séances",
+   "ok": true,
+   "detail": "après le clic : Théâtre à Ouanne, 6 photos, adresse ?serie=ouanne"
+  },
+  {
+   "nom": "Les trois univers de l'accueil ouvrent le portfolio filtré sur le bon univers",
+   "ok": true,
+   "detail": "portrait : 8 photos, sport : 18 photos, evenement : 11 photos"
+  },
+  {
+   "nom": "Instagram, Facebook et LinkedIn sur toutes les pages, bonnes adresses ; le téléphone compose le bon numéro",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "Sans JavaScript : chaque page reste lisible, navigable, et ne dit rien de faux",
+   "ok": true,
+   "detail": "accueil : 4 avis écrits dans la page ; portfolio : 37 photos ; menu accessible ; aucun bouton mort"
+  },
+  {
+   "nom": "Aucune image étirée ni absente, sur 11 écrans et 4 largeurs",
+   "ok": true,
+   "detail": "256 images contrôlées : chacune garde ses proportions (recadrée quand il le faut, jamais déformée)"
+  },
+  {
+   "nom": "Téléphone : le bouton ☰ ouvre le menu (5 liens, le devis, les 3 réseaux)",
+   "ok": true,
+   "detail": "8 liens visibles"
+  },
+  {
+   "nom": "Le menu se referme tout seul quand l'écran s'élargit (rotation), et rend le défilement",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "Échap referme le menu",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "Le bouton de thème passe du sombre au clair et s'en souvient",
+   "ok": true,
+   "detail": "fond en clair : rgb(245, 250, 251)"
+  },
+  {
+   "nom": "Aucune erreur pendant ces manipulations",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "nom": "Le mode sombre est le mode par défaut, même sur un appareil réglé en clair",
+   "ok": true,
+   "detail": "fond : rgb(14, 26, 30)"
   }
  ],
  "chiffres": {
   "largeurs": {
    "mesures": 440,
    "defauts": []
+  },
+  "contrastes": {
+   "total": 2246,
+   "minimum": 4.59,
+   "minOu": "accueil clair : button « EN »"
   }
  }
 }

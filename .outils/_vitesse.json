@@ -7,8 +7,8 @@
    "images": 878906,
    "code": 68700,
    "polices": 104644,
-   "lcp": 3612,
-   "charge": 4941
+   "lcp": 3972,
+   "charge": 4942
   },
   "portfolio": {
    "fichiers": 16,
@@ -17,8 +17,8 @@
    "images": 486072,
    "code": 67119,
    "polices": 104644,
-   "lcp": 3420,
-   "charge": 4406
+   "lcp": 3400,
+   "charge": 4390
   },
   "prestations": {
    "fichiers": 10,
@@ -27,8 +27,8 @@
    "images": 0,
    "code": 79096,
    "polices": 104644,
-   "lcp": 1656,
-   "charge": 2249
+   "lcp": 1660,
+   "charge": 2244
   },
   "contact": {
    "fichiers": 10,
@@ -37,8 +37,8 @@
    "images": 0,
    "code": 60154,
    "polices": 104644,
-   "lcp": 2360,
-   "charge": 2060
+   "lcp": 2324,
+   "charge": 2041
   },
   "apropos": {
    "fichiers": 10,
@@ -47,60 +47,60 @@
    "images": 119708,
    "code": 58535,
    "polices": 104644,
-   "lcp": 3272,
-   "charge": 2611
+   "lcp": 3200,
+   "charge": 2540
   }
  },
  "nouveau (v2.0)": {
   "accueil": {
    "fichiers": 14,
    "externes": 0,
-   "total": 677903,
-   "images": 546584,
-   "code": 45423,
+   "total": 542709,
+   "images": 411342,
+   "code": 45471,
    "polices": 85896,
-   "lcp": 4008,
-   "charge": 4016
+   "lcp": 1988,
+   "charge": 2036
   },
   "portfolio": {
    "fichiers": 16,
    "externes": 0,
-   "total": 292252,
+   "total": 292240,
    "images": 149518,
-   "code": 56838,
+   "code": 56826,
    "polices": 85896,
-   "lcp": 2684,
-   "charge": 1729
+   "lcp": 2676,
+   "charge": 1718
   },
   "prestations": {
    "fichiers": 13,
    "externes": 0,
-   "total": 302411,
+   "total": 302399,
    "images": 170892,
-   "code": 45623,
+   "code": 45611,
    "polices": 85896,
-   "lcp": 1648,
-   "charge": 1660
+   "lcp": 1632,
+   "charge": 1689
   },
   "contact": {
    "fichiers": 11,
    "externes": 0,
-   "total": 130601,
+   "total": 130589,
    "images": 0,
-   "code": 44705,
+   "code": 44693,
    "polices": 85896,
-   "lcp": 1728,
-   "charge": 1718
+   "lcp": 1712,
+   "charge": 1707
   },
   "apropos": {
    "fichiers": 11,
    "externes": 0,
-   "total": 249148,
+   "total": 249136,
    "images": 119708,
-   "code": 43544,
+   "code": 43532,
    "polices": 85896,
-   "lcp": 2244,
-   "charge": 1980
+   "lcp": 2224,
+   "charge": 1964
   }
  }
 }
