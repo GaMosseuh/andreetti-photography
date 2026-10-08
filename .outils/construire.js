@@ -164,7 +164,7 @@ function tete(page, D, htmlPage) {
 }
 
 /* ---------- la barre du haut ---------- */
-const MENU = [["accueil", "/", "navHome", "Accueil"], ["portfolio", "/portfolio", "navPortfolio", "Portfolio"], ["prestations", "/prestations", "navServices", "Prestations"], ["apropos", "/apropos", "navAbout", "À propos"], ["contact", "/contact", "navContact", "Contact"]];
+const MENU = [["accueil", "/", "navHome", "Accueil"], ["portfolio", "/portfolio", "navPortfolio", "Portfolio"], ["prestations", "/prestations", "navServices", "Prestations"], ["apropos", "/apropos", "navAbout", "À propos"], ["links", "/links", "navLinks", "Liens"], ["contact", "/contact", "navContact", "Contact"]];
 function reseaux(C, classe) {
   const l = (url, nom, ico, etiquette) => '<a class="' + classe + '" href="' + url + '" target="_blank" rel="noopener noreferrer" aria-label="' + ech(etiquette) + '" title="' + nom + '">' + ico + "</a>";
   return l(C.instagram, "Instagram", ICONES.instagram, "Instagram " + C.instagramNom + " (nouvel onglet)") +

@@ -83,6 +83,8 @@ function etoiles(note){
   }
   return s + '</div>';
 }
+/* la date d une seance : son texte libre s il existe (ex. « Ete 2024 »), sinon sa date */
+function dateSerie(s, sansJour){ return s.dateTexte ? txt(s.dateTexte) : date(s.date, sansJour); }
 function unAvis(a){
   var fiche = (typeof GOOGLE_FICHE_URL !== 'undefined') ? GOOGLE_FICHE_URL : '';
   var source = '';
@@ -90,8 +92,11 @@ function unAvis(a){
     source = '<a class="avis-source" href="' + ech(fiche) + '" target="_blank" rel="noopener noreferrer" aria-label="' +
       ech(trad('avisBadge') + ', ' + a.prenom + ' : ' + trad('avisOuvrir')) + '">' + ech(trad('avisBadge')) + '</a>';
   }
+  /* en anglais, on montre la traduction (champ "en") et on le dit ; le francais reste l original */
+  var traduit = (typeof curLang !== 'undefined' && curLang === 'en' && !!a.en);
   return '<figure class="avis">' + etoiles(a.note) +
-    '<blockquote><p>« ' + ech(a.texte) + ' »</p></blockquote>' +
+    '<blockquote lang="' + (traduit ? 'en' : 'fr') + '"><p>« ' + ech(traduit ? a.en : a.texte) + ' »</p></blockquote>' +
+    (traduit ? '<p class="avis-traduit">' + ech(trad('avisTraduit')) + '</p>' : '') +
     '<figcaption><span class="avis-prenom">' + ech(a.prenom) + '</span>' +
     (a.date ? '<time class="avis-date" datetime="' + ech(a.date) + '">' + ech(date(a.date)) + '</time>' : '') +
     source + '</figcaption></figure>';
@@ -126,7 +131,7 @@ function cartesSeances(){
       img = image(couv, '(max-width:700px) 100vw, 33vw');
     }
     return '<a class="carte-seance" href="/portfolio?serie=' + encodeURIComponent(s.id) + '">' + img +
-      '<span class="meta">' + ech(univers(s.univers)) + ' · ' + ech(date(s.date, true)) + '</span>' +
+      '<span class="meta">' + ech(univers(s.univers)) + ' · ' + ech(dateSerie(s, true)) + '</span>' +
       '<h3>' + ech(txt(s.titre)) + '</h3>' +
       '<p>' + ech(txt(s.texteAccueil || s.texte)) + '</p>' +
       '<span class="lien"><span>' + ech(trad('serieOuvrir')) + '</span><i class="fleche" aria-hidden="true"></i></span></a>';
@@ -142,7 +147,7 @@ function casesSeances(){
     var lieu = txt(s.lieu);
     return '<a class="case" href="/portfolio?serie=' + encodeURIComponent(s.id) + '" data-serie="' + ech(s.id) + '">' +
       image(couv, '(max-width:600px) 50vw, (max-width:1100px) 33vw, 25vw') +
-      '<span class="meta">' + ech(univers(s.univers)) + ' · ' + ech(date(s.date, true)) + '</span>' +
+      '<span class="meta">' + ech(univers(s.univers)) + ' · ' + ech(dateSerie(s, true)) + '</span>' +
       '<h3>' + ech(txt(s.titre)) + '</h3>' +
       '<span class="lieu">' + (lieu ? ech(lieu) + ' · ' : '') + ech(nbPhotos(photos.length)) + '</span></a>';
   }).join('');
@@ -150,7 +155,7 @@ function casesSeances(){
 /* l en-tete d une seance ouverte */
 function teteSerie(s){
   var lieu = txt(s.lieu);
-  return '<p class="meta">' + ech(univers(s.univers)) + ' · ' + ech(date(s.date)) + (lieu ? ' · ' + ech(lieu) : '') + '</p>' +
+  return '<p class="meta">' + ech(univers(s.univers)) + ' · ' + ech(dateSerie(s)) + (lieu ? ' · ' + ech(lieu) : '') + '</p>' +
     '<h2 id="serieTitre" tabindex="-1">' + ech(txt(s.titre)) + '</h2>' +
     '<p>' + ech(txt(s.texte)) + '</p>';
 }
@@ -163,7 +168,7 @@ function formules(){
     var nom = txt(f.nom);
     return '<article class="formule">' +
       (p ? '<a class="formule-photo" href="/portfolio?photo=' + encodeURIComponent(p.id) + '" aria-label="' + ech(trad('formuleVoirPhoto') + ' : ' + p.alt) + '">' +
-            image(p, '(max-width:760px) 100vw, 30vw') + '<span class="formule-exemple">' + ech(trad('formuleExemple')) + '<i class="fleche" aria-hidden="true"></i></span></a>' : '') +
+            image(p, '(max-width:760px) 100vw, 30vw').replace('<img ', f.cadrage ? '<img style="object-position:' + ech(f.cadrage) + '" ' : '<img ') + '<span class="formule-exemple">' + ech(trad('formuleExemple')) + '<i class="fleche" aria-hidden="true"></i></span></a>' : '') +
       '<div class="formule-corps">' +
       '<h3>' + ech(nom) + '</h3>' +
       '<p class="formule-prix"><span class="prix">' + ech(f.prix) + ' €</span><span class="duree">' + ech(txt(f.duree)) + '</span></p>' +
@@ -201,7 +206,7 @@ function video(){
   if(!videoPresente()) return '';
   var id = VIDEO_PRESENTATION.youtube, titre = txt(VIDEO_PRESENTATION.titre);
   return '<button class="video-vignette" type="button" data-youtube="' + ech(id) + '" data-titre="' + ech(titre) + '" aria-label="' + ech(trad('videoLire') + (titre ? ' : ' + titre : '')) + '">' +
-    '<img src="https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">' +
+    '<img src="' + (VIDEO_PRESENTATION.vignette ? ech(VIDEO_PRESENTATION.vignette) : 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg') + '" alt="" width="480" height="360" loading="lazy" decoding="async">' +
     '<span class="video-lecture" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>';
 }
 
@@ -211,6 +216,6 @@ return {
   etoiles: etoiles, avis: avis,
   universAccueil: universAccueil, cartesSeances: cartesSeances, nbCartesSeances: nbCartesSeances,
   casesSeances: casesSeances, teteSerie: teteSerie, nbPhotos: nbPhotos,
-  formules: formules, photoSerie: photoSerie, optionsPrestation: optionsPrestation, video: video, videoPresente: videoPresente, univers: univers
+  formules: formules, photoSerie: photoSerie, optionsPrestation: optionsPrestation, video: video, videoPresente: videoPresente, dateSerie: dateSerie, univers: univers
 };
 })();

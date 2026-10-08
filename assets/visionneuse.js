@@ -84,12 +84,13 @@ function mesurer(){
   img.style.width = l + 'px'; img.style.height = h + 'px';
   img.style.marginLeft = (-l / 2) + 'px'; img.style.marginTop = (-h / 2) + 'px';
 }
-/* Zoom maximum : de quoi verifier la nettete (jusqu a 2 fois les pixels du fichier),
-   au moins 3 fois la photo entiere, au plus 8. */
+/* Zoom maximum : tres fort, pour aller chercher un detail (jusqu a 5 fois les pixels du
+   fichier), au moins 8 fois la photo entiere, au plus 20. Au-dela des pixels du fichier
+   l image devient forcement plus douce : c est normal, il n y a pas plus de detail. */
 function echelleMax(){
   var p = photo(); if(!p || !baseL) return 3;
   var maxL = Math.max(p.w, p.gw || 0);
-  return borne(2 * maxL / baseL, 3, 8);
+  return borne(5 * maxL / baseL, 8, 20);
 }
 /* La photo ne sort jamais de la scene : si elle est plus petite que la scene dans un sens
    elle reste centree dans ce sens, sinon ses bords ne peuvent pas rentrer dans le cadre. */

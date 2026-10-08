@@ -159,6 +159,34 @@ document.addEventListener('click', function(e){
 document.addEventListener('contextmenu', function(e){ if(e.target && e.target.tagName === 'IMG') e.preventDefault(); });
 document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagName === 'IMG') e.preventDefault(); });
 
+/* ---------- Sommaire d une page : le lien de la partie qu on est en train de lire est mis en avant ---------- */
+function brancherSommaire(){
+  var som = document.querySelector('.sommaire'); if(!som) return;
+  var liens = [].slice.call(som.querySelectorAll('a[href^="#"]'));
+  function cibles(){
+    return liens.filter(function(a){ return !a.hidden; }).map(function(a){
+      return { a: a, el: document.getElementById(a.getAttribute('href').slice(1)) };
+    }).filter(function(c){ return c.el && !c.el.hidden; });
+  }
+  var attente = false, dernier = null;
+  function suivre(){
+    attente = false;
+    var repere = window.innerHeight * 0.35, actif = null;
+    cibles().forEach(function(c){ if(c.el.getBoundingClientRect().top <= repere) actif = c; });
+    if(actif === null || actif.a === dernier) { if(actif === null && dernier){ dernier.classList.remove('actif'); dernier.removeAttribute('aria-current'); dernier = null; } return; }
+    if(dernier){ dernier.classList.remove('actif'); dernier.removeAttribute('aria-current'); }
+    dernier = actif.a; dernier.classList.add('actif'); dernier.setAttribute('aria-current', 'true');
+    /* en bandeau (telephone), le lien actif reste visible dans le bandeau */
+    if(som.scrollWidth > som.clientWidth + 2){
+      var g = dernier.offsetLeft - (som.clientWidth - dernier.offsetWidth) / 2;
+      som.scrollLeft = Math.max(0, g);
+    }
+  }
+  window.addEventListener('scroll', function(){ if(!attente){ attente = true; requestAnimationFrame(suivre); } }, { passive: true });
+  window.addEventListener('resize', suivre);
+  suivre();
+}
+
 /* ---------- DEMARRAGE ---------- */
 (function(){
   function demarrer(){
@@ -168,6 +196,7 @@ document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagN
     /* le numero de telephone : le lien « appeler » est pose ici (voir .outils/construire.js) */
     document.querySelectorAll('a.tel[data-tel]').forEach(function(a){ try{ a.href = 'tel:' + atob(a.getAttribute('data-tel')); }catch(e){} });
     if(window.__syncTheme) window.__syncTheme();
+    brancherSommaire();
     if(typeof applyI18n === 'function' && curLang !== 'fr') applyI18n();
     var b = document.querySelector('.burger'); if(b) b.setAttribute('aria-label', tr('menuOuvrir'));
     var p = document.getElementById('boutonPartage'); if(p){ p.setAttribute('aria-label', tr('partager')); p.setAttribute('title', tr('partager')); }

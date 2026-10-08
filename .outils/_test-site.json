@@ -36,9 +36,14 @@
    "detail": "titre : « Services and prices »"
   },
   {
-   "nom": "Les textes des avis ne sont jamais traduits (seule la date l'est)",
+   "nom": "En anglais, les avis sont traduits et la traduction est signalée",
    "ok": true,
-   "detail": "date affichée : October 6, 2026"
+   "detail": "mention : « Translated from French » ; date : October 6, 2026"
+  },
+  {
+   "nom": "En français, les avis restent mot pour mot, sans mention de traduction",
+   "ok": true,
+   "detail": ""
   },
   {
    "nom": "Une langue en veille déjà choisie (ex. espagnol) retombe sur le français, sans erreur",
@@ -48,7 +53,7 @@
   {
    "nom": "Contrastes : tous les textes au-dessus du minimum (4,5:1 ; 3:1 pour les gros titres), clair et sombre",
    "ok": true,
-   "detail": "2246 textes mesurés ; le plus faible : 4.59:1 (accueil clair : button « EN »)"
+   "detail": "2456 textes mesurés ; le plus faible : 4.59:1 (accueil clair : button « EN »)"
   },
   {
    "nom": "Textes posés sur des photos : voile sombre suffisant même sur une photo toute blanche",
@@ -73,7 +78,7 @@
   {
    "nom": "Chaque carte « Dernières séances » et chaque case du portfolio ouvre la bonne séance, avec toutes ses photos",
    "ok": true,
-   "detail": "2 cartes à l'accueil (Handball à Marsannay, Théâtre à Ouanne) et 4 cases au portfolio (Handball à Marsannay 10, Théâtre à Ouanne 6, Tir à l'arc 3, Mariage en Islande 2)"
+   "detail": "2 cartes à l'accueil (Handball à Marsannay, Théâtre à Ouanne) et 5 cases au portfolio (Handball à Marsannay 10, Théâtre à Ouanne 6, Tir à l'arc 3, Festival de musique 3, Mariage en Islande 2)"
   },
   {
    "nom": "Un clic sur une case ouvre la série ; « retour » revient aux séances",
@@ -98,12 +103,12 @@
   {
    "nom": "Aucune image étirée ni absente, sur 11 écrans et 4 largeurs",
    "ok": true,
-   "detail": "256 images contrôlées : chacune garde ses proportions (recadrée quand il le faut, jamais déformée)"
+   "detail": "260 images contrôlées : chacune garde ses proportions (recadrée quand il le faut, jamais déformée)"
   },
   {
    "nom": "Téléphone : le bouton ☰ ouvre le menu (5 liens, le devis, les 3 réseaux)",
    "ok": true,
-   "detail": "8 liens visibles"
+   "detail": "9 liens visibles"
   },
   {
    "nom": "Le menu se referme tout seul quand l'écran s'élargit (rotation), et rend le défilement",
@@ -137,7 +142,7 @@
    "defauts": []
   },
   "contrastes": {
-   "total": 2246,
+   "total": 2456,
    "minimum": 4.59,
    "minOu": "accueil clair : button « EN »"
   }

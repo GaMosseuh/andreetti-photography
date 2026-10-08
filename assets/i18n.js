@@ -59,6 +59,7 @@ var TEXTES = {
   optAutre:        {fr:"Autre", en:"Other"},
   /* avis */
   avisBadge:       {fr:"Avis Google", en:"Google review"},
+  avisTraduit:     {fr:"Traduit du français", en:"Translated from French"},
   avisEtoiles:     {fr:"{n} étoiles sur 5", en:"{n} out of 5 stars"},
   avisOuvrir:      {fr:"ouvre la fiche Google dans un nouvel onglet", en:"opens the Google profile in a new tab"},
   /* video */
@@ -86,7 +87,7 @@ var MOIS = {
 var I18N = { en: {
 /* --- barre du haut, pied de page, boutons communs --- */
 evitement:"Skip to content",
-navHome:"Home", navPortfolio:"Portfolio", navServices:"Services", navAbout:"About", navContact:"Contact",
+navHome:"Home", navPortfolio:"Portfolio", navServices:"Services", navAbout:"About", navContact:"Contact", navLinks:"Links",
 ctaDevis:"Request my free quote", floatCta:"Free quote", quoteBtn:"Request a quote", surDevis:"Quote on request",
 footTag:"Portrait, sport and event photographer in Dijon and the Yonne", footPromesse:"Free quote · Reply within 48 hours",
 footLinks:"My links", footReview:"Leave a review", legalLink:"Legal notice and privacy",
@@ -147,7 +148,7 @@ faqA1:"We always start by talking through your project: the mood you're after, t
 faqQ2:"How much does a session cost?",
 faqA2:"For a portrait, the prices are shown just above: €40, €50 or €65 depending on the session, all included. For sport and events, every request is different: describe what you need in the form and I will send you a free quote within 48 hours.",
 faqQ3:"How and when will I get my photos?",
-faqA3:"Your sorted and retouched photos are delivered within 10 days in a private online gallery, accessible only with your link. You can view them, download them in high definition and share them with your loved ones. A quick tip: download your photos as soon as you get them, since the gallery isn't kept online forever.",
+faqA3:"Your sorted and retouched photos are delivered within 10 days in a private online gallery, accessible only with your link. You can view them, download them in high definition and share them with your loved ones. A quick tip: download your photos as soon as you get them, since the gallery stays available for several months, but not forever.",
 faqQ4:"Who owns the rights to the photos?",
 faqA4:"You receive your photos with full personal usage rights: printing, sharing, social media. On my side, I may publish certain images in my portfolio or on my social media, but only with your consent, which I always ask for beforehand. And if you'd rather keep your photos completely private, that's entirely your right and I respect it without question.",
 faqQ5:"What happens if the weather is bad?",
@@ -161,6 +162,14 @@ faqA8:"I am based in Dijon, and travel is included within 25 km. I am also regul
 
 /* --- a propos --- */
 aproposSous:"Alexandre ANDREETTI, photographer in Dijon",
+moiEyebrow:"Who I am", moiVoir:"See my photos",
+compEyebrow:"Skills", compTitre:"What I can do", compDomaines:"Fields", compOutils:"Tools",
+c1Titre:"Photography", c1Texte:"Portrait, sport and events, outdoors and indoors. It is my job, and what you see in the portfolio.",
+c2Titre:"Editing", c2Texte:"I edit all my photos myself. I even built my own editing studio, tailor-made for my work.", oStudio:"My editing studio",
+c3Titre:"Video", c3Texte:"Filming and editing. Depending on your request, I can offer a video edit on top of the photos: tell me about it in your message.",
+c4Titre:"Layout and design", c4Texte:"Posters, visuals, documents. I have already created the visual identity of a company.",
+sommaireLabel:"On this page", somDeroulement:"How it works", somFaq:"Questions", somVideo:"Video",
+videoPossible:"Need a video too? I do video editing, and I can offer one on top of the photos depending on your request: just say so in your message.",
 bio1:"A passionate 19-year-old photographer based in Dijon and the Yonne (89), in Burgundy. Portrait, sport, events: I capture authentic moments and genuine emotions.",
 bio2:"I started by photographing what was around me: my family and friends, the sports fields, local parties. That practice left me with one demand: to tell honest moments, without artifice.",
 bio3:"Today I work with individuals, clubs and associations across the region, with the same drive: to make images you can be proud of.",
@@ -197,7 +206,7 @@ introuvableTitre:"Page not found", introuvableTexte:"This page does not exist, o
 /* --- mentions legales --- */
 mlTitre:"Legal notice and privacy", mlMaj:"Last updated: October 2026",
 mlEditeurT:"Publisher", mlEditeur1:"The website <strong>andreettiphoto.fr</strong> is published by <strong>Alexandre ANDREETTI</strong>, photographer.",
-mlLocalisation:"Location: Yonne (89), France", mlMailLabel:"Email:", mlTelLabel:"Phone:", mlEditeur2:"Publication director: Alexandre ANDREETTI.",
+mlLocalisation:"Location: Dijon (21), France", mlMailLabel:"Email:", mlTelLabel:"Phone:", mlEditeur2:"Publication director: Alexandre ANDREETTI.",
 mlHebergeurT:"Hosting", mlHebergeur1:"The site is hosted by <strong>Netlify, Inc.</strong>", mlEtatsUnis:"United States",
 mlProprieteT:"Intellectual property",
 mlPropriete1:"All photographs, texts and graphic elements on this site are the exclusive property of Alexandre ANDREETTI, unless stated otherwise. Any reproduction, representation, distribution or download, in whole or in part, without prior written permission is forbidden and constitutes an infringement (articles L.335-2 and following of the French Intellectual Property Code).",
@@ -214,7 +223,7 @@ mlAudience2:"No cookie is set and no personal data is collected: the figures are
 mlVideoT:"Video",
 mlVideo1:"When a video is offered on the site, it is hosted by YouTube. Nothing is loaded from YouTube until you play the video. If you play it, YouTube may set its own cookies, under its own rules.",
 mlAvisT:"Client reviews",
-mlAvis1:"The reviews shown on this site are copied word for word from the Google profile of ANDREETTI Photography, where anyone can check them. Only the author's first name is shown.",
+mlAvis1:"The reviews shown on this site are copied word for word from the Google profile of ANDREETTI Photography, where anyone can check them. Only the author's first name is shown. In the English version of the site they are translated, and this is stated under each review.",
 mlReseauxT:"Social media",
 mlReseaux1:"You can follow the work of Alexandre ANDREETTI on <a href=\"https://instagram.com/andreetti.photography\" target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>, <a href=\"https://www.facebook.com/Andreetti.photography\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook</a> and <a href=\"https://www.linkedin.com/in/alexandre-andreetti/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a>."
 } };

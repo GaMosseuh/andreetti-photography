@@ -38,9 +38,12 @@ var COORDONNEES = {
    Le jour ou la video est en ligne : coller ici l identifiant YouTube, c est-a-dire ce qui
    suit "watch?v=" dans l adresse (ex. pour https://www.youtube.com/watch?v=AbCdEfGhIjK,
    ecrire "AbCdEfGhIjK"), et un titre. Rien d autre a toucher.
-   La video ne demarre jamais toute seule : le lecteur n est charge qu au clic. */
+   La video ne demarre jamais toute seule : le lecteur n est charge qu au clic.
+   vignette : (facultatif) une image a moi pour la couverture, ex. "/images/video.webp".
+              Sans rien, c est la couverture de YouTube qui est montree. */
 var VIDEO_PRESENTATION = {
   youtube: "",
+  vignette: "",
   titre: {fr:"", en:""}
 };
 
@@ -91,6 +94,12 @@ var SERIES = [
     texte:{fr:"Entraînement matinal de tir à l'arc, en pleine forêt : concentration, précision et lumière douce d'été.",
            en:"A morning archery practice deep in the forest: focus, precision and soft summer light."} },
 
+  { id:"festival", univers:"evenement", date:"2024-07", dateTexte:{fr:"Été 2024", en:"Summer 2024"}, couverture:"event-02", accueil:false,
+    titre:{fr:"Festival de musique", en:"Music festival"},
+    lieu:{fr:"", en:""},
+    texte:{fr:"Un festival de musique, à l'été 2024 : la captation vidéo de 11 groupes sur deux scènes, et pas mal de photos.",
+           en:"A music festival in summer 2024: I filmed 11 bands on two stages, and took quite a few photos."} },
+
   { id:"islande", univers:"evenement", date:"2024-10", couverture:"event-03", accueil:false,
     titre:{fr:"Mariage en Islande", en:"Wedding in Iceland"},
     lieu:{fr:"Islande", en:"Iceland"},
@@ -130,7 +139,7 @@ var PHOTOS = [
   {id:"portrait-06", cat:"portrait", alt:{fr:"Portrait d'un jeune homme en chemise blanche", en:"Portrait of a young man in a white shirt"}},
   {id:"event-07", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Comédiennes en costume, spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"Actresses in costume, the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
   {id:"sport-07", cat:"sport", serie:"tir-a-l-arc", alt:{fr:"Tir à l'arc en forêt dans l'Yonne : des archers sur le pas de tir", en:"Archery in the forest in Yonne: archers on the shooting line"}},
-  {id:"event-02", cat:"evenement", alt:{fr:"Chanteur au micro sur scène, lumières de concert", en:"A singer at the microphone on stage, concert lights"}},
+  {id:"event-02", cat:"evenement", serie:"festival", alt:{fr:"Chanteur au micro sur scène, lumières de concert", en:"A singer at the microphone on stage, concert lights"}},
   {id:"handball-marsannay-05", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : phase de jeu devant la défense", en:"CL Marsannay handball match, Marsannay-la-Côte: play in front of the defence"}},
   {id:"portrait-07", cat:"portrait", alt:{fr:"Portrait à la lumière chaude d'un lampadaire", en:"Portrait in the warm light of a street lamp"}},
   {id:"event-09", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Musiciens accompagnant le spectacle, église de Ouanne (Yonne)", en:"Musicians accompanying the show, Ouanne church (Yonne)"}},
@@ -140,11 +149,11 @@ var PHOTOS = [
   {id:"event-11", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Comédiennes devant les vitraux, théâtre à l'église de Ouanne (Yonne)", en:"Actresses in front of the stained glass, theatre at Ouanne church (Yonne)"}},
   {id:"sport-08", cat:"sport", serie:"tir-a-l-arc", alt:{fr:"Tir à l'arc en forêt dans l'Yonne : deux archers à l'entraînement", en:"Archery in the forest in Yonne: two archers practising"}},
   {id:"handball-marsannay-07", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : deux joueurs en défense", en:"CL Marsannay handball match, Marsannay-la-Côte: two players defending"}},
-  {id:"event-05", cat:"evenement", alt:{fr:"Batteur sur scène pendant un concert", en:"A drummer on stage during a concert"}},
+  {id:"event-05", cat:"evenement", serie:"festival", alt:{fr:"Batteur sur scène pendant un concert", en:"A drummer on stage during a concert"}},
   {id:"portrait-05", cat:"portrait", alt:{fr:"Portrait d'une femme marchant en pleine nature", en:"Portrait of a woman walking out in nature"}},
   {id:"handball-marsannay-08", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : deux joueurs pendant le match", en:"CL Marsannay handball match, Marsannay-la-Côte: two players during the match"}},
   {id:"sport-03", cat:"sport", alt:{fr:"Match de football : des joueurs sur le terrain", en:"Football match: players on the pitch"}},
-  {id:"event-04", cat:"evenement", alt:{fr:"Guitariste sur scène pendant un concert", en:"A guitarist on stage during a concert"}},
+  {id:"event-04", cat:"evenement", serie:"festival", alt:{fr:"Saxophoniste sur scène pendant un concert", en:"A saxophonist on stage during a concert"}},
   {id:"handball-marsannay-09", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : le banc pendant le match", en:"CL Marsannay handball match, Marsannay-la-Côte: the bench during the match"}},
   {id:"sport-05", cat:"sport", alt:{fr:"Footballeur balle au pied", en:"A footballer with the ball at his feet"}},
   {id:"handball-marsannay-10", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : les deux équipes réunies", en:"CL Marsannay handball match, Marsannay-la-Côte: both teams together"}}
@@ -162,13 +171,15 @@ var UNIVERS_ACCUEIL = [
 /* ---------- FORMULES PORTRAIT (prix fixes) ----------
    Les prix viennent de la grille officielle (Business\Tarifs). Pour changer un prix :
    modifier "prix" ici, c est tout. Ne jamais ecrire "a partir de".
-   exemple : l id de la photo montree a cote de la formule ; un clic l ouvre dans le portfolio. */
+   exemple : l id de la photo montree a cote de la formule ; un clic l ouvre dans le portfolio.
+   cadrage : (facultatif) ou placer la photo dans son cadre quand le sujet n est pas au centre,
+             ex. "26% 50%" = decalee vers la gauche. Sans rien : centree. */
 var FORMULES = [
   { id:"etudiant", prix:40, photos:10, exemple:"portrait-06",
     nom:{fr:"Portrait étudiant", en:"Student portrait"},
     duree:{fr:"1 h", en:"1 hour"},
     compris:{fr:"Sur présentation de la carte étudiante", en:"On presentation of a student card"} },
-  { id:"essentiel", prix:50, photos:10, exemple:"portrait-08",
+  { id:"essentiel", prix:50, photos:10, exemple:"portrait-08", cadrage:"26% 50%",
     nom:{fr:"Portrait essentiel", en:"Essential portrait"},
     duree:{fr:"1 h", en:"1 hour"},
     compris:{fr:"Un lieu, deux ou trois ambiances", en:"One location, two or three moods"} },
@@ -198,10 +209,14 @@ var FORMULES = [
    trois premiers, le 08/10/2026 pour celui d Elsa (apostrophes droites chez Celia et
    Elsa, apostrophe typographique chez Emmaneth : c est ce qu elles ont tape). */
 var AVIS = [
-  { prenom:"Elsa",            texte:"Super photographe ! Alexandre est très respectueux, il sait mettre à l'aise ! Les photos sont magnifiques. J'ai passé un super bon moment :) Je recommande fortement !", note:5, date:"2026-10-06", source:"google", ou:["accueil","formules"] },
-  { prenom:"Célia",           texte:"Une super expérience !!! Les photos sont supers belles et Alexandre a su me mettre à l'aise!!\nMerci encore", note:5, date:"2026-09-15", source:"google", ou:["accueil","formules"] },
-  { prenom:"Emmaneth (Anne)", texte:"Super shooting sur Paris avec Alexandre, on s’est promené au jardin du Luxembourg et on a fait plein de super photos. Merci beaucoup!!", note:5, date:"2026-08-27", source:"google", ou:["accueil"] },
-  { prenom:"Diane",           texte:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", note:5, date:"2026-07-17", source:"google", ou:["accueil","contact"] }
+  { prenom:"Elsa",            texte:"Super photographe ! Alexandre est très respectueux, il sait mettre à l'aise ! Les photos sont magnifiques. J'ai passé un super bon moment :) Je recommande fortement !", note:5, date:"2026-10-06", source:"google", ou:["accueil","formules"],
+    en:"Great photographer! Alexandre is very respectful and knows how to put you at ease! The photos are gorgeous. I had a really good time :) I highly recommend him!" },
+  { prenom:"Célia",           texte:"Une super expérience !!! Les photos sont supers belles et Alexandre a su me mettre à l'aise!!\nMerci encore", note:5, date:"2026-09-15", source:"google", ou:["accueil","formules"],
+    en:"A great experience!!! The photos are really beautiful and Alexandre knew how to put me at ease!!\nThanks again" },
+  { prenom:"Emmaneth (Anne)", texte:"Super shooting sur Paris avec Alexandre, on s’est promené au jardin du Luxembourg et on a fait plein de super photos. Merci beaucoup!!", note:5, date:"2026-08-27", source:"google", ou:["accueil"],
+    en:"Great shoot in Paris with Alexandre, we walked around the Luxembourg Gardens and took lots of great photos. Thank you so much!!" },
+  { prenom:"Diane",           texte:"Alexandre a fait un travail remarquable lors de notre mariage. Il a réussi à immortaliser le plus beau jour de notre vie avec une grande technique et est resté professionnel tout au long de la soirée.\nMerci encore !", note:5, date:"2026-07-17", source:"google", ou:["accueil","contact"],
+    en:"Alexandre did a remarkable job at our wedding. He managed to capture the most beautiful day of our lives with great technique and stayed professional throughout the evening.\nThanks again!" }
 ];
 
 /* La fiche Google (pour lire et verifier les avis) et le lien pour en deposer un.

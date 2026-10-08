@@ -122,7 +122,7 @@ function listePour(e){
             : R.toutesLesPhotos().filter(function(p){ return e.cat === 'tous' || p.cat === e.cat; });
   return liste.map(function(p){
     var s = p.serie ? R.serie(p.serie) : null;
-    p.legende = s ? L(s.titre) + ' · ' + dateLisible(s.date, true) : R.univers(p.cat);
+    p.legende = s ? L(s.titre) + ' · ' + R.dateSerie(s, true) : R.univers(p.cat);
     return p;
   });
 }

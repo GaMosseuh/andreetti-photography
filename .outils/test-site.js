@@ -151,7 +151,12 @@ async function langues() {
   const p2 = await ouvrir("/", { langue: "en" });
   r = await p2.evaluate(() => ({ lang: document.documentElement.lang, t: document.querySelector(".titre-section h2").textContent, avis: document.querySelector(".avis blockquote p").textContent, date: document.querySelector(".avis-date").textContent }));
   verifier("L'anglais choisi est gardé d'une page à l'autre", r.lang === "en" && /Services/.test(r.t), "titre : « " + r.t + " »");
-  verifier("Les textes des avis ne sont jamais traduits (seule la date l'est)", r.avis.includes(D.AVIS[0].texte.slice(0, 40)) && /October/.test(r.date), "date affichée : " + r.date);
+  /* depuis le 8 octobre 2026 (demande d Alexandre) : en anglais, les avis sont montres traduits, et c est dit */
+  const mention = await p2.evaluate(() => { const m = document.querySelector(".avis .avis-traduit"); return m ? m.textContent : ""; });
+  verifier("En anglais, les avis sont traduits et la traduction est signalée", r.avis.includes(D.AVIS[0].en.slice(0, 40)) && /October/.test(r.date) && /Translated/.test(mention), "mention : « " + mention + " » ; date : " + r.date);
+  await p2.evaluate(() => window.setLang("fr")); await pause(200);
+  const retour = await p2.evaluate(() => ({ avis: document.querySelector(".avis blockquote p").textContent, mention: !!document.querySelector(".avis .avis-traduit") }));
+  verifier("En français, les avis restent mot pour mot, sans mention de traduction", retour.avis.includes(D.AVIS[0].texte.slice(0, 40)) && !retour.mention, "");
   await p2.close();
   /* un visiteur qui avait choisi une langue desormais en veille retombe sur le francais */
   const p3 = await ouvrir("/prestations", { langue: "es" });
