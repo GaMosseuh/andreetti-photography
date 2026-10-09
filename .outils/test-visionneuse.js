@@ -156,7 +156,14 @@ async function ordinateur(nav, base) {
   verifier("150 flèches à toute vitesse : pas de rond d'attente bloqué", !bloque, "");
 
   /* photo deja signee dans le fichier : pas de second filigrane */
+  /* (plus aucune photo du site n est dans ce cas depuis le 9 octobre 2026 : on en fabrique une
+     pour l essai, en ouvrant directement la visionneuse avec une photo marquee nowmark) */
   await ouvrir(page, base, "event-10");
+  g = await geo(page);
+  verifier("Photo du site : le filigrane est bien posé (Ouanne, signalé le 9 octobre)", g.filigraneVisible, "");
+  await page.evaluate(() => { const p = Object.assign({}, Rendu.photo("event-10"), { nowmark: true }); Visionneuse.fermer(true); Visionneuse.ouvrir([p], 0, {}); });
+  await page.waitForFunction(() => window.Visionneuse.etat().charge, { timeout: 15000 });
+  await pause(150);
   g = await geo(page);
   verifier("Photo déjà signée (nowmark) : pas de second filigrane", !g.filigraneVisible, "");
   /* photo horizontale */

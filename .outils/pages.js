@@ -22,7 +22,7 @@ module.exports = {
     { fichier: "prestations.html", chemin: "/prestations", id: "prestations", menu: "Prestations",
       titre: "Prestations et tarifs · Photographe à Dijon | ANDREETTI",
       description: "Portrait à prix fixe : 40, 50 ou 65 €, tout compris. Sport et événementiel sur devis gratuit sous 48 h. Photographe à Dijon et dans l'Yonne.",
-      scripts: [] },
+      scripts: ["visionneuse.js"] },
     { fichier: "apropos.html", chemin: "/apropos", id: "apropos", menu: "À propos",
       titre: "À propos · Alexandre ANDREETTI, photographe à Dijon",
       description: "Alexandre ANDREETTI, photographe portrait, sport et événementiel à Dijon et dans l'Yonne. Mon approche, et ce que j'ai déjà fait.",

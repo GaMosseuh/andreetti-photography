@@ -165,7 +165,12 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
   verifier("Le doré de la charte ne sert qu'aux étoiles des avis", (css.match(/var\(--dore\)|#E8A93C/gi) || []).length <= 2 && /\.etoiles svg\{[^}]*var\(--dore\)/.test(css), "");
   verifier("Aucun appel à Google Fonts (polices servies par le site)", !pages.some(x => /fonts\.googleapis|fonts\.gstatic/.test(x.html)) && !/fonts\.g/.test(css), "");
   const anim = (css.match(/@keyframes\s+(\w+)/g) || []).join(", ");
-  verifier("Une seule animation dans tout le site : le rond d'attente d'une photo", anim === "@keyframes visioTourne", anim);
+  /* depuis le 9 octobre 2026, Alexandre veut des passages en douceur partout : les animations
+     autorisees sont listees ici, toutes courtes, et coupees si l appareil demande moins de mouvement */
+  const permises = ["visioTourne", "entree", "entreeDouce", "apparition"];
+  const noms = (css.match(/@keyframes\s+(\w+)/g) || []).map(x => x.replace(/@keyframes\s+/, ""));
+  verifier("Animations : seulement les passages en douceur prévus, une seule en boucle (le rond d'attente)", noms.every(n => permises.includes(n)) && (css.match(/infinite/g) || []).length <= 1, noms.join(", "));
+  verifier("Les animations sont coupées quand l'appareil demande moins de mouvement", /prefers-reduced-motion:reduce/.test(css), "");
 }
 
 /* ---------- 7. photos ---------- */
@@ -200,8 +205,16 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
   verifier("Dates des avis au format AAAA-MM-JJ, du plus récent au plus ancien", D.AVIS.every(a => /^\d{4}-\d{2}-\d{2}$/.test(a.date)) && D.AVIS.map(a => a.date).join() === D.AVIS.map(a => a.date).sort().reverse().join(), D.AVIS.map(a => a.date).join(", "));
 }
 
+/* ---------- 9. ce qui doit etre regle AVANT une mise en ligne ----------
+   Ces points ne comptent comme des echecs qu avec  --enligne  (c est ce que fait
+   « npm run predeploy ») : en travail local, ils sont seulement rappeles. */
+const avantEnLigne = [];
+if (D.VIDEO_PRESENTATION && D.VIDEO_PRESENTATION.essai) avantEnLigne.push("la vidéo de présentation est une vidéo d'ESSAI (assets/data.js, VIDEO_PRESENTATION) : mettre la vraie, ou vider youtube");
+if (process.argv.includes("--enligne")) verifier("Rien ne reste à régler avant la mise en ligne", avantEnLigne.length === 0, avantEnLigne.join(" ; "));
+
 const ko = resultats.filter(r => !r.ok);
 resultats.forEach(r => console.log((r.ok ? "  ok     " : "  ECHEC  ") + r.nom + (r.detail ? "  [" + r.detail + "]" : "")));
 console.log("\n" + (resultats.length - ko.length) + " verifications reussies sur " + resultats.length + (ko.length ? "  —  " + ko.length + " ECHEC(S)" : "  —  tout est bon"));
 if (process.argv.includes("--json")) fs.writeFileSync(path.join(__dirname, "_verifier.json"), JSON.stringify(resultats, null, 1));
+if (avantEnLigne.length && !process.argv.includes("--enligne")) console.log("A REGLER AVANT LA MISE EN LIGNE : " + avantEnLigne.join(" ; "));
 process.exit(ko.length ? 1 : 0);

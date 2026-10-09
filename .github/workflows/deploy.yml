@@ -14,5 +14,9 @@ jobs:
       # Aucun module à installer : cet outil n'a besoin que de Node.
       - name: Construire les pages et le plan du site
         run: node .outils/construire.js
+      # Garde-fou : si une règle du site est cassée, ou si la vidéo est encore une vidéo d'essai,
+      # la mise en ligne s'arrête ici.
+      - name: Vérifier le site avant de publier
+        run: node .outils/verifier.js --enligne
       - name: Déployer sur Netlify
         run: npx --yes netlify-cli deploy --prod --dir=. --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }}

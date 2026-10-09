@@ -6,7 +6,7 @@
     "construire": "node .outils/construire.js",
     "verifier": "node .outils/verifier.js",
     "test": "node .outils/verifier.js && node .outils/test-visionneuse.js && node .outils/test-site.js",
-    "predeploy": "node .outils/construire.js && node .outils/verifier.js",
+    "predeploy": "node .outils/construire.js && node .outils/verifier.js --enligne",
     "deploy": "netlify deploy --prod --dir=."
   }
 }

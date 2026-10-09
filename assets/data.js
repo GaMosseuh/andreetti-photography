@@ -39,10 +39,13 @@ var COORDONNEES = {
    suit "watch?v=" dans l adresse (ex. pour https://www.youtube.com/watch?v=AbCdEfGhIjK,
    ecrire "AbCdEfGhIjK"), et un titre. Rien d autre a toucher.
    La video ne demarre jamais toute seule : le lecteur n est charge qu au clic.
+   essai    : true tant que la video n est qu un essai ; la verification d avant mise en ligne
+              refuse alors de laisser partir le site.
    vignette : (facultatif) une image a moi pour la couverture, ex. "/images/video.webp".
               Sans rien, c est la couverture de YouTube qui est montree. */
 var VIDEO_PRESENTATION = {
-  youtube: "",
+  youtube: "xzBTvODwmr8",
+  essai: true,          // VIDEO D ESSAI : a remplacer par ma vraie video, puis retirer cette ligne
   vignette: "",
   titre: {fr:"", en:""}
 };
@@ -65,14 +68,14 @@ var VIDEO_PRESENTATION = {
                     carte prend la photo de couverture.
    Une seance qui n a encore aucune photo reste invisible partout : pas de carte vide. */
 var SERIES = [
-  { id:"elsa", univers:"portrait", date:"2026-09-26", couverture:"", accueil:true,
+  { id:"elsa", univers:"portrait", date:"2026-10", couverture:"portrait-elsa-06", accueil:true,
     titre:{fr:"Portrait avec Elsa", en:"Portrait session with Elsa"},
     lieu:{fr:"Parc de la Colombière, Dijon", en:"Parc de la Colombière, Dijon"},
-    texte:{fr:"Séance portrait avec Elsa, le 26 septembre au parc de la Colombière, à Dijon.",
-           en:"A portrait session with Elsa on 26 September at the Parc de la Colombière in Dijon."},
-    texteAccueil:{fr:"Séance portrait avec Elsa, le 26 septembre au parc de la Colombière, à Dijon. Elle a passé un bon moment, et c'est elle qui le dit : son avis est juste en dessous.",
-                  en:"A portrait session with Elsa on 26 September at the Parc de la Colombière in Dijon. She had a good time, and those are her words: her review is just below."},
-    imageAccueil:"" },
+    texte:{fr:"Séance portrait avec Elsa, au parc de la Colombière, à Dijon.",
+           en:"A portrait session with Elsa at the Parc de la Colombière in Dijon."},
+    texteAccueil:{fr:"Séance portrait avec Elsa, au parc de la Colombière, à Dijon. Elle a passé un bon moment, et c'est elle qui le dit : son avis est juste en dessous.",
+                  en:"A portrait session with Elsa at the Parc de la Colombière in Dijon. She had a good time, and those are her words: her review is just below."},
+    imageAccueil:"seance-elsa.webp" },
 
   { id:"marsannay", univers:"sport", date:"2026-09-27", couverture:"handball-marsannay-01", accueil:true,
     titre:{fr:"Handball à Marsannay", en:"Handball in Marsannay"},
@@ -80,6 +83,18 @@ var SERIES = [
     texte:{fr:"Le 27 septembre, j'ai couvert un match du CL Marsannay Handball, à l'Espace du Rocher. Mon premier match pour un club. En salle ça va très vite et la lumière est compliquée, c'est un vrai exercice. Le club a reçu ses photos retouchées.",
            en:"On 27 September I covered a CL Marsannay Handball match at the Espace du Rocher. My first match for a club. Indoors everything moves fast and the light is tricky, so it is a real challenge. The club received its edited photos."},
     imageAccueil:"seance-marsannay.webp" },
+
+  { id:"celia", univers:"portrait", date:"2026-09", couverture:"portrait-celia-01", accueil:false,
+    titre:{fr:"Portrait avec Célia", en:"Portrait session with Célia"},
+    lieu:{fr:"Dijon", en:"Dijon"},
+    texte:{fr:"Séance portrait avec Célia, à Dijon, en septembre 2026.",
+           en:"A portrait session with Célia in Dijon, in September 2026."} },
+
+  { id:"alyson", univers:"portrait", date:"2026-09", couverture:"portrait-alyson-08", accueil:false,
+    titre:{fr:"Portrait avec Alyson", en:"Portrait session with Alyson"},
+    lieu:{fr:"Dijon", en:"Dijon"},
+    texte:{fr:"Séance portrait avec Alyson, à Dijon, en septembre 2026.",
+           en:"A portrait session with Alyson in Dijon, in September 2026."} },
 
   { id:"ouanne", univers:"evenement", date:"2026-07-23", couverture:"event-10", accueil:true,
     titre:{fr:"Théâtre à Ouanne", en:"Theatre in Ouanne"},
@@ -95,10 +110,10 @@ var SERIES = [
            en:"A morning archery practice deep in the forest: focus, precision and soft summer light."} },
 
   { id:"festival", univers:"evenement", date:"2024-07", dateTexte:{fr:"Été 2024", en:"Summer 2024"}, couverture:"event-02", accueil:false,
-    titre:{fr:"Festival de musique", en:"Music festival"},
-    lieu:{fr:"", en:""},
-    texte:{fr:"Un festival de musique, à l'été 2024 : la captation vidéo de 11 groupes sur deux scènes, et pas mal de photos.",
-           en:"A music festival in summer 2024: I filmed 11 bands on two stages, and took quite a few photos."} },
+    titre:{fr:"Fet'Estival", en:"Fet'Estival"},
+    lieu:{fr:"Villemoisson-sur-Orge (91)", en:"Villemoisson-sur-Orge (91)"},
+    texte:{fr:"Le Fet'Estival, un festival de musique à Villemoisson-sur-Orge (91), à l'été 2024 : la captation vidéo de 11 groupes sur deux scènes, et pas mal de photos.",
+           en:"The Fet'Estival, a music festival in Villemoisson-sur-Orge (91), in summer 2024: I filmed 11 bands on two stages, and took quite a few photos."} },
 
   { id:"islande", univers:"evenement", date:"2024-10", couverture:"event-03", accueil:false,
     titre:{fr:"Mariage en Islande", en:"Wedding in Iceland"},
@@ -120,33 +135,56 @@ var SERIES = [
    L ordre de cette liste est l ordre d affichage dans "Toutes les photos".
    Les clientes de portrait : ne mettre QUE les photos qu elles ont validees. */
 var PHOTOS = [
+  {id:"portrait-elsa-06", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : sur une balançoire, souriante", en:"Portrait of Elsa, Parc de la Colombière in Dijon: on a swing, smiling"}},
+  {id:"portrait-alyson-08", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : en chapeau, regard vers l'objectif", en:"Portrait of Alyson in Dijon: wearing a hat, looking at the camera"}},
+  {id:"portrait-celia-01", cat:"portrait", serie:"celia", alt:{fr:"Portrait de Célia, à Dijon : assise sur un muret, en robe à fleurs", en:"Portrait of Célia in Dijon: sitting on a low wall in a floral dress"}},
+  {id:"portrait-elsa-07", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : accoudée à une table, la tête dans la main", en:"Portrait of Elsa, Parc de la Colombière in Dijon: leaning on a table, head resting on her hand"}},
+  {id:"portrait-alyson-02", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : de profil, en noir et blanc", en:"Portrait of Alyson in Dijon: in profile, in black and white"}},
+  {id:"portrait-celia-03", cat:"portrait", serie:"celia", alt:{fr:"Portrait de Célia, à Dijon : de profil, la main dans les cheveux", en:"Portrait of Célia in Dijon: in profile, a hand in her hair"}},
+  {id:"portrait-elsa-01", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : en marche dans une allée", en:"Portrait of Elsa, Parc de la Colombière in Dijon: walking along a path"}},
+  {id:"portrait-alyson-01", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : ajustant son chapeau", en:"Portrait of Alyson in Dijon: adjusting her hat"}},
+  {id:"portrait-celia-05", cat:"portrait", serie:"celia", alt:{fr:"Portrait de Célia, à Dijon : assise, les mains dans les cheveux", en:"Portrait of Célia in Dijon: sitting, hands in her hair"}},
+  {id:"portrait-elsa-04", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : de profil, en noir et blanc", en:"Portrait of Elsa, Parc de la Colombière in Dijon: in profile, in black and white"}},
+  {id:"portrait-alyson-07", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : de profil, en gros plan", en:"Portrait of Alyson in Dijon: close-up in profile"}},
+  {id:"portrait-celia-02", cat:"portrait", serie:"celia", alt:{fr:"Portrait de Célia, à Dijon : en marche dans une allée, en noir et blanc", en:"Portrait of Célia in Dijon: walking along a path, in black and white"}},
+  {id:"portrait-elsa-08", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : adossée à un arbre", en:"Portrait of Elsa, Parc de la Colombière in Dijon: leaning against a tree"}},
+  {id:"portrait-alyson-03", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : debout, les mains sur les hanches", en:"Portrait of Alyson in Dijon: standing, hands on her hips"}},
+  {id:"portrait-celia-04", cat:"portrait", serie:"celia", alt:{fr:"Portrait de Célia, à Dijon : assise sur un rocher", en:"Portrait of Célia in Dijon: sitting on a rock"}},
+  {id:"portrait-elsa-02", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : assise au pied d'un arbre", en:"Portrait of Elsa, Parc de la Colombière in Dijon: sitting at the foot of a tree"}},
+  {id:"portrait-alyson-06", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : en pied, dans une allée du parc", en:"Portrait of Alyson in Dijon: full-length, on a path in the park"}},
+  {id:"portrait-celia-06", cat:"portrait", serie:"celia", alt:{fr:"Portrait de Célia, à Dijon : assise au milieu de la verdure", en:"Portrait of Célia in Dijon: sitting among the greenery"}},
+  {id:"portrait-elsa-03", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : de profil, le visage levé", en:"Portrait of Elsa, Parc de la Colombière in Dijon: in profile, face raised"}},
+  {id:"portrait-alyson-04", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : de profil, en chapeau", en:"Portrait of Alyson in Dijon: in profile, wearing a hat"}},
+  {id:"portrait-elsa-05", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : en marche, un sac à la main", en:"Portrait of Elsa, Parc de la Colombière in Dijon: walking, a bag in her hand"}},
+  {id:"portrait-alyson-05", cat:"portrait", serie:"alyson", alt:{fr:"Portrait d'Alyson, à Dijon : de dos dans une allée, en noir et blanc", en:"Portrait of Alyson in Dijon: from behind on a path, in black and white"}},
+  {id:"portrait-elsa-09", cat:"portrait", serie:"elsa", alt:{fr:"Portrait d'Elsa, parc de la Colombière à Dijon : assise sur un banc, en noir et blanc", en:"Portrait of Elsa, Parc de la Colombière in Dijon: sitting on a bench, in black and white"}},
   {id:"portrait-02", cat:"portrait", alt:{fr:"Portrait d'un homme en veste en jean et lunettes de soleil", en:"Portrait of a man in a denim jacket and sunglasses"}},
   {id:"handball-marsannay-01", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : le gardien face à un tir", en:"CL Marsannay handball match, Marsannay-la-Côte: the goalkeeper facing a shot"}},
-  {id:"event-10", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Scène du spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"A scene from the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
+  {id:"event-10", cat:"evenement", serie:"ouanne", alt:{fr:"Scène du spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"A scene from the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
   {id:"portrait-08", cat:"portrait", alt:{fr:"Portrait de profil d'une jeune femme en extérieur", en:"Outdoor profile portrait of a young woman"}},
   {id:"event-03", cat:"evenement", serie:"islande", alt:{fr:"Mariage en Islande : les mariés", en:"Wedding in Iceland: the bride and groom"}},
   {id:"handball-marsannay-02", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : tir en suspension", en:"CL Marsannay handball match, Marsannay-la-Côte: a jump shot"}},
   {id:"sport-06", cat:"sport", serie:"tir-a-l-arc", alt:{fr:"Tir à l'arc en forêt dans l'Yonne : un archer en pleine visée", en:"Archery in the forest in Yonne: an archer taking aim"}},
-  {id:"event-08", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Comédienne en costume dans la lumière de scène, théâtre à l'église de Ouanne (Yonne)", en:"An actress in costume in the stage light, theatre at Ouanne church (Yonne)"}},
+  {id:"event-08", cat:"evenement", serie:"ouanne", alt:{fr:"Comédienne en costume dans la lumière de scène, théâtre à l'église de Ouanne (Yonne)", en:"An actress in costume in the stage light, theatre at Ouanne church (Yonne)"}},
   {id:"portrait-01", cat:"portrait", alt:{fr:"Portrait de nuit sous les lampadaires", en:"Night portrait under the street lamps"}},
   {id:"sport-02", cat:"sport", alt:{fr:"Footballeur, brassard de capitaine au bras, pendant un match", en:"A footballer wearing the captain's armband during a match"}},
   {id:"event-01", cat:"evenement", serie:"islande", alt:{fr:"Mariage en Islande : le prêtre pendant la cérémonie", en:"Wedding in Iceland: the priest during the ceremony"}},
   {id:"handball-marsannay-03", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : attaque face à la défense", en:"CL Marsannay handball match, Marsannay-la-Côte: an attack against the defence"}},
   {id:"portrait-03", cat:"portrait", alt:{fr:"Portrait d'une jeune femme attablée en extérieur", en:"Portrait of a young woman sitting at a table outdoors"}},
-  {id:"event-06", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Pendant le spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"During the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
+  {id:"event-06", cat:"evenement", serie:"ouanne", alt:{fr:"Pendant le spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"During the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
   {id:"sport-01", cat:"sport", alt:{fr:"Match de football : duel pour le ballon", en:"Football match: a duel for the ball"}},
   {id:"handball-marsannay-04", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : un tir face au gardien", en:"CL Marsannay handball match, Marsannay-la-Côte: a shot at the goalkeeper"}},
   {id:"portrait-06", cat:"portrait", alt:{fr:"Portrait d'un jeune homme en chemise blanche", en:"Portrait of a young man in a white shirt"}},
-  {id:"event-07", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Comédiennes en costume, spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"Actresses in costume, the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
+  {id:"event-07", cat:"evenement", serie:"ouanne", alt:{fr:"Comédiennes en costume, spectacle « Hippolyte et Antiope », église de Ouanne (Yonne)", en:"Actresses in costume, the show “Hippolyte et Antiope”, Ouanne church (Yonne)"}},
   {id:"sport-07", cat:"sport", serie:"tir-a-l-arc", alt:{fr:"Tir à l'arc en forêt dans l'Yonne : des archers sur le pas de tir", en:"Archery in the forest in Yonne: archers on the shooting line"}},
   {id:"event-02", cat:"evenement", serie:"festival", alt:{fr:"Chanteur au micro sur scène, lumières de concert", en:"A singer at the microphone on stage, concert lights"}},
   {id:"handball-marsannay-05", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : phase de jeu devant la défense", en:"CL Marsannay handball match, Marsannay-la-Côte: play in front of the defence"}},
   {id:"portrait-07", cat:"portrait", alt:{fr:"Portrait à la lumière chaude d'un lampadaire", en:"Portrait in the warm light of a street lamp"}},
-  {id:"event-09", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Musiciens accompagnant le spectacle, église de Ouanne (Yonne)", en:"Musicians accompanying the show, Ouanne church (Yonne)"}},
+  {id:"event-09", cat:"evenement", serie:"ouanne", alt:{fr:"Musiciens accompagnant le spectacle, église de Ouanne (Yonne)", en:"Musicians accompanying the show, Ouanne church (Yonne)"}},
   {id:"sport-04", cat:"sport", alt:{fr:"Match de football : course vers le ballon", en:"Football match: a run for the ball"}},
   {id:"handball-marsannay-06", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : l'équipe réunie", en:"CL Marsannay handball match, Marsannay-la-Côte: the team huddle"}},
   {id:"portrait-04", cat:"portrait", alt:{fr:"Portrait dans la fumée, sous une guirlande de lumières", en:"Portrait in the smoke, under a string of lights"}},
-  {id:"event-11", cat:"evenement", serie:"ouanne", nowmark:true, alt:{fr:"Comédiennes devant les vitraux, théâtre à l'église de Ouanne (Yonne)", en:"Actresses in front of the stained glass, theatre at Ouanne church (Yonne)"}},
+  {id:"event-11", cat:"evenement", serie:"ouanne", alt:{fr:"Comédiennes devant les vitraux, théâtre à l'église de Ouanne (Yonne)", en:"Actresses in front of the stained glass, theatre at Ouanne church (Yonne)"}},
   {id:"sport-08", cat:"sport", serie:"tir-a-l-arc", alt:{fr:"Tir à l'arc en forêt dans l'Yonne : deux archers à l'entraînement", en:"Archery in the forest in Yonne: two archers practising"}},
   {id:"handball-marsannay-07", cat:"sport", serie:"marsannay", alt:{fr:"Match de handball du CL Marsannay, Marsannay-la-Côte : deux joueurs en défense", en:"CL Marsannay handball match, Marsannay-la-Côte: two players defending"}},
   {id:"event-05", cat:"evenement", serie:"festival", alt:{fr:"Batteur sur scène pendant un concert", en:"A drummer on stage during a concert"}},
@@ -179,7 +217,7 @@ var FORMULES = [
     nom:{fr:"Portrait étudiant", en:"Student portrait"},
     duree:{fr:"1 h", en:"1 hour"},
     compris:{fr:"Sur présentation de la carte étudiante", en:"On presentation of a student card"} },
-  { id:"essentiel", prix:50, photos:10, exemple:"portrait-08", cadrage:"26% 50%",
+  { id:"essentiel", prix:50, photos:10, exemple:"portrait-elsa-06",
     nom:{fr:"Portrait essentiel", en:"Essential portrait"},
     duree:{fr:"1 h", en:"1 hour"},
     compris:{fr:"Un lieu, deux ou trois ambiances", en:"One location, two or three moods"} },

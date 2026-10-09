@@ -564,10 +564,44 @@ main [id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
 /* avis traduit (site en anglais) et ligne sur la video dans Prestations */
 .avis-traduit{margin-top:10px;font-size:var(--t-xs);font-style:italic;color:var(--t3)}
 .devis-plus{max-width:var(--mesure);margin:var(--e6) auto 0;text-align:center;color:var(--t2)}
-/* passage d une page a l autre et defilement vers une partie : en douceur, sauf si l appareil demande moins de mouvement */
+/* ───────── 21. EN DOUCEUR (9 octobre 2026) ─────────
+   Alexandre veut des passages agreables a l oeil, PARTOUT : d une page a l autre, a l ouverture
+   et a la fermeture d une photo, du menu, d une seance, d une question. Tout est court
+   (moins d une demi-seconde), sans rebond ni effet voyant, et coupe si l appareil demande
+   moins de mouvement (regle prefers-reduced-motion, plus haut). */
+@keyframes entree{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes entreeDouce{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes apparition{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:no-preference){
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.26s;animation-timing-function:ease}
-.nav{view-transition-name:barre-du-haut}
+/* 1. une page arrive : son contenu monte legerement en apparaissant ; elle part : il s efface */
+main > *{animation:entree .5s cubic-bezier(.22,.61,.36,1) both}
+main > .sommaire{animation:apparition .5s ease both}
+.pied{animation:apparition .6s ease both}
+html.sortie main,html.sortie .pied{opacity:0}
+/* 2. dans le portfolio : passer des seances a une seance, ou a toutes les photos */
+.panneau.actif{animation:entreeDouce .4s cubic-bezier(.22,.61,.36,1) both}
+.galerie .tuile{animation:apparition .35s ease both}
+/* 3. la photo en grand : elle s ouvre, change et se referme en fondu */
+.visio.ouverte{animation:apparition .22s ease both}
+.visio.ferme{animation:none;opacity:0;pointer-events:none;transition:opacity .19s ease}
+.visio-photo.arrive{animation:apparition .24s ease both}
+/* 4. le menu du telephone se deplie */
+.menu-mobile.ouvert{animation:entreeDouce .26s cubic-bezier(.22,.61,.36,1) both}
+/* 5. une question de la FAQ s ouvre */
+.faq-q[open] .faq-a{animation:entreeDouce .3s ease both}
+/* 6. clair / sombre : les couleurs passent de l une a l autre */
+body,.nav,.section.fond,.pied{transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+main,.pied{transition:opacity .17s ease,background-color .3s ease,color .3s ease}
+/* 7. les photos cliquables reagissent au survol */
+.case .cadre img,.carte-seance .cadre img,.galerie .tuile img,.formule-photo .cadre img,.devis-photo .cadre img,.univers a img{transition:opacity .25s,transform .6s cubic-bezier(.22,.61,.36,1)}
+.case:hover .cadre img,.carte-seance:hover .cadre img,.galerie .tuile:hover img,.formule-photo:hover .cadre img,.devis-photo:hover .cadre img,.univers a:hover img{transform:scale(1.03)}
+/* 8. aller a une partie de la page depuis le sommaire */
 html:has(.sommaire){scroll-behavior:smooth}
 }
+/* A propos : la bande bleue derriere le titre (reprise de l ancien modele) */
+.entete.bande{padding-bottom:clamp(48px,7vw,96px);background-color:var(--teal);background-image:linear-gradient(160deg,var(--teal-fonce) 0%,var(--teal) 100%);color:#fff}
+.entete.bande h1{color:#fff}
+.entete.bande .sous-h1{color:#fff}
+.entete.bande + .sommaire{border-top:0}
+/* Prestations : la phrase sur les coulisses, sous les etapes */
+.coulisses{margin-top:var(--e5);text-align:center;color:var(--t2)}

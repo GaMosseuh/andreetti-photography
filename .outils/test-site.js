@@ -259,6 +259,22 @@ async function liens() {
   }
   verifier("Chaque photo d'exemple d'une formule ouvre la même photo en grand dans le portfolio", pbEx.length === 0 && exemples.length === D.FORMULES.length, exemples.map(e => e.nom + " → " + e.href.split("photo=")[1]).join(" ; ") + (pbEx.length ? " ; " + pbEx.join(" | ") : ""));
 
+  /* b bis) sur Prestations, un clic ouvre la photo SUR PLACE ; la fermer laisse sur Prestations
+     (bug signale par Alexandre le 9 octobre : la fermeture envoyait au portfolio) */
+  const pex = await ouvrir("/prestations", {});
+  await pex.evaluate(() => document.querySelectorAll(".formule-photo")[1].scrollIntoView({ block: "center" }));
+  await pause(700);
+  const yAvant = await pex.evaluate(() => window.scrollY);
+  await pex.evaluate(() => document.querySelectorAll(".formule-photo")[1].click());
+  await pex.waitForFunction(() => window.Visionneuse && window.Visionneuse.etat().charge, { timeout: 15000 }).catch(() => {});
+  const surPlace = await pex.evaluate(() => ({ chemin: location.pathname, ouvert: window.Visionneuse.etat().ouvert, id: window.Visionneuse.etat().id, attendu: document.querySelectorAll(".formule-photo")[1].getAttribute("data-visio") }));
+  await pex.keyboard.press("Escape"); await pause(500);
+  const apres = await pex.evaluate(() => ({ chemin: location.pathname, ouvert: window.Visionneuse.etat().ouvert, cache: document.getElementById("visio").hidden, y: window.scrollY }));
+  verifier("Sur Prestations, la photo d'exemple s'ouvre sur place et se referme sur Prestations, au même endroit",
+    surPlace.ouvert && surPlace.id === surPlace.attendu && surPlace.chemin === "/prestations" && apres.chemin === "/prestations" && !apres.ouvert && apres.cache && Math.abs(apres.y - yAvant) < 4 && pex.__erreurs.length === 0,
+    "ouverte : " + surPlace.id + " ; après fermeture : " + apres.chemin + ", défilement " + Math.round(yAvant) + " → " + Math.round(apres.y) + (pex.__erreurs.length ? " ; " + pex.__erreurs[0] : ""));
+  await pex.close();
+
   /* c) chaque carte de seance ouvre la bonne serie */
   const pa = await ouvrir("/", {});
   const cartes = await pa.evaluate(() => [].slice.call(document.querySelectorAll(".carte-seance")).map(c => ({ titre: c.querySelector("h3").textContent, href: c.getAttribute("href") })));
@@ -366,7 +382,7 @@ async function menu() {
   verifier("Échap referme le menu", await page.evaluate(() => !document.getElementById("menuMobile").classList.contains("ouvert")), "");
   /* theme */
   const t0 = await page.evaluate(() => document.documentElement.getAttribute("data-theme"));
-  await page.evaluate(() => basculerTheme());
+  await page.evaluate(() => basculerTheme()); await pause(500);   /* le passage clair / sombre dure 0,3 s */
   const t1 = await page.evaluate(() => [document.documentElement.getAttribute("data-theme"), localStorage.getItem("theme"), getComputedStyle(document.body).backgroundColor]);
   verifier("Le bouton de thème passe du sombre au clair et s'en souvient", t0 === "dark" && t1[0] === "light" && t1[1] === "light" && t1[2] === "rgb(245, 250, 251)", "fond en clair : " + t1[2]);
   verifier("Aucune erreur pendant ces manipulations", page.__erreurs.length === 0, page.__erreurs.slice(0, 2).join(" | "));

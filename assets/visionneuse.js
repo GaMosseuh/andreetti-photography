@@ -44,6 +44,7 @@ var T = (typeof tr === 'function') ? tr : function(k){ return k; };
 var SEUIL_SOURIS = 5;        // px : en dessous, c est un clic ; au-dessus, un glisse
 var SEUIL_DOIGT  = 10;       // px : un doigt tremble plus qu une souris
 var ZOOM_CLIC    = 2.5;      // niveau de zoom d un clic ou d une double touche
+var FONDU        = 190;      // ms : duree de la fermeture en fondu (voir .visio.ferme dans styles.css)
 var DUREE        = 160;      // ms : duree du passage d un niveau de zoom a l autre
 var MARGE_FILIG  = 12;       // px : ecart du filigrane avec le coin de la photo
 var GOUTTIERE    = 72;       // px : place laissee aux fleches quand elles sont sur les cotes
@@ -55,7 +56,8 @@ var e = 1, tx = 0, ty = 0;                // echelle et decalage (px) par rappor
 var baseL = 0, baseH = 0;                 // taille de la photo affichee entiere
 var SL = 0, SH = 0, sceneG = 0, sceneT = 0;  // taille et position de la scene
 var jeton = 0, minuteur = null, charge = false, enErreur = false;
-var anim = null;
+var anim = null, minuteurFerme = null;
+var calme = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 var points = {}, nbPoints = 0, geste = null;
 var dernierBascule = 0, dernierTap = null;
 var aideMontree = false;
@@ -207,6 +209,7 @@ function montrer(){
     clearTimeout(minuteur); racine.classList.remove('charge');
     img.src = url; charge = true;
     img.style.visibility = 'visible';
+    img.classList.remove('arrive'); void img.offsetWidth; img.classList.add('arrive');
     mesurer(); appliquer(); precharger();
   };
   pre.onerror = function(){
@@ -257,6 +260,7 @@ function ouvrir(photos, depart, opts){
   if(!ouvert){
     dernierFocus = document.activeElement;
     ouvert = true;
+    clearTimeout(minuteurFerme); racine.classList.remove('ferme');
     racine.hidden = false;
     racine.classList.add('ouverte');
     document.documentElement.classList.add('visio-ouverte');
@@ -271,12 +275,13 @@ function fermer(silencieux){
   ouvert = false;
   arreterAnim(); clearTimeout(minuteur); jeton++;
   if(document.fullscreenElement === racine && document.exitFullscreen){ try{ document.exitFullscreen(); }catch(err){} }
-  racine.classList.remove('ouverte', 'zoome', 'charge', 'glisse');
-  racine.hidden = true;
+  racine.classList.remove('zoome', 'charge', 'glisse');
+  var finir = function(){ if(ouvert) return; racine.classList.remove('ouverte', 'ferme'); racine.hidden = true; img.removeAttribute('src'); img.style.visibility = 'hidden'; };
+  clearTimeout(minuteurFerme);
+  if(calme){ finir(); } else { racine.classList.add('ferme'); minuteurFerme = setTimeout(finir, FONDU); }
   document.documentElement.classList.remove('visio-ouverte');
   masquerFond(false);
   e = 1; tx = 0; ty = 0; points = {}; nbPoints = 0; geste = null;
-  img.removeAttribute('src'); img.style.visibility = 'hidden';
   var f = dernierFocus; dernierFocus = null;
   if(f && f.focus && document.contains(f)){ try{ f.focus({preventScroll:true}); }catch(err){ f.focus(); } }
   if(!silencieux && typeof options.surFermeture === 'function'){ try{ options.surFermeture(); }catch(err){} }

@@ -167,7 +167,7 @@ function formules(){
     var p = photo(f.exemple);
     var nom = txt(f.nom);
     return '<article class="formule">' +
-      (p ? '<a class="formule-photo" href="/portfolio?photo=' + encodeURIComponent(p.id) + '" aria-label="' + ech(trad('formuleVoirPhoto') + ' : ' + p.alt) + '">' +
+      (p ? '<a class="formule-photo" data-visio="' + ech(p.id) + '" data-legende="' + ech(nom) + '" href="/portfolio?photo=' + encodeURIComponent(p.id) + '" aria-label="' + ech(trad('formuleVoirPhoto') + ' : ' + p.alt) + '">' +
             image(p, '(max-width:760px) 100vw, 30vw').replace('<img ', f.cadrage ? '<img style="object-position:' + ech(f.cadrage) + '" ' : '<img ') + '<span class="formule-exemple">' + ech(trad('formuleExemple')) + '<i class="fleche" aria-hidden="true"></i></span></a>' : '') +
       '<div class="formule-corps">' +
       '<h3>' + ech(nom) + '</h3>' +

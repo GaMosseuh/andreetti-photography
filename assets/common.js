@@ -159,6 +159,51 @@ document.addEventListener('click', function(e){
 document.addEventListener('contextmenu', function(e){ if(e.target && e.target.tagName === 'IMG') e.preventDefault(); });
 document.addEventListener('dragstart', function(e){ if(e.target && e.target.tagName === 'IMG') e.preventDefault(); });
 
+/* ---------- Une photo ouverte en grand SUR PLACE (ex. les photos d exemple des formules) ----------
+   Le lien porte data-visio="id de la photo". Si la visionneuse est sur la page, la photo
+   s ouvre ici et se referme ici ; sinon le lien mene au portfolio, comme sans JavaScript. */
+document.addEventListener('click', function(ev){
+  if(ev.defaultPrevented || ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+  var a = ev.target.closest && ev.target.closest('a[data-visio]');
+  if(!a || !window.Visionneuse || typeof Rendu === 'undefined') return;
+  var liens = [].slice.call(document.querySelectorAll('a[data-visio]')), photos = [], depart = 0;
+  liens.forEach(function(l){
+    var p = Rendu.photo(l.getAttribute('data-visio')); if(!p) return;
+    p.legende = l.getAttribute('data-legende') || '';
+    if(l === a) depart = photos.length;
+    photos.push(p);
+  });
+  if(!photos.length) return;
+  ev.preventDefault();
+  Visionneuse.ouvrir(photos, depart, {});
+});
+
+/* ---------- Passage d une page a l autre, en douceur ----------
+   A l arrivee, la page apparait (regle CSS « entree »). Au depart, elle s efface un instant
+   avant que le navigateur ne charge la suivante. Rien de tout cela si l appareil demande
+   moins de mouvement. Les liens vers un autre site, les ancres et les nouveaux onglets ne
+   sont pas concernes. */
+(function(){
+  var calme = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var racine = document.documentElement;
+  window.addEventListener('pageshow', function(){ racine.classList.remove('sortie'); });
+  if(calme) return;
+  /* ecoute posee sur la fenetre : elle passe apres toutes les autres, et ne fait rien si un
+     autre script a deja pris le clic en charge (portfolio, visionneuse...) */
+  window.addEventListener('click', function(ev){
+    if(ev.defaultPrevented || ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+    var a = ev.target.closest && ev.target.closest('a[href]');
+    if(!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    var u; try{ u = new URL(a.href, location.href); }catch(e){ return; }
+    if(u.origin !== location.origin) return;                                  // autre site, mailto, tel
+    if(u.pathname === location.pathname && u.search === location.search) return;   // ancre de la meme page
+    ev.preventDefault();
+    racine.classList.add('sortie');
+    setTimeout(function(){ location.href = u.href; }, 170);
+    setTimeout(function(){ racine.classList.remove('sortie'); }, 1500);       // securite si la page ne change pas
+  });
+})();
+
 /* ---------- Sommaire d une page : le lien de la partie qu on est en train de lire est mis en avant ---------- */
 function brancherSommaire(){
   var som = document.querySelector('.sommaire'); if(!som) return;
