@@ -67,7 +67,7 @@
 <a href="#moi" data-i18n="moiEyebrow">Qui je suis</a>
 <a href="#competences" data-i18n="compEyebrow">Compétences</a>
 <a href="#experiences" data-i18n="parcoursEyebrow">Expériences</a>
-<a href="#video" data-si="video" data-i18n="somVideo">Vidéo</a>
+<a href="#video" data-si="video" data-i18n="somVideo" hidden>Vidéo</a>
 <a href="#approche" data-i18n="approachTitle">Mon approche</a>
 </nav>
 
@@ -149,14 +149,14 @@
 </section>
 
 <!-- VIDÉO DE PRÉSENTATION : invisible tant que l'identifiant YouTube n'est pas renseigné dans assets/data.js -->
-<section class="section fond" id="video" data-si="video">
+<section class="section fond" id="video" data-si="video" hidden>
 <div class="contenu">
 <div class="titre-section">
 <span class="surtitre" data-i18n="videoEyebrow">En vidéo</span>
 <h2 data-i18n="videoTitre">Je me présente</h2>
 </div>
 <div class="video">
-<div class="video-cadre" data-bloc="video"><!--@bloc video--><button class="video-vignette" type="button" data-youtube="xzBTvODwmr8" data-titre="" aria-label="Lire la vidéo"><img src="https://i.ytimg.com/vi/xzBTvODwmr8/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async"><span class="video-lecture" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></button><!--/@bloc--></div>
+<div class="video-cadre" data-bloc="video"><!--@bloc video--><!--/@bloc--></div>
 <p class="note" data-i18n="videoNote">La vidéo est hébergée par YouTube. Elle ne se charge que si vous la lancez.</p>
 </div>
 </div>

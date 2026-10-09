@@ -607,9 +607,9 @@ html:has(.sommaire){scroll-behavior:smooth}
 .coulisses{margin-top:var(--e5);text-align:center;color:var(--t2)}
 
 /* ───────── 22. RETOURS DU 9 OCTOBRE AU SOIR ───────── */
-/* accueil : la photo du haut recule tres lentement (le « leger dezoom » de l ancienne version) */
-@keyframes dezoom{from{transform:scale(1.1)}to{transform:scale(1)}}
-@media(prefers-reduced-motion:no-preference){.hero .cadre img{animation:dezoom 18s cubic-bezier(.2,.6,.3,1) both}}
+/* accueil : la photo du haut avance tres lentement (le leger zoom de l ancienne version) */
+@keyframes zoomLent{from{transform:scale(1.005)}to{transform:scale(1.09)}}
+@media(prefers-reduced-motion:no-preference){.hero .cadre img{animation:zoomLent 22s ease-out both}}
 /* la bande de couleur derriere le titre : le texte d introduction y passe en blanc */
 .entete.bande .chapeau{color:#fff}
 /* accueil : la ligne Instagram dans un encadre, pour qu elle ne se perde plus dans le fond */

@@ -44,8 +44,7 @@ var COORDONNEES = {
    vignette : (facultatif) une image a moi pour la couverture, ex. "/images/video.webp".
               Sans rien, c est la couverture de YouTube qui est montree. */
 var VIDEO_PRESENTATION = {
-  youtube: "xzBTvODwmr8",
-  essai: true,          // VIDEO D ESSAI : a remplacer par ma vraie video, puis retirer cette ligne
+  youtube: "",
   vignette: "",
   titre: {fr:"", en:""}
 };

@@ -8,7 +8,7 @@
   ok     En anglais, les avis sont traduits et la traduction est signalée  [mention : « Translated from French » ; date : October 6, 2026]
   ok     En français, les avis restent mot pour mot, sans mention de traduction
   ok     Une langue en veille déjà choisie (ex. espagnol) retombe sur le français, sans erreur  [langue : fr]
-  ok     Contrastes : tous les textes au-dessus du minimum (4,5:1 ; 3:1 pour les gros titres), clair et sombre  [2540 textes mesurés ; le plus faible : 4.59:1 (accueil clair : button « EN »)]
+  ok     Contrastes : tous les textes au-dessus du minimum (4,5:1 ; 3:1 pour les gros titres), clair et sombre  [2512 textes mesurés ; le plus faible : 4.59:1 (accueil clair : button « EN »)]
   ok     Textes posés sur des photos : voile sombre suffisant même sur une photo toute blanche  [haut de l'accueil, voile de 46 à 66 % : titre de 52 px à 4.9:1 au niveau du titre ; panneaux des univers, voile de 62 % en bas : 4.8:1 ; zones concernées : hero, , formule-photo, devis-photo]
   ok     Chaque bouton de devis préremplit la bonne prestation dans le formulaire  [7 liens essayés : portrait-etudiant, portrait-essentiel, portrait-confort, sport, evenementiel]
   ok     Sans lien particulier, le formulaire propose « Je ne sais pas encore » et les 8 choix  [8 choix, par défaut : À préciser]
@@ -19,7 +19,7 @@
   ok     Les trois univers de l'accueil ouvrent le portfolio filtré sur le bon univers  [portrait : 31 photos, sport : 18 photos, evenement : 11 photos]
   ok     Instagram, Facebook et LinkedIn sur toutes les pages, bonnes adresses ; le téléphone compose le bon numéro
   ok     Sans JavaScript : chaque page reste lisible, navigable, et ne dit rien de faux  [accueil : 4 avis écrits dans la page ; portfolio : 60 photos ; menu accessible ; aucun bouton mort]
-  ok     Aucune image étirée ni absente, sur 11 écrans et 4 largeurs  [376 images contrôlées : chacune garde ses proportions (recadrée quand il le faut, jamais déformée)]
+  ok     Aucune image étirée ni absente, sur 11 écrans et 4 largeurs  [368 images contrôlées : chacune garde ses proportions (recadrée quand il le faut, jamais déformée)]
   ok     Téléphone : le bouton ☰ ouvre le menu (5 liens, le devis, les 3 réseaux)  [9 liens visibles]
   ok     Le menu se referme tout seul quand l'écran s'élargit (rotation), et rend le défilement
   ok     Échap referme le menu
