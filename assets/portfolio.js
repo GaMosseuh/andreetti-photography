@@ -87,6 +87,39 @@ function justifierTout(){ justifier(galerie); justifier(serieGal); }
 var minuteurTaille = null;
 window.addEventListener('resize', function(){ clearTimeout(minuteurTaille); minuteurTaille = setTimeout(justifierTout, 80); });
 
+/* ---------- « Toutes les photos » : un ordre different a chaque visite ----------
+   Les photos sont melangees au hasard, avec une regle : deux photos de la meme seance (donc
+   de la meme personne) ne se suivent jamais de pres. On tire chaque photo au sort parmi les
+   seances qui ne sont pas apparues dans les dernieres places ; les seances qui ont le plus
+   de photos restantes ont plus de chances, pour ne pas finir avec un paquet de la meme. */
+function melanger(){
+  var groupes = {}, cles = [];
+  PHOTOS.forEach(function(p){
+    if(!R.photo(p.id)) return;
+    var c = p.serie || ('seule-' + p.id);
+    if(!groupes[c]){ groupes[c] = []; cles.push(c); }
+    groupes[c].push(p.id);
+  });
+  cles.forEach(function(c){ var g = groupes[c]; for(var i = g.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var x = g[i]; g[i] = g[j]; g[j] = x; } });
+  var sortie = [], derniers = [], ECART = 4;
+  function reste(){ return cles.filter(function(c){ return groupes[c].length; }); }
+  var r = reste();
+  while(r.length){
+    var possibles = [], ecart = ECART;
+    while(!possibles.length && ecart >= 0){
+      var recents = derniers.slice(-ecart);
+      possibles = r.filter(function(c){ return ecart === 0 || recents.indexOf(c) === -1; });
+      ecart--;
+    }
+    var total = 0; possibles.forEach(function(c){ total += groupes[c].length * groupes[c].length; });
+    var tirage = Math.random() * total, choisi = possibles[0];
+    for(var k = 0; k < possibles.length; k++){ tirage -= groupes[possibles[k]].length * groupes[possibles[k]].length; if(tirage <= 0){ choisi = possibles[k]; break; } }
+    sortie.push(groupes[choisi].pop()); derniers.push(choisi);
+    r = reste();
+  }
+  return sortie;
+}
+
 /* ---------- affichage ---------- */
 function montrerPanneau(el, oui){ if(el){ el.hidden = !oui; el.classList.toggle('actif', oui); } }
 function afficher(e, focus){
@@ -211,7 +244,8 @@ document.addEventListener('languechange', function(){
 
 /* ---------- demarrage ---------- */
 (function(){
-  if(!galerie.querySelector('.tuile')){ galerie.innerHTML = R.galerieToutes(); brancherImages(galerie); }
+  R.ordonner(melanger());
+  galerie.innerHTML = R.galerieToutes(); brancherImages(galerie);
   var e = lire();
   afficher(e);
   try{ history.replaceState(history.state, '', adresse(etat)); }catch(err){}

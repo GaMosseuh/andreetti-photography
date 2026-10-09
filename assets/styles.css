@@ -605,3 +605,24 @@ html:has(.sommaire){scroll-behavior:smooth}
 .entete.bande + .sommaire{border-top:0}
 /* Prestations : la phrase sur les coulisses, sous les etapes */
 .coulisses{margin-top:var(--e5);text-align:center;color:var(--t2)}
+
+/* ───────── 22. RETOURS DU 9 OCTOBRE AU SOIR ───────── */
+/* accueil : la photo du haut recule tres lentement (le « leger dezoom » de l ancienne version) */
+@keyframes dezoom{from{transform:scale(1.1)}to{transform:scale(1)}}
+@media(prefers-reduced-motion:no-preference){.hero .cadre img{animation:dezoom 18s cubic-bezier(.2,.6,.3,1) both}}
+/* la bande de couleur derriere le titre : le texte d introduction y passe en blanc */
+.entete.bande .chapeau{color:#fff}
+/* accueil : la ligne Instagram dans un encadre, pour qu elle ne se perde plus dans le fond */
+.ligne-reseau.encadre{max-width:920px;margin-inline:auto;padding:var(--e4) var(--e5);background:var(--surface);border:1px solid var(--trait);border-left:3px solid var(--accent);border-radius:var(--rayon-g)}
+@media(max-width:600px){.ligne-reseau.encadre{padding:var(--e3)}}
+/* A propos : « Vous avez un projet en tete ? » dans un encadre, bien separe de « Mon approche » */
+.encadre-appel .contenu{max-width:860px;padding:clamp(32px,5vw,64px) clamp(20px,5vw,64px);background:var(--surface);border:1px solid var(--trait);border-top:3px solid var(--accent);border-radius:var(--rayon-g)}
+/* portfolio : les titres des seances plus presents */
+.case h3{font-size:clamp(24px,2.3vw,30px);line-height:1.15}
+.case .meta{margin-top:18px}
+@media(max-width:600px){.case h3{font-size:21px}}
+/* « Toutes les photos » : au survol, le nom de la seance s affiche en bas de la photo */
+.galerie .tuile{position:relative}
+.tuile-titre{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:36px 14px 12px;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0));color:#fff;font-size:var(--t-xs);font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-align:left;opacity:0;transition:opacity .25s ease;pointer-events:none}
+@media(hover:hover){.galerie .tuile:hover .tuile-titre,.galerie .tuile:focus-visible .tuile-titre{opacity:1}}
+#serieGalerie .tuile-titre{display:none}

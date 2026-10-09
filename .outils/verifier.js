@@ -167,7 +167,7 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
   const anim = (css.match(/@keyframes\s+(\w+)/g) || []).join(", ");
   /* depuis le 9 octobre 2026, Alexandre veut des passages en douceur partout : les animations
      autorisees sont listees ici, toutes courtes, et coupees si l appareil demande moins de mouvement */
-  const permises = ["visioTourne", "entree", "entreeDouce", "apparition"];
+  const permises = ["visioTourne", "entree", "entreeDouce", "apparition", "dezoom"];
   const noms = (css.match(/@keyframes\s+(\w+)/g) || []).map(x => x.replace(/@keyframes\s+/, ""));
   verifier("Animations : seulement les passages en douceur prévus, une seule en boucle (le rond d'attente)", noms.every(n => permises.includes(n)) && (css.match(/infinite/g) || []).length <= 1, noms.join(", "));
   verifier("Les animations sont coupées quand l'appareil demande moins de mouvement", /prefers-reduced-motion:reduce/.test(css), "");

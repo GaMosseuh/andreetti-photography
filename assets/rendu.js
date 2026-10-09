@@ -66,12 +66,22 @@ function image(p, tailles, options){
     '</span>';
 }
 function tuile(p){
+  /* le nom de la seance apparait au survol, dans « Toutes les photos » (voir .tuile-titre) */
+  var s = p.serie ? serie(p.serie) : null;
   return '<a class="tuile" href="/portfolio?photo=' + encodeURIComponent(p.id) + '" data-photo="' + ech(p.id) + '" style="--r:' + p.r + '">' +
-    image(p, '(max-width:520px) 60vw, (max-width:900px) 42vw, 30vw') + '</a>';
+    image(p, '(max-width:520px) 60vw, (max-width:900px) 42vw, 30vw') +
+    (s ? '<span class="tuile-titre" aria-hidden="true">' + ech(txt(s.titre)) + '</span>' : '') + '</a>';
 }
 function galerie(liste){ return liste.map(tuile).join(''); }
-/* toutes les photos, dans l ordre de data.js */
-function toutesLesPhotos(){ var out = []; if(typeof PHOTOS !== 'undefined') PHOTOS.forEach(function(p){ var x = photo(p.id); if(x) out.push(x); }); return out; }
+/* toutes les photos : dans l ordre de data.js, ou dans l ordre melange choisi a l ouverture
+   du portfolio (ORDRE_PHOTOS, une liste d id posee par portfolio.js) */
+var ORDRE_PHOTOS = null;
+function ordonner(ids){ ORDRE_PHOTOS = ids && ids.length ? ids : null; }
+function toutesLesPhotos(){
+  var out = []; if(typeof PHOTOS === 'undefined') return out;
+  if(ORDRE_PHOTOS){ ORDRE_PHOTOS.forEach(function(id){ var x = photo(id); if(x) out.push(x); }); return out; }
+  PHOTOS.forEach(function(p){ var x = photo(p.id); if(x) out.push(x); }); return out;
+}
 function galerieToutes(){ return galerie(toutesLesPhotos()); }
 
 /* ---------- avis ---------- */
@@ -216,6 +226,6 @@ return {
   etoiles: etoiles, avis: avis,
   universAccueil: universAccueil, cartesSeances: cartesSeances, nbCartesSeances: nbCartesSeances,
   casesSeances: casesSeances, teteSerie: teteSerie, nbPhotos: nbPhotos,
-  formules: formules, photoSerie: photoSerie, optionsPrestation: optionsPrestation, video: video, videoPresente: videoPresente, dateSerie: dateSerie, univers: univers
+  formules: formules, photoSerie: photoSerie, optionsPrestation: optionsPrestation, video: video, videoPresente: videoPresente, ordonner: ordonner, dateSerie: dateSerie, univers: univers
 };
 })();
