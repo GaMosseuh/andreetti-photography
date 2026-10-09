@@ -1,0 +1,10 @@
+const fs = require("fs"), path = require("path");
+const f = path.join(__dirname, "..", "..", "assets", "rendu.js"); let t = fs.readFileSync(f, "utf8");
+const crlf = t.includes(String.fromCharCode(13)); if (crlf) t = t.split(String.fromCharCode(13)).join("");
+const r = (a, b) => { if (!t.includes(a)) throw new Error("absent : " + a.slice(0, 60)); t = t.replace(a, b); };
+r("' loading=\"' + (options.vite ? 'eager' : 'lazy') + '\" decoding", "' loading=\"' + (options.vite ? 'eager\" fetchpriority=\"high' : 'lazy') + '\" decoding");
+r("return seriesVisibles().map(function(s){", "return seriesVisibles().map(function(s, rang){");
+r("image(couv, '(max-width:600px) 50vw, (max-width:1100px) 33vw, 25vw')", "image(couv, '(max-width:600px) 50vw, (max-width:1100px) 33vw, 25vw', { vite: rang < 2 })");
+r("return FORMULES.map(function(f){", "return FORMULES.map(function(f, rang){");
+r("image(p, '(max-width:760px) 100vw, 30vw').replace(", "image(p, '(max-width:760px) 100vw, 30vw', { vite: rang === 0 }).replace(");
+fs.writeFileSync(f, t); console.log("rendu.js : fait" + (crlf ? " (fins de ligne remises au format court)" : ""));

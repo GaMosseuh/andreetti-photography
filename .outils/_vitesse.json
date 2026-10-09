@@ -7,8 +7,8 @@
    "images": 878906,
    "code": 68700,
    "polices": 104644,
-   "lcp": 3972,
-   "charge": 4942
+   "lcp": 3616,
+   "charge": 4945
   },
   "portfolio": {
    "fichiers": 16,
@@ -17,8 +17,8 @@
    "images": 486072,
    "code": 67119,
    "polices": 104644,
-   "lcp": 3400,
-   "charge": 4390
+   "lcp": 3420,
+   "charge": 4402
   },
   "prestations": {
    "fichiers": 10,
@@ -27,8 +27,8 @@
    "images": 0,
    "code": 79096,
    "polices": 104644,
-   "lcp": 1660,
-   "charge": 2244
+   "lcp": 1684,
+   "charge": 2268
   },
   "contact": {
    "fichiers": 10,
@@ -37,8 +37,8 @@
    "images": 0,
    "code": 60154,
    "polices": 104644,
-   "lcp": 2324,
-   "charge": 2041
+   "lcp": 2360,
+   "charge": 2064
   },
   "apropos": {
    "fichiers": 10,
@@ -47,60 +47,60 @@
    "images": 119708,
    "code": 58535,
    "polices": 104644,
-   "lcp": 3200,
-   "charge": 2540
+   "lcp": 3248,
+   "charge": 2576
   }
  },
  "nouveau (v2.0)": {
   "accueil": {
    "fichiers": 14,
    "externes": 0,
-   "total": 542709,
+   "total": 549160,
    "images": 411342,
-   "code": 45471,
+   "code": 51922,
    "polices": 85896,
-   "lcp": 1988,
-   "charge": 2036
+   "lcp": 1952,
+   "charge": 2054
   },
   "portfolio": {
-   "fichiers": 16,
+   "fichiers": 20,
    "externes": 0,
-   "total": 292240,
-   "images": 149518,
-   "code": 56826,
+   "total": 494422,
+   "images": 341750,
+   "code": 66776,
    "polices": 85896,
-   "lcp": 2676,
-   "charge": 1718
+   "lcp": 2560,
+   "charge": 2553
   },
   "prestations": {
-   "fichiers": 13,
+   "fichiers": 14,
    "externes": 0,
-   "total": 302399,
-   "images": 170892,
-   "code": 45611,
+   "total": 556145,
+   "images": 409366,
+   "code": 60883,
    "polices": 85896,
-   "lcp": 1632,
-   "charge": 1689
+   "lcp": 2068,
+   "charge": 2070
   },
   "contact": {
    "fichiers": 11,
    "externes": 0,
-   "total": 130589,
+   "total": 136934,
    "images": 0,
-   "code": 44693,
+   "code": 51038,
    "polices": 85896,
-   "lcp": 1712,
-   "charge": 1707
+   "lcp": 1716,
+   "charge": 1767
   },
   "apropos": {
    "fichiers": 11,
    "externes": 0,
-   "total": 249136,
+   "total": 256089,
    "images": 119708,
-   "code": 43532,
+   "code": 50485,
    "polices": 85896,
-   "lcp": 2224,
-   "charge": 1964
+   "lcp": 2392,
+   "charge": 2100
   }
  }
 }

@@ -62,7 +62,7 @@ function image(p, tailles, options){
   return '<span class="cadre' + (p.nowmark ? '' : ' filigrane') + '">' +
     '<img src="' + p.srcPetite + '" srcset="' + p.srcPetite + ' ' + Math.min(720, p.w) + 'w' + grandes + '" sizes="' + ech(tailles || '50vw') + '"' +
     ' width="' + p.w + '" height="' + p.h + '" alt="' + ech(options.alt != null ? options.alt : p.alt) + '"' +
-    ' loading="' + (options.vite ? 'eager' : 'lazy') + '" decoding="async" data-img data-secours="' + p.src + '">' +
+    ' loading="' + (options.vite ? 'eager" fetchpriority="high' : 'lazy') + '" decoding="async" data-img data-secours="' + p.src + '">' +
     '</span>';
 }
 function tuile(p){
@@ -152,11 +152,11 @@ function nbCartesSeances(){ return seriesVisibles().filter(function(s){ return s
 /* ---------- portfolio : les cases des seances ---------- */
 function nbPhotos(n){ return n === 1 ? trad('photoNb1') : String(trad('photosNb')).replace('{n}', n); }
 function casesSeances(){
-  return seriesVisibles().map(function(s){
+  return seriesVisibles().map(function(s, rang){
     var photos = photosDe(s.id), couv = photo(s.couverture) || photos[0];
     var lieu = txt(s.lieu);
     return '<a class="case" href="/portfolio?serie=' + encodeURIComponent(s.id) + '" data-serie="' + ech(s.id) + '">' +
-      image(couv, '(max-width:600px) 50vw, (max-width:1100px) 33vw, 25vw') +
+      image(couv, '(max-width:600px) 50vw, (max-width:1100px) 33vw, 25vw', { vite: rang < 2 }) +
       '<span class="meta">' + ech(univers(s.univers)) + ' · ' + ech(dateSerie(s, true)) + '</span>' +
       '<h3>' + ech(txt(s.titre)) + '</h3>' +
       '<span class="lieu">' + (lieu ? ech(lieu) + ' · ' : '') + ech(nbPhotos(photos.length)) + '</span></a>';
@@ -173,12 +173,12 @@ function teteSerie(s){
 /* ---------- prestations : les formules portrait ---------- */
 function formules(){
   if(typeof FORMULES === 'undefined') return '';
-  return FORMULES.map(function(f){
+  return FORMULES.map(function(f, rang){
     var p = photo(f.exemple);
     var nom = txt(f.nom);
     return '<article class="formule">' +
       (p ? '<a class="formule-photo" data-visio="' + ech(p.id) + '" data-legende="' + ech(nom) + '" href="/portfolio?photo=' + encodeURIComponent(p.id) + '" aria-label="' + ech(trad('formuleVoirPhoto') + ' : ' + p.alt) + '">' +
-            image(p, '(max-width:760px) 100vw, 30vw').replace('<img ', f.cadrage ? '<img style="object-position:' + ech(f.cadrage) + '" ' : '<img ') + '<span class="formule-exemple">' + ech(trad('formuleExemple')) + '<i class="fleche" aria-hidden="true"></i></span></a>' : '') +
+            image(p, '(max-width:760px) 100vw, 30vw', { vite: rang === 0 }).replace('<img ', f.cadrage ? '<img style="object-position:' + ech(f.cadrage) + '" ' : '<img ') + '<span class="formule-exemple">' + ech(trad('formuleExemple')) + '<i class="fleche" aria-hidden="true"></i></span></a>' : '') +
       '<div class="formule-corps">' +
       '<h3>' + ech(nom) + '</h3>' +
       '<p class="formule-prix"><span class="prix">' + ech(f.prix) + ' €</span><span class="duree">' + ech(txt(f.duree)) + '</span></p>' +

@@ -569,7 +569,9 @@ main [id]{scroll-margin-top:calc(var(--nav-h) + 24px)}
    et a la fermeture d une photo, du menu, d une seance, d une question. Tout est court
    (moins d une demi-seconde), sans rebond ni effet voyant, et coupe si l appareil demande
    moins de mouvement (regle prefers-reduced-motion, plus haut). */
-@keyframes entree{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* depart a 0.01 et non a 0 : un element qui nait totalement transparent n est plus compte par
+   les navigateurs comme « affiche », ce qui faussait la mesure de vitesse de Google (LCP) */
+@keyframes entree{from{opacity:.01;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes entreeDouce{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes apparition{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:no-preference){
