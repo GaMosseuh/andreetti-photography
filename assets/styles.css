@@ -618,7 +618,7 @@ html:has(.sommaire){scroll-behavior:smooth}
 .ligne-reseau.encadre{max-width:920px;margin-inline:auto;padding:var(--e4) var(--e5);background:var(--surface);border:1px solid var(--trait);border-left:3px solid var(--accent);border-radius:var(--rayon-g)}
 @media(max-width:600px){.ligne-reseau.encadre{padding:var(--e3)}}
 /* A propos : « Vous avez un projet en tete ? » dans un encadre, bien separe de « Mon approche » */
-.encadre-appel .contenu{max-width:860px;padding:clamp(32px,5vw,64px) clamp(20px,5vw,64px);background:var(--surface);border:1px solid var(--trait);border-top:3px solid var(--accent);border-radius:var(--rayon-g)}
+.encadre-appel .contenu{max-width:920px;padding:clamp(32px,5vw,64px) clamp(20px,5vw,64px);background:var(--surface);border:1px solid var(--trait);border-top:3px solid var(--accent);border-radius:var(--rayon-g)}
 /* portfolio : les titres des seances plus presents */
 .case h3{font-size:clamp(24px,2.3vw,30px);line-height:1.15}
 .case .meta{margin-top:18px}
@@ -628,3 +628,8 @@ html:has(.sommaire){scroll-behavior:smooth}
 .tuile-titre{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:36px 14px 12px;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,0));color:#fff;font-size:var(--t-xs);font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-align:left;opacity:0;transition:opacity .25s ease;pointer-events:none}
 @media(hover:hover){.galerie .tuile:hover .tuile-titre,.galerie .tuile:focus-visible .tuile-titre{opacity:1}}
 #serieGalerie .tuile-titre{display:none}
+/* A propos : « Mon approche » dans un encadre, comme la ligne Instagram de l accueil (10 octobre 2026) */
+.approche .contenu{max-width:920px;padding:clamp(32px,5vw,56px) clamp(20px,5vw,64px);background:var(--surface);border:1px solid var(--trait);border-left:3px solid var(--accent);border-radius:var(--rayon-g)}
+.approche .valeurs li{padding:7px 14px;border:1px solid var(--trait);border-radius:999px;letter-spacing:.14em}
+.approche .valeurs{gap:10px}
+.approche + .encadre-appel{padding-top:0}
