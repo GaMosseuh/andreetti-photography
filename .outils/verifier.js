@@ -60,12 +60,13 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
   const longs = PAGES.filter(p => p.titre.length >= 60).map(p => p.id + " (" + p.titre.length + ")");
   verifier("Tous les titres de page font moins de 60 caractères", longs.length === 0, longs.join(", ") || PAGES.map(p => p.titre.length).join(", ") + " caractères");
   verifier("Le titre de l'accueil commence par ANDREETTI", /^ANDREETTI/.test(PAGES[0].titre), PAGES[0].titre);
-  const descLongues = PAGES.filter(p => !p.robots && (p.description.length > 160 || p.description.length < 70)).map(p => p.id + " (" + p.description.length + ")");
+  const descLongues = PAGES.filter(p => (!p.robots || p.horsGoogle) && (p.description.length > 160 || p.description.length < 70)).map(p => p.id + " (" + p.description.length + ")");
   verifier("Descriptions entre 70 et 160 caractères", descLongues.length === 0, descLongues.join(", "));
   const pb = [];
   for (const { p, html } of pages) {
     const can = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
-    if (can !== SITE + p.chemin) pb.push(p.id + " : canonique " + can);
+    if (p.horsGoogle) { if (can) pb.push(p.id + " : canonique alors que la page est hors Google"); }
+    else if (can !== SITE + p.chemin) pb.push(p.id + " : canonique " + can);
     if (/\.html/.test(can || "")) pb.push(p.id + " : canonique en .html");
     const liens = [...html.matchAll(/href="([^"#]+)"/g)].map(m => m[1]).filter(h => /\.html(\?|$)/.test(h) && !/^https?:/.test(h));
     if (liens.length) pb.push(p.id + " : lien interne en .html (" + liens[0] + ")");
@@ -76,7 +77,15 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
   const sm = lire("sitemap.xml");
   const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   const attendu = PAGES.filter(p => !p.robots).map(p => SITE + p.chemin);
-  verifier("Plan du site : les " + attendu.length + " pages publiques, sans .html", locs.length === attendu.length && attendu.every(u => locs.includes(u)) && !/\.html/.test(sm), locs.join(" "));
+  /* depuis le 14 octobre 2026 : seule l accueil est proposee a Google */
+  {
+    const rob = pages.map(({ p, html }) => ({ id: p.id, r: (html.match(/<meta name="robots" content="([^"]+)"/) || [])[1] || "" }));
+    const malRegle = rob.filter(x => { const p = PAGES.find(q => q.id === x.id); if (p.id === "accueil") return !/^index, follow/.test(x.r); if (p.horsGoogle) return x.r !== "noindex, follow"; return !/noindex/.test(x.r); });
+    verifier("Dans Google, seule l'accueil : accueil en index, follow ; les 5 autres pages en noindex, follow", malRegle.length === 0, rob.map(x => x.id + " = " + x.r.split(",")[0]).join(" ; "));
+    const rtxt = lire("robots.txt");
+    verifier("robots.txt ne bloque aucune page (sinon Google ne verrait pas le noindex)", !/Disallow:\s*\/\S/.test(rtxt) && !/Disallow:\s*\/\s*$/m.test(rtxt), rtxt.split("\n").filter(Boolean).join(" | "));
+  }
+  verifier("Plan du site : seulement l'accueil (" + attendu.length + " adresse), sans .html", locs.length === attendu.length && attendu.every(u => locs.includes(u)) && !/\.html/.test(sm), locs.join(" "));
   const net = lire("netlify.toml");
   const iAnc = net.indexOf("andreetti-photography.netlify.app/*"), iHtml = net.indexOf('from = "/portfolio.html"'), iRac = net.lastIndexOf('from = "/"');
   verifier("Redirections : l'ancienne adresse Netlify en premier, puis les .html, puis l'accueil", iAnc > 0 && iAnc < iHtml && iHtml < iRac, "");
@@ -130,7 +139,7 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
   verifier("Affiché, le numéro se lit bien 06 82 29 86 58", texteVisible("<p>" + decode + "</p>").trim() === "06 82 29 86 58", "« " + texteVisible("<p>" + decode + "</p>").trim() + " »");
   const b64 = (pages.find(x => x.p.id === "contact").html.match(/data-tel="([^"]+)"/) || [])[1] || "";
   verifier("Le lien « appeler » compose bien +33682298658", Buffer.from(b64, "base64").toString() === "+33682298658", Buffer.from(b64, "base64").toString());
-  const fb = pages.filter(x => !x.p.robots || x.p.id === "mentions").filter(x => !x.html.includes(C.facebook)).map(x => x.p.id);
+  const fb = pages.filter(x => !x.p.robots || x.p.horsGoogle || x.p.id === "mentions").filter(x => !x.html.includes(C.facebook)).map(x => x.p.id);
   verifier("Facebook est partout où sont Instagram et LinkedIn", fb.length === 0, "absent de : " + fb.join(", "));
   const cibles = [];
   for (const { p, html } of pages) for (const m of html.matchAll(/<a\b[^>]*href="https?:\/\/(?!andreettiphoto\.fr)[^"]+"[^>]*>/g)) { if (!/target="_blank"/.test(m[0]) || !/rel="noopener noreferrer"/.test(m[0])) cibles.push(p.id + " : " + m[0].slice(0, 70)); }
@@ -146,9 +155,9 @@ const pages = PAGES.map(p => ({ p, html: lire(p.fichier) }));
     for (const b of blocs) { try { const j = JSON.parse(b); types[p.id].push(j["@type"]); if (/AggregateRating|"Review"|openingHours/i.test(b)) pb.push(p.id + " : balisage interdit"); if (j["@type"] === "ProfessionalService" && j.telephone !== "+33682298658") pb.push(p.id + " : téléphone " + j.telephone); } catch (e) { pb.push(p.id + " : JSON invalide"); } }
   }
   verifier("Données Google valides, sans avis, sans note, sans horaires, téléphone correct", pb.length === 0, pb.join(" ; "));
-  const publiques = PAGES.filter(p => !p.robots);
+  const publiques = PAGES.filter(p => !p.robots || p.horsGoogle);
   verifier("ProfessionalService sur toutes les pages publiques", publiques.every(p => types[p.id].includes("ProfessionalService")), "");
-  verifier("Fil d'Ariane sur les pages intérieures, Person sur À propos, FAQ sur Prestations", publiques.filter(p => p.id !== "accueil").every(p => types[p.id].includes("BreadcrumbList")) && types.apropos.includes("Person") && types.prestations.includes("FAQPage") && types.portfolio.includes("ImageGallery"), JSON.stringify(types));
+  verifier("Pas de fil d'Ariane sur les pages hors Google ; Person sur À propos, FAQ sur Prestations", publiques.filter(p => p.horsGoogle).every(p => !types[p.id].includes("BreadcrumbList")) && types.apropos.includes("Person") && types.prestations.includes("FAQPage") && types.portfolio.includes("ImageGallery"), JSON.stringify(types));
   const faq = JSON.parse([...pages.find(x => x.p.id === "prestations").html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => m[1]).find(b => /FAQPage/.test(b)));
   verifier("La FAQ pour Google reprend les 8 questions de la page, mot pour mot", faq.mainEntity.length === 8 && /40, 50 ou 65 €/.test(faq.mainEntity[1].acceptedAnswer.text) && /25 km/.test(faq.mainEntity[7].acceptedAnswer.text), faq.mainEntity.length + " questions");
 }

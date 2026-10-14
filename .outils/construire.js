@@ -138,7 +138,9 @@ function tete(page, D, htmlPage) {
     '<meta name="google-site-verification" content="AsFyBL63fL2S-Izu1Oi_3jA-iGOKLUJJGYdxtkft53U" />',
     '<meta name="google-site-verification" content="1CpIicORCdYnNOE4eiCDTbtQpq73NWiVUg8BA25iDsM" />');
   h.push('<meta name="theme-color" content="#0E1A1E">',
-    '<link rel="canonical" href="' + url + '">', '<link rel="alternate" hreflang="fr" href="' + url + '">', '<link rel="alternate" hreflang="x-default" href="' + url + '">',
+    /* page hors Google : pas de canonique (elle dirait a Google « c est moi la bonne page » alors
+       que la page demande a ne pas etre listee) */
+    ...(page.horsGoogle ? [] : ['<link rel="canonical" href="' + url + '">', '<link rel="alternate" hreflang="fr" href="' + url + '">', '<link rel="alternate" hreflang="x-default" href="' + url + '">']),
     "<!-- Le mode SOMBRE est le mode par defaut, pour tout le monde. Le mode clair ne s affiche que si le visiteur l a choisi avec le bouton.",
     "     Ce petit script s execute avant l affichage (pas de clignotement) et signale aussi que les scripts fonctionnent. -->",
     "<script>(function(){var d=document.documentElement,t='dark';d.classList.add('js');try{if(localStorage.getItem('theme')==='light')t='light';}catch(e){}d.setAttribute('data-theme',t);})();</script>",
@@ -153,9 +155,9 @@ function tete(page, D, htmlPage) {
     '<link rel="preload" href="/assets/polices/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>',
     '<link rel="stylesheet" href="/assets/styles.css">');
   if (page.id === "accueil") h.push('<link rel="preload" as="image" href="/images/hero.webp" imagesrcset="/images/hero-900.webp 900w, /images/hero.webp 1920w" imagesizes="100vw" fetchpriority="high">');
-  if (!page.robots) {
+  if (!page.robots || page.horsGoogle) {
     h.push(ld(service(D), D));
-    if (page.id !== "accueil") h.push(ld(filAriane(page), D));
+    if (page.id !== "accueil" && !page.horsGoogle) h.push(ld(filAriane(page), D));
     if (page.id === "apropos") h.push(ld(personne(D), D));
     if (page.id === "portfolio") h.push(ld(galerieGoogle(D), D));
     if (page.id === "prestations") { const f = faqGoogle(htmlPage); if (f) h.push(ld(f, D)); }
